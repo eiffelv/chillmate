@@ -1,0 +1,148 @@
+body {
+    border-style: outset;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #DEDDFF;
+    margin: 0px;
+    padding: 0;
+    
+}
+
+body.login{
+    /* NOTE: Below are merged from Frontend Branch; please check if something breaks */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+h1{
+    font-size: 60px;
+    text-align: center;
+}
+
+
+ul.a {
+    list-style-type: circle;
+
+  }
+div.container{
+
+    background-color: #F5F5F5;
+    margin: 35px;
+    border-radius:10px
+}
+
+
+nav {
+    border-style: none none inset none;
+    background-color: #D9D9D9;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-size:25px;
+}
+
+.container {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #D9D9D9;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+.login-container h2 {
+    margin-bottom: 20px;
+}
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.login-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.register-container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+.register-container h2 {
+    margin-bottom: 20px;
+}
+.register-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.register-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.register-container button:hover {
+    background-color: #0056b3;
+}
+.register-container p {
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    display: none;
+}
