@@ -9,7 +9,7 @@ body {
 }
 
 body.login{
-    /* NOTE: Below are merged from Frontend Branch; please check if something breaks */
+    
     display: flex; /* Use flexbox */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
@@ -91,9 +91,9 @@ button:hover {
 
 .login-container {
     background-color: #fff;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 1100px;
     text-align: center;
 }
 .login-container h2 {
@@ -121,9 +121,9 @@ button:hover {
 
 .register-container {
     background-color: #fff;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 1100px;
     text-align: center;
 }
 .register-container h2 {
