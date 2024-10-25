@@ -4,6 +4,7 @@ import Navbar from "./components/navbar.js";
 import Home from "./components/home.js"
 import Login from "./components/login.js"
 import Register from "./components/register.js"
+import Forum from "./components/forum.js"
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forum" element={<Forum />} />
         </Routes>
     </Router>
     </div>

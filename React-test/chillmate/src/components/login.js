@@ -2,22 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png"
+import Navbar from "./navbar";
+import { Link } from "react-router-dom";
 
 export default class Login extends React.Component {
 
     render() {
       return (
         <body className="login">
-            <nav>
-                <ul>
-                    <li>
-                        <a href="home.html">
-                        <img src={require('./ChillMateLogo.png')} alt="Logo" width="50" height="50" />
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
+            <Navbar />
             <div className="login-container">
                 <h2>Login</h2>
                     <form>
@@ -25,7 +18,7 @@ export default class Login extends React.Component {
                         <input type="password" placeholder="Password" name="password" required />
                         <button type="submit"><a href="index.html">Login</a></button>
                     </form>
-                <p>Don't have an account? <a href="register.html">Register here</a></p>
+                <p>Don't have an account? <Link to="/register">Register here</Link></p>
             </div>
 
             <script src="scripts.js"></script>

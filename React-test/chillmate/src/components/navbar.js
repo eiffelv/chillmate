@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
-import "./ChillMateLogo.png"
+import "./ChillMateLogo.png";
+import home from "./home";
 import Login from "./login";
+import Forum from "./forum";
+// import About from "./about";
+// import Resources from "./resources";
 import { Link } from "react-router-dom";
 
 export default class Navbar extends React.Component {
-
-                
 
     render() {
       return (
@@ -16,23 +18,24 @@ export default class Navbar extends React.Component {
             <nav className="navbar">
               <ul>
                 <li>
-                  <a href="home.html">
-                    <img src={require('./ChillMateLogo.png')} alt="Logo" width="50" height="50" />
-                  </a>
-                </li>
+                  <Link to="/home">
+                  <img src={require('./ChillMateLogo.png')} alt="Logo" width="50" height="50" />
+                  </Link>
+                </li> 
                 <li>
                      {/* Link is basically the same thing as <a> in html so don't need to worry about it too much */}
                     <Link to="/login">Login</Link>
-                    <a href={'/login'}></a>
                 </li>
                 <li>
-                  <a href="forum.html">Forum</a>
+                    <Link to="/forum">Forum</Link>
                 </li>
                 <li>
-                  <a href="about.html">About</a>
+                    {/* <Link to=" /about">About</Link>
+                    <a href={'about'}></a> */}
                 </li>
                 <li>
-                  <a href="resources.html">Resources</a>
+                    {/* <Link to=" /resources">Resources</Link>
+                    <a href={'resources'}></a> */}
                 </li>
               </ul>
             </nav>
