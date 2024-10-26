@@ -4,24 +4,48 @@ import "./style.css";
 import "./ChillMateLogo.png"
 import Navbar from "./navbar";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 //don't forget to change the class name into something what the page is supposed to be
 //for example if you want to create a forum page change the name from 'Home' to 'Forum'
-export default class Home extends React.Component {
+function Home() {
+    // usestate for setting a javascript
+    // object for storing and using data
+    const [info, setInfo] = useState({
+        name: "",
+    });
+    // Using useEffect for single rendering
+    // console.log("phallus");
+    useEffect(() => {
+        // Using fetch to fetch the api from 
+        // flask server it will be redirected to proxy
+        fetch("/data").then((res) =>
+            res.json().then((data) => {
+                // Setting a data from api
+                setInfo({
+                    name: data.Name
+                });
+                console.log("kontol", data);
+            })
+        );
+    }, []);
 
-    // example
-    // put all the html code from the previous index to the return function
-    // there will be some error since some html code does not fit React, so i recommend go to
-    // chatgpt/ any ai to ask to change it to fit react code
-    //also i think everything needs to be put in a div to work? i don't really know but just to make sure
-    //put it in a div even if the div doesn't do anything
-    render() {
-      return (
+
+    const navigate = useNavigate();
+
+    // Define the function to handle navigation
+    const goToRegister = () => {
+        console.log("tai");
+        navigate('/register');
+    };
+
+    return (
         <div>
             <body>
                 <Navbar />
                 <div className="container" id="home">
-                    <h1>ChillMate</h1>
+                    <h1>Chillmate</h1>
                     <p>
                     Our stress management app is designed for San Francisco State University students and faculty, offering essential tools to combat stress: <br /><br />
             
@@ -36,12 +60,14 @@ export default class Home extends React.Component {
                     <br />Join us in fostering a healthier academic environment! <br /><br />
                     </p>
                     {/* Link is basically the same thing as <a> in html so don't need to worry about it too much */}
-                    <button><Link to="/register">Register Now!</Link></button>
+                    {/* <button><Link to="/register">Register Now!</Link></button> */}
+                    <button onClick={goToRegister}>Register Now!</button>
                 </div>
             </body>
         </div>
-      );
-    }
+    );
 }
+
+export default Home;
 
 
