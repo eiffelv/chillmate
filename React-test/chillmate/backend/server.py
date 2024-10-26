@@ -7,7 +7,7 @@ from dotenv import load_dotenv
  
 
 # Initializing flask app
-app = Flask(__name__)d
+app = Flask(__name__)
 cors = CORS(app, origins='*')
 
 load_dotenv()
@@ -41,7 +41,7 @@ def register():
             "email": email,
             "sid": sid
         }
-        client['your_database_name'].users.insert_one(new_user)
+        users_collection.insert_one(new_user)
         return jsonify({"message": "User registered successfully"}), 201
 
 
