@@ -3,6 +3,7 @@ import Navbar from "./navbar";
 import logo from "./ChillMateLogo.png";
 import luisImage from "./LuisCarrillo.JPG";
 import gioImage from "./GioJung.jpg";
+import eifImage from "./Eiffel.jpg";
 import mentalHealthImage from "./mentalhealth.png";
 import ss1Image from "./SS1.jpg";
 import ss2Image from "./ss2.jpg";
@@ -105,7 +106,8 @@ export default class About extends React.Component {
             {
                 title: 'Teammate 6 (Team Leader)',
                 name: 'Eiffel Valentino',
-                introduction: 'Hello everyone, my name is Eiffel and I am an Undergrad Senior Computer Science student. I personally like traveling and watching YouTube videos about food, travel, and technology.'
+                introduction: 'Hello everyone, my name is Eiffel and I am an Undergrad Senior Computer Science student. I personally like traveling and watching YouTube videos about food, travel, and technology.',
+                image: eifImage
             },
             {
                 title: 'Teammate 7 (Scrum Master)',

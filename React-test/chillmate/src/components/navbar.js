@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
-import "./ChillMateLogo.png"
+import { ReactComponent as Logo } from "./ChillMate.svg";
 import { Link } from "react-router-dom";
 
 export default class Navbar extends React.Component {
@@ -16,7 +16,7 @@ export default class Navbar extends React.Component {
               <ul>
                 <li>
                   <Link to = "/">
-                    <img src={require('./ChillMateLogo.png')} alt="Logo" width="50" height="50" />
+                    <Logo width="50" height="50" />
                   </Link>
                 </li>
                 <li>
