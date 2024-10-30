@@ -5,9 +5,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #DEDDFF;
     align-content: start;
-
-    margin: 0px;
-    padding: 0;
     
 }
 
@@ -27,17 +24,57 @@ body.login{
 
 }
 
+.register-container {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex; /* Use flexbox */
+  justify-content:center; /* Center horizontally */
+  flex-wrap: wrap; /* Allow items to wrap onto the next line */
+  align-items: center; /* Center vertically */
+  align-content: start;
+  gap:40px;
+  height: 90vh; 
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.747);
+  
+}
 
-body.register{
-    /* NOTE: Below are merged from Frontend Branch; please check if something breaks */
+.register-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Space between input groups */
+}
 
-   display: flex; /* Use flexbox */
-   justify-content:center; /* Center horizontally */
-   flex-wrap: wrap; /* Allow items to wrap onto the next line */
-   align-items: center; /* Center vertically */
-   align-content: start;
-   gap:40px;
-   height: 100vh; /* Full viewport height */
+.input-group {
+  flex: 1; /* Allow groups to take equal space */
+}
+
+.name-container {
+  display: flex;
+  gap: 10px; /* Space between first and last name inputs */
+}
+
+.name-container input {
+  flex: 2; /* Make each name input take equal space */
+}
+
+.state-zip-container {
+  display: flex;
+  gap: 10px; /* Space between state and zip code inputs */
+}
+
+.state-zip-container select,
+.state-zip-container input {
+  flex: 1; /* Make state and zip inputs take equal space */
+}
+
+.input-group input, .input-group select {
+  width: 80%; /* Make inputs fill the width of the group */
+  padding: 10px;
+  margin-bottom: 20px; /* Space between inputs */
+  font-size: 16px;
 }
 
 
@@ -161,24 +198,6 @@ button:hover {
 }
 
 
-.register-container {
- 
-    background-color: #fff;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 1000px;
-    text-align: center;
-}
-.register-container h2 {
-    margin-bottom: 20px;
-}
-.register-container input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
 .register-container button {
     background-color: #007bff;
     color: white;
