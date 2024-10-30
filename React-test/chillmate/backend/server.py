@@ -83,7 +83,7 @@ def createPost():
 @app.route('/getPost', method=('GET', 'POST'))
 def getPost():
     post = forum_collection.query.all()
-    return jsonify([{'Topic': post.Topic, 'Text': post.Text, 'NoofLikes': post.NoofLikes} for post in post])
+    return jsonify([{'id': post._id, 'Topic': post.Topic, 'Text': post.Text, 'NoofLikes': post.NoofLikes} for post in post])
 
     
 # Running app
