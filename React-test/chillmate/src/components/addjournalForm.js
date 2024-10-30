@@ -1,4 +1,3 @@
-// AddJournalForm.js
 import React, { useState } from 'react';
 
 const AddJournalForm = ({ onAddEntry, onClose }) => {
@@ -8,13 +7,22 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddEntry(title, date, content);
+
+    if (title && date && content) {
+      onAddEntry(title, date, content);
+      // Reset fields after successful submission
+      setTitle("");
+      setDate("");
+      setContent("");
+    } else {
+      alert("Please fill out all fields.");
+    }
   };
 
 
   return (
     <div className="add-journal-form">
-      <h2>New Journal Entry</h2>
+      <h2>New Journal</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -35,7 +43,7 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
           onChange={(e) => setContent(e.target.value)}
           required
         />
-        <button type="submit" onClick={handleSubmit}>Save</button>
+        <button type="submit">Save</button>
         <button type="button" onClick={onClose}>Cancel</button>
       </form>
     </div>

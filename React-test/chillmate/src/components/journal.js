@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import "./ChillMateLogo.png"
 import Navbar from "./navbar";
-import { Link } from "react-router-dom";
 import JournalList from './journalList';
 import AddJournalForm from './addjournalForm';
 
@@ -12,6 +10,14 @@ const JournalPage = () => {
     const [entries, setEntries] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [showAddForm, setShowAddForm] = useState(false);
+    const latestEntryRef = useRef(null);
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        if (showAddForm && formRef.current) {
+            formRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [showAddForm]);
 
     // Filtered entries based on search query
     const filteredEntries = entries.filter(entry =>
@@ -21,10 +27,11 @@ const JournalPage = () => {
     // Function to add a new journal entry
     const addJournalEntry = (title, date, content) => {
         const newEntry = { id: Date.now(), title, date, content };
-        setEntries([...entries, newEntry]);
+        setEntries((prevEntries) => [...prevEntries, newEntry]);
         setShowAddForm(false);  // Hide form after submission
     };
-
+    
+    
     return (
         <div className="journal">
             <Navbar />
@@ -36,10 +43,17 @@ const JournalPage = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button className="add-journal-button" onClick={() => setShowAddForm(true)}>+</button>
+                <button className="add-journal-button" 
+                        onClick={() => setShowAddForm(true)}>+</button>
 
-                <JournalList entries={filteredEntries} />
-                {showAddForm && <AddJournalForm onAddEntry={addJournalEntry} onClose={() => setShowAddForm(false)} />}
+                <JournalList entries={filteredEntries} latestEntryRef={latestEntryRef} />
+                {showAddForm && (
+                    <div ref={formRef}>
+                        <AddJournalForm 
+                            onAddEntry={addJournalEntry} 
+                            onClose={() => setShowAddForm(false)} />
+                    </div>
+                )}
             </div>
         </div>
     );
