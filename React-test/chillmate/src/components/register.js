@@ -84,7 +84,6 @@ function Register() {
     const handleSubmit = async (event) => {
         console.log("bangsat");
         event.preventDefault();
-
         try {
             const response = await fetch("/register", {
                 method: "POST",
@@ -178,7 +177,7 @@ function Register() {
             <button type="submit">Create Account</button>
             </form>
             <p>
-                Already have an account? <a href="login.html">Login here</a>
+                Already have an account? <Link to="/login">Login here</Link>
             </p>
         </div>
         </div>

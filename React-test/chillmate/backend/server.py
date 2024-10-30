@@ -26,6 +26,7 @@ def get_time():
         'Name':"Will",
         }
 
+#register api logic
 @app.route('/register', methods=['POST'])
 def register():
         data = request.json
@@ -44,6 +45,20 @@ def register():
         users_collection.insert_one(new_user)
         return jsonify({"message": "User registered successfully"}), 201
 
+
+#login api logic
+@app.route('/login', methods=('GET', 'POST'))
+def login():
+    data = request.json
+    username = data.get("username")
+    password = data.get("password")
+
+    user = users_collection.find_one({'username': username, 'password': password})
+    if user:
+            return jsonify({"message": "User registered successfully"}), 201
+            # Add any additional logic, such as session management
+    else:
+            return jsonify({"message": "error"}), 202
 
     
 # Running app
