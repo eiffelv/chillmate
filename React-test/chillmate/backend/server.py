@@ -3,7 +3,8 @@ from flask_cors import CORS
 import pymongo
 from pymongo import MongoClient
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
+from chatbot.db_utils import MongoUtils
  
 
 # Initializing flask app
@@ -19,6 +20,7 @@ users_collection = db['users']
 
 db2 = client['chillmate']
 forum_collection = db2['Forum']
+db_name = 'chillmate'
 
 # Route for seeing a data
 @app.route('/data')
@@ -85,6 +87,15 @@ def getPost():
     post = forum_collection.query.all()
     return jsonify([{'id': post._id, 'Topic': post.Topic, 'Text': post.Text, 'NoofLikes': post.NoofLikes} for post in post])
 
+@app.route("/chatbot/find_sim_docs", method='GET')
+def find_simialar_docs():
+    inputText = request.json
+    mongoUtils = MongoUtils(client, db_name, 'Resources')
+
+    input_text_emb = mongoUtils.generate_embeddings(inputText)
+    similar_docs = mongoUtils.find_similar_documents(input_text_emb, embedding_name="ResourceEmbedding")
+
+    return jsonify(similar_docs)
     
 # Running app
 if __name__ == '__main__':

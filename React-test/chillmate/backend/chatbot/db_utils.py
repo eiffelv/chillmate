@@ -70,4 +70,4 @@ class MongoUtils:
         doc_scores.sort(key=lambda x: x[1], reverse=True)
 
         # Return the top N documents
-        return [[doc, score] for doc, score in doc_scores[:no_of_docs]]
+        return [doc for doc, score in doc_scores[:no_of_docs] if score >= threshold]
