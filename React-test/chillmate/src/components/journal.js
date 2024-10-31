@@ -25,8 +25,8 @@ const JournalPage = () => {
     );
 
     // Function to add a new journal entry
-    const addJournalEntry = (title, date, content) => {
-        const newEntry = { id: Date.now(), title, date, content };
+    const addJournalEntry = (title, date, content,color ) => {
+        const newEntry = { id: Date.now(), title, date, content, color};
         setEntries((prevEntries) => [...prevEntries, newEntry]);
         setShowAddForm(false);  // Hide form after submission
     };

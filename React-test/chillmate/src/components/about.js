@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "./navbar";
-import logo from "./ChillMateLogo.png";
 import luisImage from "./LuisCarrillo.JPG";
 import gioImage from "./GioJung.jpg";
 import eifImage from "./Eiffel.jpg";

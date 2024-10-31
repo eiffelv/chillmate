@@ -470,6 +470,7 @@ ul{
     padding: 10px;
     margin: 10px 0;
     border-radius: 8px; /* Optional: rounds corners */
+    color: #333;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
   }
   
@@ -502,3 +503,13 @@ ul{
   .add-journal-button:hover {
     transform: scale(1.1); /* Slightly enlarges the button on hover */
   }
+
+  .add-journal-form .color-picker {
+    margin-top: 10px;
+}
+
+.add-journal-form .color-options {
+    display: flex;
+    gap: 5px;
+}
+
