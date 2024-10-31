@@ -1,9 +1,9 @@
 import numpy as np
 import os
 import google.generativeai as genai
-import torch
-import torch.nn.functional as F
-from transformers import AutoTokenizer, AutoModel
+# import torch
+# import torch.nn.functional as F
+# from transformers import AutoTokenizer, AutoModel
 from typing import List
 
 
@@ -36,24 +36,24 @@ class GoogleEmbeddings:
         return list(embds.reshape(1, -1)[0])
 
 
-class BERTEmbeddings:
+# class BERTEmbeddings:
 
-    def __init__(self) -> None:
-        self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-        self.model = AutoModel.from_pretrained("bert-base-uncased")
+#     def __init__(self) -> None:
+#         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+#         self.model = AutoModel.from_pretrained("bert-base-uncased")
 
-    def generate_embeddings(self, inp: str):
+#     def generate_embeddings(self, inp: str):
 
-        inputs = self.tokenizer(inp, return_tensors="pt")
+#         inputs = self.tokenizer(inp, return_tensors="pt")
 
-        with torch.no_grad():
-            outputs = self.model(**inputs)
+#         with torch.no_grad():
+#             outputs = self.model(**inputs)
 
-        embeddings = outputs.last_hidden_state
+#         embeddings = outputs.last_hidden_state
 
-        embeddings = embeddings.mean(dim=1)
+#         embeddings = embeddings.mean(dim=1)
 
-        return embeddings.tolist()[0]
+#         return embeddings.tolist()[0]
 
 
 class Embeddings:
@@ -66,9 +66,9 @@ class Embeddings:
         use: "bert" or "google_gemini"
         """
 
-        if use == "bert":
-            embedding_model = BERTEmbeddings()
-            return embedding_model.generate_embeddings(text)
+        # if use == "bert":
+        #     embedding_model = BERTEmbeddings()
+        #     return embedding_model.generate_embeddings(text)
 
         embedding_model = GoogleEmbeddings()
         return embedding_model.generate_embeddings(text)

@@ -3,8 +3,9 @@ from flask_cors import CORS
 import pymongo
 from pymongo import MongoClient
 import os
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from chatbot.db_utils import MongoUtils
+from loguru import logger
  
 
 # Initializing flask app
@@ -66,36 +67,38 @@ def login():
             return jsonify({"message": "error"}), 202
 
 #api to create new post
-@app.route('/createPost', method=('GET','POST'))
-def createPost():
-    data = request.json
-    Topic = data.get("topic")
-    Text = data.get("text")
-    NoofLikes = 0
+# @app.route('/createPost', method=('GET','POST'))
+# def createPost():
+#     data = request.json
+#     Topic = data.get("topic")
+#     Text = data.get("text")
+#     NoofLikes = 0
 
-    new_post = {
-            "Topic": Topic,
-            "Text": Text,  # Ideally, hash the password before storing
-            "NoofLikes": NoofLikes
-    }
+#     new_post = {
+#             "Topic": Topic,
+#             "Text": Text,  # Ideally, hash the password before storing
+#             "NoofLikes": NoofLikes
+#     }
 
-    forum_collection.insert_one(new_post)
-    return jsonify({"message": "User registered successfully"}), 201
+#     forum_collection.insert_one(new_post)
+#     return jsonify({"message": "User registered successfully"}), 201
 
-@app.route('/getPost', method=('GET', 'POST'))
-def getPost():
-    post = forum_collection.query.all()
-    return jsonify([{'id': post._id, 'Topic': post.Topic, 'Text': post.Text, 'NoofLikes': post.NoofLikes} for post in post])
+# @app.route('/getPost', method=('GET', 'POST'))
+# def getPost():
+#     post = forum_collection.query.all()
+#     return jsonify([{'id': post._id, 'Topic': post.Topic, 'Text': post.Text, 'NoofLikes': post.NoofLikes} for post in post])
 
-@app.route("/chatbot/find_sim_docs", method='GET')
+@app.route("/chatbot/find_sim_docs", methods=['GET'])
 def find_simialar_docs():
-    inputText = request.json
+    json = request.get_json()
+    inputText = json.get('input_text', "")
     mongoUtils = MongoUtils(client, db_name, 'Resources')
 
     input_text_emb = mongoUtils.generate_embeddings(inputText)
     similar_docs = mongoUtils.find_similar_documents(input_text_emb, embedding_name="ResourceEmbedding")
-
-    return jsonify(similar_docs)
+    
+    f_docs = [{"resource_title": doc.get("RecourseTitle", ""), "resource_link": doc.get("RecourseLink", ""), "resource_body": doc.get("ResourseBody", "")} for doc in similar_docs]
+    return jsonify(f_docs)
     
 # Running app
 if __name__ == '__main__':
