@@ -54,9 +54,10 @@ const Chatbot = () => {
 
   return (
     <div>
+      <body>
       <Navbar />
       <div className="chatbot-container">
-        <h2>Chatbot</h2>
+        <h1>Chatbot</h1>
         <div className="chatbot-messages">
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
@@ -67,8 +68,7 @@ const Chatbot = () => {
           {typingMessage && <div className="message bot">{typingMessage}</div>}
           <div ref={messagesEndRef} /> {/* Element to scroll to */}
         </div>
-      </div>
-      <div className="chatbot-input">
+        <div className="chatbot-input">
         <input
           type="text"
           placeholder="Type a message..."
@@ -78,8 +78,13 @@ const Chatbot = () => {
         />
         <button onClick={sendMessage}>Send</button>
       </div>
+      </div>
+      
+      </body>
     </div>
+    
   );
 };
 
 export default Chatbot;
+
