@@ -5,9 +5,12 @@ import google.generativeai as genai
 # import torch.nn.functional as F
 # from transformers import AutoTokenizer, AutoModel
 from typing import List
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "AIzaSyB8pQi-f5WCy3Ek7-a2DUNkmfc3AIotfMo")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 class GoogleEmbeddings:
 
@@ -43,5 +46,3 @@ class Embeddings:
 
         embedding_model = GoogleEmbeddings()
         return embedding_model.generate_embeddings(text)
-    
-
