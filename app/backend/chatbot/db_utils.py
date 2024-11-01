@@ -55,7 +55,6 @@ class MongoUtils:
         # Fetch all documents with embeddings
         documents = self.fetch_all_documents_with_embedding(embedding_name=embedding_name)
 
-        logger.debug(f"All docs: {documents}")
         # Store documents with their similarity scores
         doc_scores = []
         
@@ -63,7 +62,6 @@ class MongoUtils:
             stored_embedding = doc.get(embedding_name, [])
             
             if len(stored_embedding) == len(inp_document_embedding):
-                
                 # Compute cosine similarity
                 similarity = self.check_similarity(stored_embedding, inp_document_embedding)
                 doc_scores.append((doc, similarity))

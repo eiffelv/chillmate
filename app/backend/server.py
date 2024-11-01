@@ -5,7 +5,6 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from chatbot.db_utils import MongoUtils
-from loguru import logger
  
 
 # Initializing flask app
@@ -66,7 +65,7 @@ def login():
     else:
             return jsonify({"message": "error"}), 202
 
-#api to create new post
+# #api to create new post
 # @app.route('/createPost', method=('GET','POST'))
 # def createPost():
 #     data = request.json
@@ -90,15 +89,13 @@ def login():
 
 @app.route("/chatbot/find_sim_docs", methods=['GET'])
 def find_simialar_docs():
-    json = request.get_json()
-    inputText = json.get('input_text', "")
+    inputText = request.json
     mongoUtils = MongoUtils(client, db_name, 'Resources')
 
     input_text_emb = mongoUtils.generate_embeddings(inputText)
     similar_docs = mongoUtils.find_similar_documents(input_text_emb, embedding_name="ResourceEmbedding")
-    
-    f_docs = [{"resource_title": doc.get("RecourseTitle", ""), "resource_link": doc.get("RecourseLink", ""), "resource_body": doc.get("ResourseBody", "")} for doc in similar_docs]
-    return jsonify(f_docs)
+
+    return jsonify(similar_docs)
     
 # Running app
 if __name__ == '__main__':
