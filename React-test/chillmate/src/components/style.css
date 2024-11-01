@@ -129,7 +129,7 @@ nav ul li a {
 }
 
 .navbar li:last-child {
-    margin-left: 660px; /* Add extra space for the last item */
+    margin-left: 600px; /* Add extra space for the last item */
     
 }
 
@@ -331,6 +331,8 @@ ul{
   }
 
   .chatbot-container {
+
+    background:#f9f9f9;
     width: 1000px;
     margin: 0 auto;
     padding: 20px;
