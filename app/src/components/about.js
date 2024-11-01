@@ -71,62 +71,62 @@ export default class About extends React.Component {
                     </div>
 
 
-{/* Profile Page */}
-<div className="container">
-    <h2 className="gradient-text4">Meet the Team</h2>
-    <div className="profile-grid">
-        {[
-            {
-                title: 'Teammate 1 (Front-end Leader)',
-                name: 'Chun Kai Liu',
-                introduction: 'Hello, my name is Chun Kai Liu and I\'m a senior Computer Science major at SFSU. In my free time, I like to work out and play games.'
-            },
-            {
-                title: 'Teammate 2 (GitHub Master)',
-                name: 'Luis Carrillo',
-                introduction: 'Hello, my name is Luis Carrillo and I\'m a senior Computer Science major at SFSU. In my free time I like to play basketball or soccer.',
-                image: luisImage
-            },
-            {
-                title: 'Teammate 3 (Back-end Lead)',
-                name: 'William Widjaja',
-                introduction: 'Hi, my name is William Widjaja and I\'m a senior Computer Science major at SFSU. In my free time, I like to play games and listen to music.'
-            },
-            {
-                title: 'Teammate 4 (Back-end Member)',
-                name: 'Jay Lodha',
-                introduction: 'I\'m a Grad student pursuing Data Science and AI. I have worked as a ML Engineer for 2 years at a document AI firm before commencing my masters. I like playing basketball whenever I can.'
-            },
-            {
-                title: 'Teammate 5',
-                name: 'Sneha Katturu',
-                introduction: 'Hi all, I am Sneha, a graduate student with majors in Computer Science. During my free time I like to play badminton.'
-            },
-            {
-                title: 'Teammate 6 (Team Leader)',
-                name: 'Eiffel Valentino',
-                introduction: 'Hello everyone, my name is Eiffel and I am an Undergrad Senior Computer Science student. I personally like traveling and watching YouTube videos about food, travel, and technology.',
-                image: eifImage
-            },
-            {
-                title: 'Teammate 7 (Scrum Master)',
-                name: 'Gio Jung',
-                introduction: 'Hello, I\'m currently in the master\'s program in Computer Science and my role in this project is a Scrum Master. My personal hobby is listening to music and running.',
-                image: gioImage
-            }
-        ].map((teammate, index) => (
-            <div key={index} className="profile-card">
-                <h3 className="gradient-text3">{teammate.title}</h3>
-                <p><strong>Name:</strong> {teammate.name}</p>
-                <p><strong>Introduction:</strong> {teammate.introduction}</p>
-                {teammate.image && <img src={teammate.image} alt={teammate.name} className="profile-image" />}
-            </div>
-        ))}
-    </div>
-</div>
+                    {/* Profile Page */}
+                    <div className="container">
+                        <h2 className="gradient-text4">Meet the Team</h2>
+                        <div className="profile-grid">
+                            {[
+                                {
+                                    title: 'Teammate 1 (Front-end Leader)',
+                                    name: 'Chun Kai Liu',
+                                    introduction: 'Hello, my name is Chun Kai Liu and I\'m a senior Computer Science major at SFSU. In my free time, I like to work out and play games.'
+                                },
+                                {
+                                    title: 'Teammate 2 (GitHub Master)',
+                                    name: 'Luis Carrillo',
+                                    introduction: 'Hello, my name is Luis Carrillo and I\'m a senior Computer Science major at SFSU. In my free time I like to play basketball or soccer.',
+                                    image: luisImage
+                                },
+                                {
+                                    title: 'Teammate 3 (Back-end Lead)',
+                                    name: 'William Widjaja',
+                                    introduction: 'Hi, my name is William Widjaja and I\'m a senior Computer Science major at SFSU. In my free time, I like to play games and listen to music.'
+                                },
+                                {
+                                    title: 'Teammate 4 (Back-end Member)',
+                                    name: 'Jay Lodha',
+                                    introduction: 'I\'m a Grad student pursuing Data Science and AI. I have worked as a ML Engineer for 2 years at a document AI firm before commencing my masters. I like playing basketball whenever I can.'
+                                },
+                                {
+                                    title: 'Teammate 5',
+                                    name: 'Sneha Katturu',
+                                    introduction: 'Hi all, I am Sneha, a graduate student with majors in Computer Science. During my free time I like to play badminton.'
+                                },
+                                {
+                                    title: 'Teammate 6 (Team Leader)',
+                                    name: 'Eiffel Valentino',
+                                    introduction: 'Hello everyone, my name is Eiffel and I am an Undergrad Senior Computer Science student. I personally like traveling and watching YouTube videos about food, travel, and technology.',
+                                    image: eifImage
+                                },
+                                {
+                                    title: 'Teammate 7 (Scrum Master)',
+                                    name: 'Gio Jung',
+                                    introduction: 'Hello, I\'m currently in the master\'s program in Computer Science and my role in this project is a Scrum Master. My personal hobby is listening to music and running.',
+                                    image: gioImage
+                                }
+                            ].map((teammate, index) => (
+                                <div key={index} className="profile-card">
+                                    <h3 className="gradient-text3">{teammate.title}</h3>
+                                    <p><strong>Name:</strong> {teammate.name}</p>
+                                    <p><strong>Introduction:</strong> {teammate.introduction}</p>
+                                    {teammate.image && <img src={teammate.image} alt={teammate.name} className="profile-image" />}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-                    
-                    
+
+
                 </div>
             </div>
         );

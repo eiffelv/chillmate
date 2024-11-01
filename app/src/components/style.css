@@ -515,9 +515,8 @@ ul{
 }
 
 .suggestions {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  display:inline-flex;
+  gap: 10px;
 }
 
 .suggestion-button {
@@ -530,6 +529,7 @@ ul{
   text-align: center;
   font-size: 0.9em;
   transition: background-color 0.2s;
+  gap: 5px;
 }
 
 .suggestion-button:hover {

@@ -27,6 +27,8 @@ function App() {
           <Route path="/chatbot" element={<Chatbot/>} />
           <Route path="/journal" element={<Journal/>} />
         </Routes>
+      </Router>
+    </div>
   );
 }
 

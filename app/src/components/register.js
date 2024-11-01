@@ -85,8 +85,8 @@ export default class Register extends React.Component {
                                     <option value="Wisconsin">Wisconsin</option>
                                     <option value="Wyoming">Wyoming</option>
                                 </select>
-                                <input type="text" name="zip_code" placeholder="Zip Code" required />
                             </div>
+                            <input type="text" name="zip_code" placeholder="Zip Code" required />
                         </div>
                         {/* Other fields */}
                         <div className="input-group">
