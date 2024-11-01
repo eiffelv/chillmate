@@ -45,8 +45,8 @@ function Home() {
             <body>
                 <Navbar />
                 <div className="container" id="home">
-                    <h1>{info.name}</h1>
-                    <p>
+                    <h1>ChillMate</h1>
+                    <p className="homeDescription">
                     Our stress management app is designed for San Francisco State University students and faculty, offering essential tools to combat stress: <br /><br />
             
                     <ul className="a">

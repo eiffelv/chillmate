@@ -6,7 +6,7 @@ import Navbar from "./navbar";
 import { Link } from "react-router-dom";
 
 const Forum = () => {
-    <Navbar />
+    
     // State to handle form inputs and posts
     const [topic, setTopic] = useState('');
     const [postContent, setPostContent] = useState('');
@@ -41,13 +41,15 @@ const Forum = () => {
       });
       setPosts(updatedPosts);
     };
-  
+    
     return (
       <div className="forum">
+        <Navbar />
         {/* Forum Page */}
         <div className="container1">
-          <h1>Forum</h1><br />
-  
+           
+           <h1>Forum</h1><br />
+         
           {/* Post Form */}
           <div className="post-form">
             <h2>Create a New Post</h2>
