@@ -513,3 +513,24 @@ ul{
     gap: 5px;
 }
 
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.suggestion-button {
+  padding: 8px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+}
+
+.suggestion-button:hover {
+  background-color: #0056b3;
+}

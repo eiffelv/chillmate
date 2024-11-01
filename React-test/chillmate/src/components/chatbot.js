@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png"
 import Navbar from "./navbar";
-import { Link } from "react-router-dom";
+
+
+const suggestions = ["Find the resources in campus for you. ", "Organizing your tasks for you.", "Gernal conversation.😊"];
 
 
 
@@ -42,6 +43,11 @@ const Chatbot = () => {
     }, 50);
   };
 
+  // Handle click on a suggested question
+  const handleSuggestionClick = (suggestion) => {
+    sendMessage(suggestion);
+  };
+
   // Function to handle Enter key submission
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') sendMessage();
@@ -54,10 +60,18 @@ const Chatbot = () => {
 
   return (
     <div>
+      <body></body>
       <Navbar />
       <div className="chatbot-container">
         <h2>Chatbot</h2>
         <div className="chatbot-messages">
+          <div className="suggestions">
+            {suggestions.map((suggestion, index) => (
+              <button key={index} className="suggestion-button" onClick={() => handleSuggestionClick(suggestion)}>
+                {suggestion}
+              </button>
+            ))}
+          </div>
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
               {msg.text}
@@ -76,6 +90,7 @@ const Chatbot = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
         />
+
         <button onClick={sendMessage}>Send</button>
       </div>
     </div>
