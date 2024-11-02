@@ -12,24 +12,24 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
     // usestate for setting a javascript
     // object for storing and using data
-    const [info, setInfo] = useState({
-        name: "",
-    });
-    // Using useEffect for single rendering
-    // console.log("phallus");
-    useEffect(() => {
-        // Using fetch to fetch the api from 
-        // flask server it will be redirected to proxy
-        fetch("/data").then((res) =>
-            res.json().then((data) => {
-                // Setting a data from api
-                setInfo({
-                    name: data.Name
-                });
-                console.log("kontol", data);
-            })
-        );
-    }, []);
+    // const [info, setInfo] = useState({
+    //     name: "",
+    // });
+    // // Using useEffect for single rendering
+    // // console.log("phallus");
+    // useEffect(() => {
+    //     // Using fetch to fetch the api from 
+    //     // flask server it will be redirected to proxy
+    //     fetch("/data").then((res) =>
+    //         res.json().then((data) => {
+    //             // Setting a data from api
+    //             setInfo({
+    //                 name: data.Name
+    //             });
+    //             console.log("kontol", data);
+    //         })
+    //     );
+    // }, []);
 
 
     const navigate = useNavigate();

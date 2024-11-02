@@ -9,36 +9,37 @@ import { useNavigate } from 'react-router-dom';
 const Register = () => {
     const [user, setUser] = useState({
         sfsu_id: "",
-        FirstName: "",
-        LastName: "",
-        Email:"",
-        Password:"",
+        first_name: "",
+        last_name: "",
+        email:"",
+        password:"",
         Address:"",
-        PhoneNum:"",
+        phone_number:"",
         Age:"",
         Occupation:"",
-        Username:"",
+        username:"",
         EmergencyContactEmail:"",
-        line1: "",
-        line2: "",
+        address_line_1: "",
+        address_line_2: "",
         city: "",
         state: "",
-        zip: ""
+        zip_code: ""
     });
+
+    
     
     const [message, setMessage] = useState("");
-    const [fullAddress, setAddress] = useState({
-        line1: "",
-        line2: "",
-        city: "",
-        state: "",
-        zip: "",
-    })
+
     console.log("this user", user);
-    console.log("this is full address", fullAddress);
 
 
     const handleSubmit = async (event) => {
+
+        setUser(prevUser => ({
+            ...prevUser,
+            Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`
+        }));
+
         console.log("bangsat");
         event.preventDefault();
         try {
@@ -107,8 +108,8 @@ const Register = () => {
                     {/* Address Section */}
                     <div className="input-group">
                         <label>Address</label>
-                        <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.line1} onChange={handleChange} required />
-                        <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.line2} onChange={handleChange}/>
+                        <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.address_line_1} onChange={handleChange} required />
+                        <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange}/>
                     </div>
                     <div className="input-group">
                         <input type="text" name="city" placeholder="City" value={user.city} onChange={handleChange} required />

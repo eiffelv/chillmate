@@ -28,15 +28,15 @@ def register():
     data = request.json
 
     SFStateID = data.get("sfsu_id")
-    FirstName = data.get("FirstName")
-    LastName = data.get("LastName")
-    Email = data.get("Email")
-    Password = data.get("Password")
-    Address = data.get("line1" + "line2")
-    PhoneNum = data.get("PhoneNum")
+    FirstName = data.get("first_name")
+    LastName = data.get("last_name")
+    Email = data.get("email")
+    Password = data.get("password")
+    Address = data.get("Address")
+    PhoneNum = data.get("phone_number")
     Age = data.get("Age")
     Occupation = data.get("Occupation")
-    Username = data.get("Username")
+    Username = data.get("username")
     EmergencyContactEmail = data.get("EmergencyContactEmail")
 
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name="user")
@@ -67,9 +67,9 @@ def login():
     username = data.get("username")
     password = data.get("password")
 
-    mongoUtils = MongoUtils(client, db_name="your_database_name", collection_name="users")
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name="user")
 
-    user = mongoUtils.collection.find_one({'username': username, 'password': password})
+    user = mongoUtils.collection.find_one({'Username': username, 'Password': password})
     if user:
         return jsonify({"message": "User registered successfully"}), 201
         # Add any additional logic, such as session management
