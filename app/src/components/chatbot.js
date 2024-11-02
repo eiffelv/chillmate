@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "./style.css";
 import "./ChillMateLogo.png"
+import { LoginContext } from "./LoginContext";
 import Navbar from "./navbar";
 
 
@@ -58,7 +59,6 @@ const Chatbot = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="chatbot-container">
         <h1>Chatbot</h1>
         <div className="chatbot-messages">

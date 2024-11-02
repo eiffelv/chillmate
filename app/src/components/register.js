@@ -5,6 +5,7 @@ import Navbar from "./navbar";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { LoginContext } from "./LoginContext";
 
 const Register = () => {
     const [user, setUser] = useState({
@@ -97,7 +98,6 @@ const Register = () => {
 
     return (
         <div className="register">
-            <Navbar />
 
             <div className="register-container">
                 <h2>Register</h2>

@@ -131,7 +131,6 @@ const resourcesData = [
 
 const Resources = () => (
   <div className="resources">
-    <Navbar />
     <div className="container" id="resources">
       <h1>Resources</h1>
       {resourcesData.map((section, sectionIndex) => (

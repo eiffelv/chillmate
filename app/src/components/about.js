@@ -23,7 +23,6 @@ export default class About extends React.Component {
 
         return (
             <div>
-                <Navbar />
                 <div className="container" id="home">
                     <div style={{ textAlign: "center", padding: "20px" }}>
                         <h1>All About ChillMate</h1>

@@ -10,8 +10,9 @@ from chatbot.db_utils import MongoUtils
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Replace with a fixed key in production
 
-# Configure CORS to allow credentials
-cors = CORS(app, origins="http://localhost:3000", supports_credentials=True)
+# Dynamic CORS configuration
+frontend_origin = os.getenv("FRONTEND_ORIGIN")
+cors = CORS(app, origins=[frontend_origin], supports_credentials=True)
 
 load_dotenv()
 

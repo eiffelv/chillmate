@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+import { LoginContext } from "./LoginContext";
 import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png";
 import Navbar from "./navbar";
-import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
     const navigate = useNavigate();
@@ -16,7 +18,6 @@ function Home() {
 
     return (
         <div>
-            <Navbar />
             <div className="container" id="home">
                 <h1>ChillMate</h1>
                 <div className="homeDescription">

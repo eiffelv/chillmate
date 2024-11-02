@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { LoginContext } from "./LoginContext";
 import "./style.css";
 import "./ChillMateLogo.png";
+import Navbar from "./navbar";
 
 function Login() {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const { login } = useContext(LoginContext);
     const [user, setUser] = useState({
         username: "",
         password: ""
@@ -27,37 +29,26 @@ function Login() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(user),
+                credentials: "include"
             });
 
             const data = await response.json();
-            if (data.message === 'User registered successfully') {
-                goToProfile();
+            if (data.message === 'User logged in successfully') {
+                login();  // Update login state
+                navigate('/');
             } else {
-                alert("User/password is wrong");
+                alert("Username/password is incorrect");
             }
         } catch (error) {
             setMessage("An error occurred while logging in.");
         }
     };
 
-    const goToProfile = () => {
-        navigate('/');
-    };
-
     return (
         <div className="login">
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">
-                            <img src={require('./ChillMateLogo.png')} alt="Logo" width="50" height="50" />
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-
             <div className="login-container">
                 <h2>Login</h2>
+                {message && <p className="error-message">{message}</p>}
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"

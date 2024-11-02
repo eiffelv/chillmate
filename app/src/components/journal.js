@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import "./ChillMateLogo.png"
+import { LoginContext } from "./LoginContext";
 import Navbar from "./navbar";
 import JournalList from './journalList';
 import AddJournalForm from './addjournalForm';
@@ -25,32 +26,31 @@ const JournalPage = () => {
     );
 
     // Function to add a new journal entry
-    const addJournalEntry = (title, date, content,color ) => {
-        const newEntry = { id: Date.now(), title, date, content, color};
+    const addJournalEntry = (title, date, content, color) => {
+        const newEntry = { id: Date.now(), title, date, content, color };
         setEntries((prevEntries) => [...prevEntries, newEntry]);
         setShowAddForm(false);  // Hide form after submission
     };
-    
-    
+
+
     return (
         <div className="journal">
-            <Navbar />
             <div className="journal-page">
-            <h2>Journal</h2>
+                <h2>Journal</h2>
                 <input
                     type="text"
                     placeholder="Search journal..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button className="add-journal-button" 
-                        onClick={() => setShowAddForm(true)}>+</button>
+                <button className="add-journal-button"
+                    onClick={() => setShowAddForm(true)}>+</button>
 
                 <JournalList entries={filteredEntries} latestEntryRef={latestEntryRef} />
                 {showAddForm && (
                     <div ref={formRef}>
-                        <AddJournalForm 
-                            onAddEntry={addJournalEntry} 
+                        <AddJournalForm
+                            onAddEntry={addJournalEntry}
                             onClose={() => setShowAddForm(false)} />
                     </div>
                 )}
