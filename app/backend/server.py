@@ -26,19 +26,35 @@ client = MongoClient(mongo_uri)
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     data = request.json
-    username = data.get("username")
-    email = data.get("email")
-    password = data.get("password")
-    sid = data.get("sid")
 
-    mongoUtils = MongoUtils(client, db_name="your_database_name", collection_name="users")
+    SFStateID = data.get("sfsu_id")
+    FirstName = data.get("FirstName")
+    LastName = data.get("LastName")
+    Email = data.get("Email")
+    Password = data.get("Password")
+    Address = data.get("line1" + "line2")
+    PhoneNum = data.get("PhoneNum")
+    Age = data.get("Age")
+    Occupation = data.get("Occupation")
+    Username = data.get("Username")
+    EmergencyContactEmail = data.get("EmergencyContactEmail")
+
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name="user")
 
     # Insert new user
     new_user = {
-        "username": username,
-        "password": password,  # Ideally, hash the password before storing
-        "email": email,
-        "sid": sid
+
+        "SFStateID" : SFStateID,
+        "FirstName" : FirstName,
+        "LastName" : LastName,
+        "Email" : Email,
+        "Password" : Password,
+        "Address": Address,
+        "PhoneNum" : PhoneNum,
+        "Age" : Age,
+        "Occupation": Occupation,
+        "Username" : Username,
+        "EmergencyContactEmail" : EmergencyContactEmail
     }
     mongoUtils.collection.insert_one(new_user)
     return jsonify({"message": "User registered successfully"}), 201
