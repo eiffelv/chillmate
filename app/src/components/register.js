@@ -32,7 +32,6 @@ const Register = () => {
 
     console.log("this user", user);
 
-
     const handleSubmit = async (event) => {
 
         setUser(prevUser => ({
@@ -81,6 +80,12 @@ const Register = () => {
         setUser({ ...user, [name]: value }); // Dynamically set the value based on field name
         // setAddress({ ...user, [name]: value }); 
         // setUser({Address: fullAddress});
+
+        //combine address into one variable which is Address
+        setUser(prevUser => ({
+            ...prevUser,
+            Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`
+        }));
     };
 
     const navigate = useNavigate();
