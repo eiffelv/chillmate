@@ -58,7 +58,6 @@ const Chatbot = () => {
 
   return (
     <div>
-      <body>
       <Navbar />
       <div className="chatbot-container">
         <h1>Chatbot</h1>
@@ -80,21 +79,20 @@ const Chatbot = () => {
           <div ref={messagesEndRef} /> {/* Element to scroll to */}
         </div>
         <div className="chatbot-input">
-        <input
-          type="text"
-          placeholder="Type a message..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
+          <input
+            type="text"
+            placeholder="Type a message..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
 
-        <button onClick={sendMessage}>Send</button>
+          <button onClick={sendMessage}>Send</button>
+        </div>
       </div>
-      </div>
-      
-      </body>
+
     </div>
-    
+
   );
 };
 

@@ -96,7 +96,7 @@ const Register = () => {
     };
 
     return (
-        <body className="register">
+        <div className="register">
             <Navbar />
 
             <div className="register-container">
@@ -219,7 +219,7 @@ const Register = () => {
                     Already have an account? <Link to="/login">Login here</Link>
                 </p>
             </div>
-        </body >
+        </div >
     );
 
 }

@@ -1,30 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
-import "./ChillMateLogo.png"
-import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-
+import "./ChillMateLogo.png";
 
 function Login() {
-
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({
         username: "",
         password: ""
-    })
+    });
     const [message, setMessage] = useState("");
-    console.log(user);
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser({ ...user, [name]: value }); // Dynamically set the value based on field name
-    };
-
     const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+    };
+
     const handleSubmit = async (event) => {
-        console.log("bangsat");
         event.preventDefault();
 
         try {
@@ -37,29 +30,26 @@ function Login() {
             });
 
             const data = await response.json();
-            console.log(data)
             if (data.message === 'User registered successfully') {
-                goToProfile()
+                goToProfile();
             } else {
-                alert("user/password is wrong");
+                alert("User/password is wrong");
             }
         } catch (error) {
-            setMessage("An error occurred while registering.");
+            setMessage("An error occurred while logging in.");
         }
     };
 
     const goToProfile = () => {
-        console.log("tai");
         navigate('/');
     };
 
-
     return (
-        <body className="login">
+        <div className="login">
             <nav>
                 <ul>
                     <li>
-                        <Link to = "/">
+                        <Link to="/">
                             <img src={require('./ChillMateLogo.png')} alt="Logo" width="50" height="50" />
                         </Link>
                     </li>
@@ -68,28 +58,29 @@ function Login() {
 
             <div className="login-container">
                 <h2>Login</h2>
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Username" name="username" value={user.username} onChange={handleChange} required />
-                        <input type="password" placeholder="Password" name="password"value={user.password} onChange={handleChange} required />
-                        <button type="submit"><a href="index.html">Login</a></button>
-                    </form>
-                <p>Don't have an account? <Link to = "/register">Register here</Link></p>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        name="username"
+                        value={user.username}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        value={user.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <Link to="/register">Register here</Link></p>
             </div>
-
-            <script src="scripts.js"></script>
-        </body>
+        </div>
     );
 }
 
-export default Login
-
-
-// export default class Login extends React.Component {
-
-
-
-
-//     render() {
-
-//     }
-// }
+export default Login;
