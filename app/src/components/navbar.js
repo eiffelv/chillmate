@@ -27,10 +27,19 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/forum">Forum</Link>
+            {isLoggedIn ? (
+              <Link to="/forum">Forum</Link>
+            ) : (
+              <Link to="/login">Forum</Link>
+            )}
           </li>
           <li>
-            <Link to="/chatbot">Chatbot</Link>
+          {isLoggedIn ? (
+              <Link to="/chatbot">Chatbot</Link>
+            ) : (
+              <Link to="/login">Chatbot</Link>
+            )}
+
           </li>
           <li>
             <Link to="/about">About</Link>
@@ -39,7 +48,11 @@ export default function Navbar() {
             <Link to="/resources">Resources</Link>
           </li>
           <li>
-            <Link to="/journal">Journal</Link>
+          {isLoggedIn ? (
+              <Link to="/journal">Journal</Link>
+            ) : (
+              <Link to="/login">Chatbot</Link>
+            )} 
           </li>
           <li>
             {isLoggedIn ? (
