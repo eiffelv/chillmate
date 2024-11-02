@@ -4,9 +4,7 @@ import "./ChillMateLogo.png"
 import Navbar from "./navbar";
 
 
-const suggestions = ["Find the resources in campus for you. ", "Organizing your tasks for you.", "Gernal conversation.😊"];
-
-
+const suggestions = ["Find the resources in campus for you.📚", "Organizing your tasks for you.📋", "Gernal conversation.😊"];
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -101,4 +99,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
