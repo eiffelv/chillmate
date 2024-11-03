@@ -101,6 +101,19 @@ def find_similar_docs():
 
     return jsonify(f_docs)
 
+
+#---- Forum API ----
+# get at least 5 post from the forum database
+@app.route('/getForum', methods=['POST', 'GET'])
+def getForum(): 
+    sfid = "923651973"
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+    result = [
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find({'SFStateID': sfid})
+    ]
+    return jsonify(result)
+
+
 # Running app
 if __name__ == '__main__':
     app.run(debug=True)
