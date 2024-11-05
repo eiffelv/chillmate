@@ -12,30 +12,45 @@ body {
     text-align: left;
 }
 
-body.login{
-    /* NOTE: Below are merged from Frontend Branch; please check if something breaks */
-    display: flex; /* Use flexbox */
-    justify-content:center; /* Center horizontally */
-    flex-wrap: wrap; /* Allow items to wrap onto the next line */
-    align-items: center; /* Center vertically */
-    align-content: start;
-    gap:120px;
-    height: 100vh; /* Full viewport height */
 
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #DEDDFF; /* Optional: background color */
 }
+
+.login-container {
+  width: 100%;
+  max-width: 85%; /* Set a max-width for the container */
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 15px; /* Optional: rounded corners */
+  background-color: white; /* Optional: background color */
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DEDDFF; /* Optional: background color */
+}
+
 
 .register-container {
   width: 1000px;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 20px;
   display: flex; /* Use flexbox */
   justify-content:center; /* Center horizontally */
   flex-wrap: wrap; /* Allow items to wrap onto the next line */
   align-items: center; /* Center vertically */
   align-content: start;
-  gap:40px;
-  height: 90vh; 
+  gap:10px;
+  height: 100vh; 
   margin-bottom: 20px;
+  border-radius: 15px; /* Smoother, rounded corners */
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.747);
   
@@ -45,6 +60,27 @@ body.login{
   display: flex;
   flex-wrap: wrap;
   gap: 30px; /* Space between input groups */
+}
+
+.register-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 50%; /* Centered button with 50% width */
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.register-container button:hover {
+  background-color: #0056b3;
+}
+
+.register-container p {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .input-group {

@@ -12,6 +12,7 @@ app.secret_key = os.urandom(24)  # Replace with a fixed key in production
 
 # Dynamic CORS configuration
 frontend_origin = os.getenv("FRONTEND_ORIGIN")
+
 cors = CORS(app, origins=[frontend_origin], supports_credentials=True)
 
 load_dotenv()
