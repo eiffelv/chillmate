@@ -21,7 +21,7 @@ const Forum = () => {
           //event.preventDefault();  // Prevents the default form submission behavior
         
           const token = localStorage.getItem('accessToken');
-          const response = await fetch('http://localhost:5000/getForum', {
+          const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/getForum`, {
               headers: {
                   'Authorization': `Bearer ${token}`
               }
@@ -47,6 +47,35 @@ const Forum = () => {
 
 
 
+    const uploadPost = async (newPost) => {
+      const token = localStorage.getItem('accessToken');
+    
+      try {
+        const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/createForum`, {
+          method: "POST",
+          credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(newPost),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to upload post');
+        }
+    
+        const data = await response.json();
+        console.log(data);
+        // Handle success or error based on the response data
+      } catch (error) {
+        console.error('Error uploading post:', error);
+        // Handle error, e.g., display an error message to the user
+      }
+    };
+
+
+
   // Handle form submission to add new posts
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,6 +90,10 @@ const Forum = () => {
       content: postContent,
       liked: false,
     };
+
+
+    uploadPost(newPost);
+    console.log(newPost);
     setPosts([newPost, ...posts]); // Add new post to the beginning of the posts array
     setTopic(''); // Clear form fields
     setPostContent('');

@@ -147,7 +147,7 @@ def getForum():
 def createForum(): 
     data = request.json
     current_user = get_jwt_identity()
-    topic = data.get("title")
+    topic = data.get("topic")
     text = data.get("content")
     
     new_post = {
