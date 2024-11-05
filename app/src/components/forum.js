@@ -8,32 +8,44 @@ import { Link } from "react-router-dom";
 
 const Forum = () => {
 
-  //will added this part to get forum posts from api
-  useEffect(() => {
-    //will added this code block
-      const getForumPost = async (e) => {
-        //event.preventDefault();  // Prevents the default form submission behavior
-      
-        const token = localStorage.getItem('accessToken');
-        const response = await fetch('http://localhost:5000/getForum', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        const data = await response.json();
-        console.log("useEffect running")
-        console.log("dapetnya", data);
-        return data;
-      };
-      getForumPost();
-  }, []);
-
-  //
-
   // State to handle form inputs and posts
   const [topic, setTopic] = useState('');
   const [postContent, setPostContent] = useState('');
   const [posts, setPosts] = useState([]);
+
+
+    //will added this part to get forum posts from api
+    useEffect(() => {
+      //will added this code block
+        const getForumPost = async (e) => {
+          //event.preventDefault();  // Prevents the default form submission behavior
+        
+          const token = localStorage.getItem('accessToken');
+          const response = await fetch('http://localhost:5000/getForum', {
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          });
+          const data = await response.json();
+          console.log("useEffect running")
+          console.log("dapetnya", data);
+
+          const formattedPosts = data.map(post => ({
+            topic: post.Topic || "Untitled",
+            content: post.Text || "",
+            liked: false
+          }));
+  
+          setPosts(formattedPosts); 
+
+          return data;
+        };
+        getForumPost();
+    }, []);
+  
+    //
+
+
 
   // Handle form submission to add new posts
   const handleSubmit = (e) => {
