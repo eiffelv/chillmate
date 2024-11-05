@@ -138,9 +138,32 @@ def getForum():
 
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
     result = [
-        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find({'SFStateID': current_user})
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find()
     ]
     return jsonify(result)
+
+@app.route('/createForum', methods=['POST', 'GET'])
+@jwt_required() 
+def createForum(): 
+    data = request.json
+    current_user = get_jwt_identity()
+    topic = data.get("title")
+    text = data.get("content")
+    
+    new_post = {
+        "SFStateID": current_user,
+        "Topic": topic,
+        "Text": text,
+        "NoofLikes": 0
+    }
+
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+    mongoUtils.collection.insert_one(new_post)
+    return jsonify({"message": "Post succesfully added"}), 201
+
+
+
+#-------------------------------
 
 
 # Running app
