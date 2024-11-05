@@ -138,7 +138,7 @@ def getForum():
 
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
     result = [
-        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find()
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find().sort("_id", -1)
     ]
     return jsonify(result)
 
