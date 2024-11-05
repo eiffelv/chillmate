@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { LoginContext } from "./LoginContext";
 import "./style.css";
@@ -7,6 +7,28 @@ import Navbar from "./navbar";
 import { Link } from "react-router-dom";
 
 const Forum = () => {
+
+  //will added this part to get forum posts from api
+  useEffect(() => {
+    //will added this code block
+      const getForumPost = async (e) => {
+        //event.preventDefault();  // Prevents the default form submission behavior
+      
+        const token = localStorage.getItem('accessToken');
+        const response = await fetch('http://localhost:5000/getForum', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        console.log("useEffect running")
+        console.log("dapetnya", data);
+        return data;
+      };
+      getForumPost();
+  }, []);
+
+  //
 
   // State to handle form inputs and posts
   const [topic, setTopic] = useState('');

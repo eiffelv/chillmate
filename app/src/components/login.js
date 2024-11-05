@@ -25,19 +25,21 @@ function Login() {
         try {
             const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/login`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(user),
-                credentials: "include"
             });
 
             const data = await response.json();
-            if (data.message === 'User logged in successfully') {
-                login();  // Update login state
-                navigate('/');
-            } else {
+            if (data.message === 'Invalid username or password') {
                 alert("Username/password is incorrect");
+            } else {
+                login();  // Update login state
+                //store data token
+                localStorage.setItem('accessToken', data.access_token);
+                navigate('/');
             }
         } catch (error) {
             setMessage("An error occurred while logging in.");

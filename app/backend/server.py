@@ -1,14 +1,34 @@
 from flask import Flask, request, jsonify, session
 from flask_cors import CORS
+from flask_session import Session
 import pymongo
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from chatbot.db_utils import MongoUtils
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 # Initializing flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Replace with a fixed key in production
+# app.config["SESSION_PERMANENT"] = False
+# app.config["SESSION_TYPE"] = "filesystem"
+# Session(app)
+
+# Session configuration
+# app.config['SESSION_COOKIE_HTTPONLY'] = True  # Cookie accessible only through HTTP(S), not JavaScript
+# app.config['SESSION_COOKIE_SECURE'] = False  # Use this in production; for development, set to False if not using HTTPS
+# app.config['SESSION_PERMANENT'] = True
+# app.config['PERMANENT_SESSION_LIFETIME'] = 86400  # Session lifetime in seconds (e.g., 1 day)
+
+# app.config['SESSION_TYPE'] = 'filesystem'  # Store session data in the file system
+# Session(app)
+
+
+app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Replace with a strong secret key
+jwt = JWTManager(app)
+
+
 
 # Dynamic CORS configuration
 frontend_origin = os.getenv("FRONTEND_ORIGIN")
@@ -65,9 +85,13 @@ def login():
 
     user = mongoUtils.collection.find_one({'Username': username, 'Password': password})
     if user:
-        session['user_id'] = str(user['_id'])  # Storing user's unique ID in session
-        session['username'] = user['Username']  # Optional: storing username
-        return jsonify({"message": "User logged in successfully"}), 201
+        session['user_id'] = user['SFStateID'] # Storing user's unique ID in session
+        #session['username'] = user['Username']  # Optional: storing username
+
+        #creaet token to check store data on whether it's logged in or not based on sfstateid
+        access_token = create_access_token(identity=user['SFStateID'])
+        return jsonify(access_token=access_token)
+        # return jsonify({"message": "User logged in successfully"}), 201
     else:
         return jsonify({"message": "Invalid username or password"}), 401
 
@@ -82,7 +106,9 @@ def is_logged_in():
 # Logout API logic
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.clear()  # Clears all session data
+    print("logging out of session")
+    #session.clear()  # Clears all session data
+    session.pop('user_id', None)
     return jsonify({"message": "User logged out successfully"}), 200
 
 # Sample route that requires a logged-in user
@@ -105,11 +131,14 @@ def find_similar_docs():
 #---- Forum API ----
 # get at least 5 post from the forum database
 @app.route('/getForum', methods=['POST', 'GET'])
+@jwt_required() 
 def getForum(): 
-    sfid = "923651973"
+    current_user = get_jwt_identity()
+    print(current_user)
+
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
     result = [
-        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find({'SFStateID': sfid})
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find({'SFStateID': current_user})
     ]
     return jsonify(result)
 
