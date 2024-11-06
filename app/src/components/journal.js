@@ -19,6 +19,7 @@ const JournalPage = () => {
             formRef.current.scrollIntoView({ behavior: "smooth" });
         }
 
+        //get journal entries from database
         const getJournal = async (e) => {
             const token = localStorage.getItem('accessToken');
             try {
@@ -38,11 +39,13 @@ const JournalPage = () => {
                 const data = await response.json();
                 console.log("response: ", data);
 
+                //format the journal entry from database array
                 const formattedJournal = data.map(post => ({
                     id: Date.now(),
                     title: post.Title || "",
                     content: post.Content || "",
                   }));
+                //put journal entry to website
                 setEntries(formattedJournal);
                 
 
@@ -58,6 +61,37 @@ const JournalPage = () => {
 
     }, [showAddForm]);
 
+
+    //upload new journal entry to database
+    const uploadJournal = async (newEntry) => {
+        const token = localStorage.getItem('accessToken');
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/createJournal`, {
+              method: "POST",
+              credentials: 'include',
+              headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(newEntry),
+            });
+        
+            if (!response.ok) {
+              throw new Error('Failed to upload post');
+            }
+        
+            const data = await response.json();
+            console.log(data);
+            // Handle success or error based on the response data
+          } catch (error) {
+            console.error('Error uploading post:', error);
+            // Handle error, e.g., display an error message to the user
+          }
+    }
+
+
+
     // Filtered entries based on search query
     const filteredEntries = entries.filter(entry =>
         entry.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -66,7 +100,10 @@ const JournalPage = () => {
     // Function to add a new journal entry
     const addJournalEntry = (title, date, content, color) => {
         const newEntry = { id: Date.now(), title, date, content, color };
+        console.log(newEntry);
+        uploadJournal(newEntry);
         setEntries((prevEntries) => [...prevEntries, newEntry]);
+        console.log("keupload ga ?")
         setShowAddForm(false);  // Hide form after submission
     };
 

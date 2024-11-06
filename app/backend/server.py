@@ -200,7 +200,6 @@ def createForum():
 @jwt_required() 
 def getJournal(): 
     current_user = get_jwt_identity()
-    print(current_user)
 
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
     result = [
@@ -209,9 +208,23 @@ def getJournal():
     logger.error(result)
     return jsonify(result)
 
+@app.route('/createJournal', methods=['POST','GET'])
+@jwt_required() 
+def createJournal():
+    current_user = get_jwt_identity()
+    data = request.json
+    title = data.get("title")
+    content = data.get("content")
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
 
+    new_journal = {
+        "SFStateID": current_user,
+        "Title": title,
+        "Content": content,
+    }
 
-
+    mongoUtils.collection.insert_one(new_journal)
+    return jsonify({"message": "Post succesfully added"}), 201
 
 #_____________________________
 
