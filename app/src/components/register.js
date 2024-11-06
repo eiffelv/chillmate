@@ -111,8 +111,8 @@ const Register = () => {
 
                     {/* Address Section */}
                     <div className="input-group">
+                    <label>Address</label>
                         <div className="address-group">
-                            <label>Address</label>
                             <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.address_line_1} onChange={handleChange} />
                             <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange} />
                         </div>
