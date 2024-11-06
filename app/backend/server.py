@@ -6,7 +6,9 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from chatbot.db_utils import MongoUtils
+from chatbot.generate_goals import GenerateGoal
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from loguru import logger
 
 # Initializing flask app
 app = Flask(__name__)
@@ -111,11 +113,11 @@ def logout():
     session.pop('user_id', None)
     return jsonify({"message": "User logged out successfully"}), 200
 
-# Sample route that requires a logged-in user
+# Find similar docs endpoint
 @app.route("/chatbot/find_sim_docs", methods=['GET'])
 def find_similar_docs():
-    if 'user_id' not in session:
-        return jsonify({"error": "Unauthorized"}), 401
+    # if 'user_id' not in session:
+    #     return jsonify({"error": "Unauthorized"}), 401
 
     inputText = request.json.get('input_text', "")
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Resources')
@@ -126,6 +128,30 @@ def find_similar_docs():
     f_docs = [{"Resource_title": doc.get("RecourseTitle", ""), "Resource_link": doc.get("RecourseLink", ""), "Resource_body": doc.get("ResourseBody", "")} for doc in similar_docs]
 
     return jsonify(f_docs)
+
+@app.route("/chatbot/generate_goal_tasks", methods=['GET'])
+def generate_subtasks():
+
+    inputText = request.json.get('input_text', "")
+    
+    if not inputText:
+        return jsonify({})
+    
+    model_name = "accounts/fireworks/models/llama-v3p1-70b-instruct"
+    provider_name = "fireworks"
+
+    ext_json = { 'goal': '[Original goal/problem]', 
+                'subtasks': [{ 'subtask': '[Description of subtask 1]', 
+                           'importance': '[Explanation of why this subtask is necessary]', 
+                           'focus': '[What the student should concentrate on for this subtask]' }, 
+                           ... ] 
+                }
+
+    context = {"user_query": inputText, "ext_json": ext_json}
+
+    parsed_output = GenerateGoal(model_name=model_name, provider_name=provider_name).generate(context)
+    
+    return jsonify(parsed_output)
 
 
 #---- Forum API ----
