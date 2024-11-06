@@ -18,6 +18,42 @@ const JournalPage = () => {
         if (showAddForm && formRef.current) {
             formRef.current.scrollIntoView({ behavior: "smooth" });
         }
+
+        const getJournal = async (e) => {
+            const token = localStorage.getItem('accessToken');
+            try {
+                const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/getJournal`, {
+                    method: "POST",
+                    credentials: 'include',
+                    headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                    },
+                    //body: JSON.stringify(newJournal),
+                });
+            
+                if (!response.ok) {
+                    throw new Error('Failed to upload post');
+                }
+                const data = await response.json();
+                console.log("response: ", data);
+
+                const formattedPosts = data.map(post => ({
+                    topic: post.Topic || "Untitled",
+                    content: post.Text || "",
+                    liked: false
+                  }));
+
+
+            } catch (error) {
+            console.error('Error uploading post:', error);
+            // Handle error, e.g., display an error message to the user
+            };
+
+        };
+        getJournal();
+
+
     }, [showAddForm]);
 
     // Filtered entries based on search query

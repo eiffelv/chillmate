@@ -202,10 +202,11 @@ def getJournal():
     current_user = get_jwt_identity()
     print(current_user)
 
-    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
     result = [
-        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find().sort("_id", -1)
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find({'SFStateID': current_user}).sort("_id", -1)
     ]
+    logger.error(result)
     return jsonify(result)
 
 
