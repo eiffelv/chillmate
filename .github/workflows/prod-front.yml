@@ -1,14 +1,15 @@
-name: Vercel Production Deployment
+name: Vercel Deploy - React
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FRONTEND }}
-  WEB_URL: 'https://chillmate-nu.vercel.app'
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_REACT }}
+  WEB_URL: 'https://chillmate-react.vercel.app'
 on:
   push:
-    branches:
-      - master
+    # branches:
+    #   - master
     paths:
-      - application/frontend/**
+      - 'app/**'
+      - '!app/backend/**'
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
@@ -33,5 +34,5 @@ jobs:
           BRANCH_NAME=${{ github.ref_name }}
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"\n\n🚀 **New Production Frontend deployment successful!**\n\n🔗 Deployment URL: $DEPLOYMENT_URL (${{ env.WEB_URL }}) \n\n📜 Commit: [$COMMIT_HASH_SHORT](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)\n📝 $COMMIT_USER - $COMMIT_MESSAGE\n\"}" \
+          -d "{\"content\": \"\n\n🚀 **Deployed React!**\n\n🔗 Deployment URL: $DEPLOYMENT_URL (${{ env.WEB_URL }}) \n\n📜 Commit: [$COMMIT_HASH_SHORT](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)\n📝 $COMMIT_USER - $COMMIT_MESSAGE\n\"}" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
