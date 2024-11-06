@@ -28,22 +28,46 @@ export default class About extends React.Component {
                         <h1>All About ChillMate</h1>
                     </div>
 
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
+    {/* Left side containing ss2 and ss4 images */}
+    <div className="content-section">
+  <div className="left-column">
+    <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
+    <div className="left-images">
+      <img src={ss2Image} alt="App Screenshot 2" width="300" height="200" />
+      <img src={ss4Image} alt="App Screenshot 4" width="300" height="200" />
+    </div>
+  </div>
+
+  <div className="left-column">
+  <div className="left-column">
+  <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
+    <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
+   
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
                     {/* Replace layout tables with CSS-based divs */}
-                    <div className="content-section">
+                   {/* <div className="content-section">
                         <div className="left-column">
                             <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
-                            <div className="image-row">
+                            <div className="left-image">
                                 <img src={ss2Image} alt="App Screenshot 2" width="300" height="200" />
                                 <img src={ss4Image} alt="App Screenshot 4" width="300" height="200" />
                             </div>
+                            <div className="right-images">
+                                    <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
+                                    <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
+                         </div>
                         </div>
-                        <div className="right-column">
-                            <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
-                            <div className="float-center">
-                                <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
-                            </div>
-                        </div>
-                    </div>
+                       </div>*/}
 
                     <div className="radial-gradient-text highlight-section">
                         <span className="gradient-text2">

@@ -103,13 +103,17 @@ nav {
     background-color: #D9D9D9;
     padding: 10px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items:center;
     top: 0; /* Position at the top of the viewport */
     width: 99%; /* Make it span the entire width of the page */
+  
     
 }
 
 nav ul {
+ display: flex;
+ align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -123,8 +127,9 @@ nav ul li {
 
 nav ul li a {
     color: black;
+    text-align: center;
     text-decoration: none;
-    font-size:25px;
+    font-size:20px;
     
 }
 
@@ -176,6 +181,7 @@ button:hover {
 }
 .login-container h2 {
     margin-bottom: 20px;
+    
 }
 .login-container input {
     width: 90%;
@@ -183,6 +189,7 @@ button:hover {
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
+    text-align: right;
 }
 .login-container button {
     background-color: #007bff;
@@ -195,6 +202,33 @@ button:hover {
 }
 .login-container button:hover {
     background-color: #0056b3;
+}
+
+/* Logout button */
+.logout-button {
+  /* Change the background color */
+  color: rgb(17, 17, 17);  /* Text color */
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  
+}
+
+.logout-button:hover {
+  background-color: #0056b3;  /* Darken background on hover */
+}
+
+/* Move logout button to the far right */
+nav ul {
+  display: flex;
+  justify-content: space-between; /* Space out the items */
+  width: 100%;  /* Ensure it takes full width */
+}
+
+nav ul li:last-child {
+  margin-left: auto; /* Move the last item (Logout button) to the far right */
 }
 
 .register-container button {
@@ -217,6 +251,71 @@ button:hover {
     color: red;
     display: none;
 }
+
+
+/*About US*/
+
+.content-section {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 20px;
+}
+
+.left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.left-images {
+  display: flex;
+ 
+  flex-direction: row;
+}
+
+.left-column img {
+  width: 100%;
+  height: auto;
+}
+
+.left-column {
+  position: relative; /* Set position relative for the left column */
+}
+
+.left-column img[src*="ss5"] {
+
+  align-items: center;
+  position: absolute;
+  top: 60px; /* Align it to the top */
+  right: 0; /* Align it to the right */
+  width: 450px; /* Adjust width as per your requirement */
+  height: 450px; /* Adjust height as per your requirement */
+  
+}
+
+.gradient-text {
+  margin-top: 220px; /* Adjust margin to avoid overlap with the image */
+}
+
+.gradient-text {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /* Forum CSS*/
 body.forum {
@@ -535,3 +634,543 @@ ul{
 .suggestion-button:hover {
   background-color: #0056b3;
 }
+
+/*profile pge*/
+/*
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fcfbfc;
+}
+
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px; /* Adjust the width of the navbar *
+  height: 100%; /* Full height *
+  background-color: #333;
+  color: white;
+  padding-top: 20px;
+  z-index: 1000; /* Ensure it stays above other content *
+}
+
+/* Navbar list and item styling *
+.navbar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navbar li {
+  padding: 15px;
+  text-align: center;
+}
+
+.navbar li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.navbar li a:hover {
+  background-color: #575757;
+}
+
+
+
+
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Profile Container *
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Sidebar Styles *
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 220px;
+  background-color: #f4e6f3;
+  padding: 20px;
+  border-radius: 8px 0 0 8px;
+}
+
+.sidebar-item {
+  margin: 10px 0;
+  color: #333;
+  cursor: pointer;
+}
+
+.sidebar-item:hover {
+  text-decoration: underline;
+}
+
+/* Profile Content Styles *
+.profile-content {
+  flex: 1;
+  padding: 20px;
+  text-align: left; /* Align text to the left *
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center; /* Center-align "My Profile" heading *
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: #666;
+}
+
+.profile-details {
+  width: 100%;
+}
+
+.profile-form {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  flex: 1; /* Ensure equal space between form groups *
+}
+
+.form-group label {
+  margin-right: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input[readonly] {
+  background-color: #f9f9f9;
+}
+
+input[type="text"],
+input[type="email"] {
+  font-size: 16px;
+}
+
+select {
+  background-color: white;
+}
+
+/* Mood Tracker *
+.mood-tracker {
+  width: 48%;
+  padding: 15px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.mood-tracker h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0a0606;
+  margin-bottom: 10px;
+}
+
+.Current.Mood {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+.emoji-tracker {
+  font-size: 4em;
+  margin-top: 5px;
+  padding: 2px;
+}
+
+/* Emergency Contact Details *
+.emergency-contact-details {
+  width: 48%; 
+  margin-top: 20px;
+  margin-right: 20px; 
+  display: inline-block; 
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  align-items: right;
+  text-align: right;
+}
+
+.emergency-contact-details h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.emergency-contact-details .form-group {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* Responsive Design *
+@media (max-width: 768px) {
+  .profile-content {
+    width: 48%;
+    flex-direction: column;
+  }
+
+  .mood-tracker, 
+  .emergency-contact-details {
+    width: 48%; /* Make each section full width on small screens *
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+.mood-tracker-container {
+  display: flex;
+  justify-content: space-between; /* Ensures space between the two sections *
+  gap: 20px; /* Optional: Adds some space between the mood tracker and emergency contact *
+}
+
+.mood-tracker {
+  flex: 1; /* Ensures the mood tracker takes available space *
+  padding: 15px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.emergency-contact-details {
+  flex: 1; /* Ensures the emergency contact section takes available space *
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  text-align: left;
+}
+
+.mood-tracker h3,
+.emergency-contact-details h4 {
+  margin-top: 0;
+}*/
+
+
+
+
+
+
+/* Profile Layout 
+.profile {
+  display: flex;
+  min-height: 100vh;
+  padding-left: 200px; /* Leave space for the navbar *
+  justify-content: center; /* Center profile content horizontally *
+  align-items: flex-start; /* Align content at the top *
+}
+
+/* Profile Content - Adjusted for the navbar *
+.profile-container {
+  flex: 1; /* Take the remaining space after the navbar *
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: calc(100% - 200px); /* Ensure it fills remaining space and takes into account navbar *
+}
+
+/* Profile Content Styles */
+.profile-content {
+  padding: 20px;
+  text-align: left;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: #666;
+}
+
+.profile-details {
+  width: 100%;
+}
+
+.profile-form {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  flex: 1; /* Ensure equal space between form groups */
+}
+
+.form-group label {
+  margin-right: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input[readonly] {
+  background-color: #f9f9f9;
+}
+
+input[type="text"],
+input[type="email"] {
+  font-size: 16px;
+}
+
+select {
+  background-color: white;
+}
+
+/* Mood Tracker */
+.mood-tracker {
+  width: 48%;
+  padding: 15px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.mood-tracker h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0a0606;
+  margin-bottom: 10px;
+}
+
+.Current.Mood {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+.emoji-tracker {
+  font-size: 4em;
+  margin-top: 5px;
+  padding: 2px;
+}
+
+/* Emergency Contact Details */
+.emergency-contact-details {
+  width: 48%; 
+  margin-top: 20px;
+  margin-right: 20px; 
+  display: inline-block; 
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  align-items: right;
+  text-align: right;
+}
+
+.emergency-contact-details h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.emergency-contact-details .form-group {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.profile-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.profile-content {
+  width: 100%;
+  flex-direction: column;
+}
+
+.mood-tracker, 
+.emergency-contact-details {
+  width: 100%; /* Make each section full width on small screens */
+  margin-left: 0;
+  margin-top: 20px;
+}
+}
+
+.mood-tracker-container {
+display: flex;
+justify-content: space-between; /* Ensures space between the two sections */
+gap: 20px; /* Optional: Adds some space between the mood tracker and emergency contact */
+}
+
+.mood-tracker {
+flex: 1; /* Ensures the mood tracker takes available space */
+padding: 15px;
+background-color: #f6f6f6;
+border-radius: 8px;
+text-align: left;
+}
+
+.emergency-contact-details {
+flex: 1; /* Ensures the emergency contact section takes available space */
+padding: 20px;
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+margin-top: 20px;
+text-align: left;
+}
+
+.mood-tracker h3,
+.emergency-contact-details h4 {
+margin-top: 0;
+text-align: center;
+}
+
+/* Target logout button only when on the profile page *
+.profile .navbar .logout-button {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background-color: #d9534f; /* Optional for a unique color *
+  padding: 8px 16px;
+  border-radius: 4px;
+  z-index: 1000; /* Ensure it stays on top *
+}*/
+
+/* Apply styles only when navbar has the class left-navbar */
+.left-navbar {
+  position: fixed;   /* Fix the navbar to the left */
+  top: 0;            /* Align the navbar to the top */
+  left: 0;           /* Align the navbar to the left edge of the screen */
+  width: 250px;      /* Define the width of the navbar */
+  height: 100vh;     /* Make navbar take the full height */
+  background-color: #333; /* Background color for the navbar */
+  color: white;      /* Text color */
+  padding: 20px;     /* Padding inside the navbar */
+  z-index: 1000;     /* Ensure navbar stays above content */
+}
+
+/* Offset the profile content to the right to accommodate the navbar */
+.profile-container {
+  margin-left: 250px;  /* Move the profile content to the right */
+  padding: 20px;       /* Add padding for aesthetics */
+}
+
+/* Optional: If you want to style the profile content */
+.profile-content {
+  padding-left: 20px;
+}
+
+
