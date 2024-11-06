@@ -254,45 +254,74 @@ button:hover {
 }
 
 /* Forum CSS*/
-body.forum {
-    font-family: Arial, sans-serif;
-    background-color: #DEDDFF;
-    margin: 0px;
-    padding: 0;
-    box-sizing: border-box;
-    border-style: outset;
-  
-   
+
+.forum {
+  padding-top: 20px;
+  padding-left: 75px;
+  padding-right: 75px;
 }
 
 .container1 {
     
     margin: 35px;
-    padding: 20px;
+    padding: 40px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    
 }
 
-h1, h2 {
+h1{
     text-align: center;
 }
 
-.post-form, .posts-section {
-    margin-top: 30px;
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start; /* Center-aligns the elements inside */
+  text-align: start; /* Center-aligns text within the container */
+}
+.post-form button{
+  align-items: center;
 }
 
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+
+.posts-section {
+  margin-top: 30px;
 }
+
+.post-form h2 {
+  width: 100%;
+  text-align: center; /* Center-aligns the "Create a New Post" text */
+  margin-bottom: 20px; /* Optional: Add spacing below the heading */
+}
+
+.post-form textarea {
+  width: 130%; /* Full width of the container */
+  height:100px;
+  font-size: 16px;
+  text-align: left; /* Align text inside the field to the left */
+  padding: 8px; /* Add padding for a better look */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.post-form input{
+  width: 50%; /* Full width of the container */
+  font-size: 16px;
+  text-align: left; /* Align text inside the field to the left */
+  padding: 8px; /* Add padding for a better look */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
 
 .post-form button{
-    width: 100%;
+    width: 20%;
     padding: 10px;
     background-color: #28a745;
     color: white;
@@ -300,6 +329,7 @@ input, textarea {
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
+    
 }
 
 button:hover {
@@ -468,6 +498,12 @@ ul{
     -webkit-text-fill-color: transparent;
     text-align: center;
   }
+
+  .highlighted-background {
+    background-color: #DEDDFF;
+    padding: 15px;
+    border-radius: 8px;
+}
 
   .content-section {
     display: flex;
