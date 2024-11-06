@@ -1,25 +1,24 @@
 import React from "react";
 import "./style.css";
 import "./ChillMateLogo.png"
-import Navbar from "./navbar";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { LoginContext } from "./LoginContext";
+
 
 const Register = () => {
     const [user, setUser] = useState({
         sfsu_id: "",
         first_name: "",
         last_name: "",
-        email:"",
-        password:"",
-        Address:"",
-        phone_number:"",
-        Age:"",
-        Occupation:"",
-        username:"",
-        EmergencyContactEmail:"",
+        email: "",
+        password: "",
+        Address: "",
+        phone_number: "",
+        Age: "",
+        Occupation: "",
+        username: "",
+        EmergencyContactEmail: "",
         address_line_1: "",
         address_line_2: "",
         city: "",
@@ -27,8 +26,8 @@ const Register = () => {
         zip_code: ""
     });
 
-    
-    
+
+
     const [message, setMessage] = useState("");
 
     console.log("this user", user);
@@ -107,14 +106,16 @@ const Register = () => {
                         <label>Name *</label>
                         <div className="name-container">
                             <input type="text" name="first_name" placeholder="First" value={user.FirstName} onChange={handleChange} required />
-                            <input type="text" name="last_name" placeholder="Last" value={user.LastName} onChange={handleChange} required />
+                            <input type="text" name="last_name" placeholder="Last" value={user.LastName} onChange={handleChange} required />                        
                         </div>
+                        <input type="number" name="age" placeholder="Age" value={user.Age} onChange={handleChange} required />
                     </div>
+
                     {/* Address Section */}
                     <div className="input-group">
                         <label>Address</label>
                         <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.address_line_1} onChange={handleChange} required />
-                        <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange}/>
+                        <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange} />
                     </div>
                     <div className="input-group">
                         <input type="text" name="city" placeholder="City" value={user.city} onChange={handleChange} required />
@@ -172,12 +173,13 @@ const Register = () => {
                                 <option value="Wisconsin">Wisconsin</option>
                                 <option value="Wyoming">Wyoming</option>
                             </select>
-                            <input type="text" name="zip_code" placeholder="Zip Code" value={user.zip} onChange={handleChange} required />
+
                         </div>
+                        <input type="text" name="zip_code" placeholder="Zip Code" value={user.zip} onChange={handleChange} required />
                     </div>
                     {/* Other fields */}
                     <div className="input-group">
-                        <input type="text" name="username" placeholder="Username" value={user.Username} onChange={handleChange}  required />
+                        <input type="text" name="username" placeholder="Username" value={user.Username} onChange={handleChange} required />
                         <input type="email" name="email" placeholder="Email" value={user.Email} onChange={handleChange} required />
                     </div>
                     <div className="input-group">
@@ -224,11 +226,5 @@ const Register = () => {
 
 export default Register
 
-// export default class Register extends React.Component {
-
-//     render() {
-        
-//     }
-// }
 
 

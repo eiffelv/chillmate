@@ -151,7 +151,6 @@ nav ul {
     padding: 0;
 }
 
-/* will changed it for now */
 nav ul li {
     display: inline;
     margin-right: 10px;
@@ -165,7 +164,7 @@ nav ul li a {
 }
 
 .navbar li:last-child {
-    margin-left: 600px; /* Add extra space for the last item */
+    margin-left: 850px; /* Add extra space for the last item */
     
 }
 
@@ -495,7 +494,7 @@ ul{
 
   /* JournalPage.css */
   .journal-page {
-    padding: 20px;
+    padding: 200px;
   }
   
   .journal-list {
