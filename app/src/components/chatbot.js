@@ -13,11 +13,44 @@ const Chatbot = () => {
   const [typingMessage, setTypingMessage] = useState('');
   const messagesEndRef = useRef(null); // Ref to track the end of messages for scrolling
 
+  //getting chatbot response
+  const getChatBot = async (message) => {
+    console.log("message: ", message);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/chatbot/generate_goal_tasks`, {
+        method: "POST",
+        // credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input_text: message }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to upload post');
+      }
+  
+      const data = await response.json();
+      console.log(data);
+      return data;
+      // Handle success or error based on the response data
+    } catch (error) {
+      console.error('Error uploading post:', error);
+      // Handle error, e.g., display an error message to the user
+    }
+  }
+
+
   // Function to handle sending a new message
   const sendMessage = () => {
     if (!input.trim()) return;
 
     const userMessage = { text: input, sender: 'user' };
+
+    const botReply = getChatBot(input);
+
+
+
     setMessages([...messages, userMessage]);
     setInput('');
 

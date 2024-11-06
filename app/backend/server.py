@@ -129,10 +129,11 @@ def find_similar_docs():
 
     return jsonify(f_docs)
 
-@app.route("/chatbot/generate_goal_tasks", methods=['GET'])
+@app.route("/chatbot/generate_goal_tasks", methods=['GET', 'POST'])
 def generate_subtasks():
     
     inputText = request.json.get('input_text', "")
+    logger.debug(inputText)
     
     if not inputText:
         return jsonify({})
@@ -152,7 +153,8 @@ def generate_subtasks():
     parsed_output = GenerateGoal(model_name=model_name, provider_name=provider_name).generate(context)
     if not parsed_output:
         logger.error("Empty response")
-    
+
+    logger.debug(parsed_output)
     return jsonify(parsed_output)
 
 
