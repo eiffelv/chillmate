@@ -55,7 +55,8 @@ class PromptLoader:
 
 
 class GenerateGoal:
-    def __init__(self, model_name: str, provider_name: str, yaml_path: str = "app/backend/chatbot/goal_prompt.yaml"):
+    def __init__(self, model_name: str, provider_name: str, yaml_path: str = "./chatbot/goal_prompt.yaml"):
+        logger.debug(os.getcwd())
         self.yaml_path = yaml_path
         self.model_name = model_name
         self.provider_name = provider_name
@@ -153,6 +154,7 @@ class GenerateGoal:
     def generate(self, context: Dict):
         
         prompt = PromptLoader(self.yaml_path, context)
+        logger.debug(prompt.get_user_prompt())
         try:
             raw_res, time_taken = self.call_llm(prompt.get_user_prompt(), prompt.get_system_prompt(), get_json=True)
             parsed_output = json.loads(GenerateGoal._postprocess_response(raw_res))
