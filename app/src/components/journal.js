@@ -41,9 +41,11 @@ const JournalPage = () => {
 
                 //format the journal entry from database array
                 const formattedJournal = data.map(post => ({
-                    id: Date.now(),
+                    //ask kevin about this
+                    //id: post._id,
                     title: post.Title || "",
                     content: post.Content || "",
+
                   }));
                 //put journal entry to website
                 setEntries(formattedJournal);
@@ -99,7 +101,8 @@ const JournalPage = () => {
 
     // Function to add a new journal entry
     const addJournalEntry = (title, date, content, color) => {
-        const newEntry = { id: Date.now(), title, date, content, color };
+        //i got rid of id = dateID from newEntry so we'll have to discuss this later
+        const newEntry = { title, date, content, color };
         console.log(newEntry);
         uploadJournal(newEntry);
         setEntries((prevEntries) => [...prevEntries, newEntry]);
