@@ -164,9 +164,55 @@ def getForum():
 
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
     result = [
-        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find({'SFStateID': current_user})
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find().sort("_id", -1)
     ]
     return jsonify(result)
+
+@app.route('/createForum', methods=['POST', 'GET'])
+@jwt_required() 
+def createForum(): 
+    data = request.json
+    current_user = get_jwt_identity()
+    topic = data.get("topic")
+    text = data.get("content")
+    
+    new_post = {
+        "SFStateID": current_user,
+        "Topic": topic,
+        "Text": text,
+        "NoofLikes": 0
+    }
+
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+    mongoUtils.collection.insert_one(new_post)
+    return jsonify({"message": "Post succesfully added"}), 201
+
+
+# @app.route('/searchForum', methods=['POST', 'GET'])
+# def searchForum():
+#     data = request.json
+#     user = mongoUtils.collection.find_one({'Username': username, 'Password': password})
+
+#---- Journal API ----
+@app.route('/getJournal', methods=['POST', 'GET'])
+@jwt_required() 
+def getJournal(): 
+    current_user = get_jwt_identity()
+    print(current_user)
+
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+    result = [
+        {**doc, "_id": str(doc["_id"])} for doc in mongoUtils.collection.find().sort("_id", -1)
+    ]
+    return jsonify(result)
+
+
+
+
+
+#_____________________________
+
+#-------------------------------
 
 
 # Running app
