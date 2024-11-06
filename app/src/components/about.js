@@ -66,8 +66,8 @@ export default class About extends React.Component {
                                     <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
                                     <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
                          </div>
-                        </div>*/}
-                       </div>
+                        </div>
+                       </div>*/}
 
                     <div className="radial-gradient-text highlight-section">
                         <span className="gradient-text2">
