@@ -51,7 +51,7 @@ export default function Navbar() {
           {isLoggedIn ? (
               <Link to="/journal">Journal</Link>
             ) : (
-              <Link to="/login">Chatbot</Link>
+              <Link to="/login">Journal</Link>
             )} 
           </li>
           <li>

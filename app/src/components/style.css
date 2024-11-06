@@ -422,6 +422,7 @@ ul{
     background-color: #0056b3;
   }
   
+  /*About Page*/
   .radial-gradient-text {
     background: Radial-gradient(to right, navy,); /* Gradient colors */
     -webkit-background-clip: text; /* For Chrome and Safari */
@@ -467,6 +468,35 @@ ul{
     -webkit-text-fill-color: transparent;
     text-align: center;
   }
+
+  .content-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Add space between columns */
+    padding: 20px;
+}
+
+.left-column, .right-column {
+    flex: 1;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.right-column {
+  text-align: center; /* Center-aligns the content within the right column */
+}
+
   .profile-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
