@@ -55,7 +55,7 @@ class PromptLoader:
 
 
 class GenerateGoal:
-    def __init__(self, model_name: str, provider_name: str, yaml_path: str = "/home/adityadev/chillmate/app/backend/chatbot/goal_prompt.yaml"):
+    def __init__(self, model_name: str, provider_name: str, yaml_path: str = "app/backend/chatbot/goal_prompt.yaml"):
         self.yaml_path = yaml_path
         self.model_name = model_name
         self.provider_name = provider_name
