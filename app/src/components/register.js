@@ -97,28 +97,34 @@ const Register = () => {
 
     return (
         <div className="register">
-
             <div className="register-container">
                 <h2>Register</h2>
                 <form onSubmit={handleSubmit} className="register-form">
                     {/* Name Section */}
                     <div className="input-group">
-                        <label>Name *</label>
+                        <label>Name<span className="required">*</span></label>
                         <div className="name-container">
                             <input type="text" name="first_name" placeholder="First" value={user.FirstName} onChange={handleChange} required />
-                            <input type="text" name="last_name" placeholder="Last" value={user.LastName} onChange={handleChange} required />                        
+                            <input type="text" name="last_name" placeholder="Last" value={user.LastName} onChange={handleChange} required />
                         </div>
-                        <input type="number" name="age" placeholder="Age" value={user.Age} onChange={handleChange} required />
                     </div>
 
                     {/* Address Section */}
                     <div className="input-group">
-                        <label>Address</label>
-                        <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.address_line_1} onChange={handleChange} required />
-                        <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange} />
+                        <div className="address-group">
+                            <label>Address</label>
+                            <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.address_line_1} onChange={handleChange} />
+                            <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange} />
+                        </div>
                     </div>
+
                     <div className="input-group">
+                        <label>City</label>
                         <input type="text" name="city" placeholder="City" value={user.city} onChange={handleChange} required />
+                    </div>
+
+                    <div className="input-group">    
+                        <label>State</label>
                         <div className="state-zip-container">
                             <select name="state" value={user.state} onChange={handleChange} required>
                                 <option value="" disabled selected>Select State</option>
@@ -175,14 +181,26 @@ const Register = () => {
                             </select>
 
                         </div>
-                        <input type="text" name="zip_code" placeholder="Zip Code" value={user.zip} onChange={handleChange} required />
                     </div>
+
+                    <div className="input-group">
+                        <label>Zip Code</label>
+                        <input type="text" name="zip_code" value={user.zip} onChange={handleChange} required />
+                    </div>
+
                     {/* Other fields */}
                     <div className="input-group">
-                        <input type="text" name="username" placeholder="Username" value={user.Username} onChange={handleChange} required />
-                        <input type="email" name="email" placeholder="Email" value={user.Email} onChange={handleChange} required />
+                        <label>Username<span className="required">*</span></label>
+                        <input type="text" name="username" value={user.Username} onChange={handleChange} required />
                     </div>
+
                     <div className="input-group">
+                        <label>Email<span className="required">*</span></label>
+                        <input type="email" name="email" value={user.Email} onChange={handleChange} required />
+                    </div>
+
+                    <div className="input-group">
+                        <label>Password<span className="required">*</span></label>
                         <input
                             type="password"
                             id="password"
@@ -199,22 +217,28 @@ const Register = () => {
                             required
                         />
                     </div>
-                    <input
-                        type="tel"
-                        name="phone_number"
-                        placeholder="Phone Number"
-                        value={user.PhoneNum} onChange={handleChange}
-                        required
-                        pattern="[0-9]{10}" // Optional: restrict to 10-digit phone numbers
-                        title="Please enter a valid 10-digit phone number."
-                    />
-                    <input
-                        type="number"
-                        name="sfsu_id"
-                        placeholder="SFSU ID"
-                        value={user.sfsu_id} onChange={handleChange}
-                        required
-                    />
+
+                    <div className="input-group">
+                        <label>Phone number<span className="required">*</span></label>
+                        <input
+                            type="tel"
+                            name="phone_number"
+                            value={user.PhoneNum} onChange={handleChange}
+                            required
+                            pattern="[0-9]{10}" // Optional: restrict to 10-digit phone numbers
+                            title="Please enter a valid 10-digit phone number."
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <label>SFSU ID<span className="required">*</span></label>
+                        <input
+                            type="number"
+                            name="sfsu_id"
+                            value={user.sfsu_id} onChange={handleChange}
+                            required
+                        />
+                    </div>
                     <button type="submit">Create Account</button>
                 </form>
                 <p>Already have an account? <Link to="/login">Login here</Link></p>
