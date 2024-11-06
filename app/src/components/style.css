@@ -360,6 +360,7 @@ ul{
   .message.bot {
     background-color: #f1f8e9;
     text-align: left;
+    white-space: pre-wrap; /* or pre-line */
   }
   
   .chatbot-input {

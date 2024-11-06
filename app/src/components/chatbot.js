@@ -13,6 +13,8 @@ const Chatbot = () => {
   const [typingMessage, setTypingMessage] = useState('');
   const messagesEndRef = useRef(null); // Ref to track the end of messages for scrolling
 
+  const [loading, setLoading] = useState(true);
+
   //getting chatbot response
   const getChatBot = async (message) => {
     console.log("message: ", message);
@@ -31,23 +33,38 @@ const Chatbot = () => {
       }
   
       const data = await response.json();
-      console.log(data);
-      return data;
+      
+      //Convert the object to a single string
+      let resultString = `Goal: ${data.goal}\n\nSubtasks:\n`;
+
+      data.subtasks.forEach((subtask, index) => {
+          resultString += `
+      Subtask ${index + 1}: ${subtask.subtask}
+      Importance: ${subtask.importance}
+      Focus: ${subtask.focus}
+          `;
+      });
+
+
+      return resultString;
       // Handle success or error based on the response data
     } catch (error) {
       console.error('Error uploading post:', error);
       // Handle error, e.g., display an error message to the user
     }
+    finally {
+      setLoading(false); // Once the promise settles, update loading state
+    }
   }
 
 
   // Function to handle sending a new message
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage = { text: input, sender: 'user' };
 
-    const botReply = getChatBot(input);
+    const botReply = await getChatBot(input);
 
 
 
@@ -55,7 +72,12 @@ const Chatbot = () => {
     setInput('');
 
     // Start typing animation for bot response
-    const botResponse = `You said: ${input}`;
+    console.log("botReply: ", botReply);
+    const botResponse = botReply;
+    console.log("showing: ", botResponse)
+    if(loading) {
+      console.log("waiting")
+    }
     simulateTyping(botResponse);
   };
 
@@ -64,7 +86,14 @@ const Chatbot = () => {
     setTypingMessage('');
     let index = 0;
     const typingInterval = setInterval(() => {
-      setTypingMessage((prevText) => prevText + text.charAt(index));
+      const currentChar = text.charAt(index);
+    
+      if (currentChar === '\n') {
+          console.log("space pls");
+          setTypingMessage((prevText) => prevText + '\n');
+      } else {
+          setTypingMessage((prevText) => prevText + currentChar);
+      }
       index++;
 
       if (index === text.length) {
@@ -72,7 +101,7 @@ const Chatbot = () => {
         setMessages((prevMessages) => [...prevMessages, { text, sender: 'bot' }]);
         setTypingMessage('');
       }
-    }, 50);
+    }, 10);
   };
 
   // Handle click on a suggested question
