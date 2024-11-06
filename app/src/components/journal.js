@@ -38,11 +38,13 @@ const JournalPage = () => {
                 const data = await response.json();
                 console.log("response: ", data);
 
-                const formattedPosts = data.map(post => ({
-                    topic: post.Topic || "Untitled",
-                    content: post.Text || "",
-                    liked: false
+                const formattedJournal = data.map(post => ({
+                    id: Date.now(),
+                    title: post.Title || "",
+                    content: post.Content || "",
                   }));
+                setEntries(formattedJournal);
+                
 
 
             } catch (error) {
