@@ -131,7 +131,7 @@ def find_similar_docs():
 
 @app.route("/chatbot/generate_goal_tasks", methods=['GET'])
 def generate_subtasks():
-
+    
     inputText = request.json.get('input_text', "")
     
     if not inputText:
@@ -150,6 +150,8 @@ def generate_subtasks():
     context = {"user_query": inputText, "ext_json": ext_json}
 
     parsed_output = GenerateGoal(model_name=model_name, provider_name=provider_name).generate(context)
+    if not parsed_output:
+        logger.error("Empty response")
     
     return jsonify(parsed_output)
 
