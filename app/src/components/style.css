@@ -1,0 +1,538 @@
+body {
+    
+    border-style: outset;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #DEDDFF;
+    align-content: start;
+    
+}
+
+.homeDescription{
+    text-align: left;
+}
+
+body.login{
+    /* NOTE: Below are merged from Frontend Branch; please check if something breaks */
+    display: flex; /* Use flexbox */
+    justify-content:center; /* Center horizontally */
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    align-items: center; /* Center vertically */
+    align-content: start;
+    gap:120px;
+    height: 100vh; /* Full viewport height */
+
+}
+
+.register-container {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex; /* Use flexbox */
+  justify-content:center; /* Center horizontally */
+  flex-wrap: wrap; /* Allow items to wrap onto the next line */
+  align-items: center; /* Center vertically */
+  align-content: start;
+  gap:40px;
+  height: 90vh; 
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.747);
+  
+}
+
+.register-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Space between input groups */
+}
+
+.input-group {
+  flex: 1; /* Allow groups to take equal space */
+}
+
+.name-container {
+  display: flex;
+  gap: 10px; /* Space between first and last name inputs */
+}
+
+.name-container input {
+  flex: 2; /* Make each name input take equal space */
+}
+
+.state-zip-container {
+  display: flex;
+  gap: 10px; /* Space between state and zip code inputs */
+}
+
+.state-zip-container select,
+.state-zip-container input {
+  flex: 1; /* Make state and zip inputs take equal space */
+}
+
+.input-group input, .input-group select {
+  width: 80%; /* Make inputs fill the width of the group */
+  padding: 10px;
+  margin-bottom: 20px; /* Space between inputs */
+  font-size: 16px;
+}
+
+
+h1{
+    font-size: 60px;
+    text-align: center;
+}
+
+
+ul.a {
+    text-indent: 10px;
+    list-style-type: circle;
+    list-style-position: inside;
+
+  }
+div.container{
+
+    background-color: #F5F5F5;
+    margin: 35px;
+    border-radius:10px
+}
+
+
+nav {
+    border-style: none none inset none;
+    background-color: #D9D9D9;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    top: 0; /* Position at the top of the viewport */
+    width: 99%; /* Make it span the entire width of the page */
+    
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* will changed it for now */
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-size:25px;
+    
+}
+
+.navbar li:last-child {
+    margin-left: 600px; /* Add extra space for the last item */
+    
+}
+
+/*Using flexbox to try to make alignment easier*/
+.container {
+    
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: flex-start; /* Align children to the left */
+    padding: 20px;
+    margin-top: 20px;
+    gap: 20px;
+}
+/*For the Chillmate header*/
+.container > :first-child {
+    margin: 0 auto; /* Center the first item */
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    
+    padding: 8px 15px;
+    background-color: #d6c692;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: 1px solid #000000;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    text-align: center;
+}
+.login-container h2 {
+    margin-bottom: 20px;
+}
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.login-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 925px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.register-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 925px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.register-container button:hover {
+    background-color: #0056b3;
+}
+.register-container p {
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    display: none;
+}
+
+/* Forum CSS*/
+body.forum {
+    font-family: Arial, sans-serif;
+    background-color: #DEDDFF;
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+    border-style: outset;
+  
+   
+}
+
+.container1 {
+    
+    margin: 35px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.post-form, .posts-section {
+    margin-top: 30px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.post-form button{
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.posts-section li{
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-content {
+    margin-top: 5px;
+}
+
+.like-Text {
+    color: #000000;
+}
+
+.like-container {
+    display: flex;
+    justify-content:end;
+    margin-top: 50px;
+  }
+  
+  .like-btn {
+    background-color: #d3dfdf;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .like-btn .like-icon {
+    margin-right: 10px;
+    font-size: 24px;
+    color: #b9e9d1;  /* Default color */
+    transition: color 0.3s ease;
+  }
+  
+  .like-btn.liked {
+    background-color: #008829; /* Button background changes when liked */
+  }
+  
+  .left-align {
+    text-align: left;
+  }
+
+  .chatbot-container {
+
+    background:#f9f9f9;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .chatbot-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  
+  .message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+  }
+  
+  .message.user {
+    background-color: #e0f7fa;
+    text-align: right;
+  }
+  
+  .message.bot {
+    background-color: #f1f8e9;
+    text-align: left;
+    white-space: pre-wrap; /* or pre-line */
+  }
+  
+  .chatbot-input {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .chatbot-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .chatbot-input button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .chatbot-input button:hover {
+    background-color: #0056b3;
+  }
+  
+  .radial-gradient-text {
+    background: Radial-gradient(to right, navy,); /* Gradient colors */
+    -webkit-background-clip: text; /* For Chrome and Safari */
+    background-clip: text; /* For modern browsers */
+    -webkit-text-fill-color: transparent; /* Makes text transparent to show gradient */
+    text-align: center; /* Aligns text to the center */
+    font-size: 16px; /* Adjusts font size */
+    font-family: Arial, sans-serif; /* Adjust font if needed */
+  }
+  
+  .gradient-text {
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .gradient-text2 {
+    font-size: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .gradient-text3 {
+    font-size: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gradient-text4 {
+    font-size: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* Space between cards */
+    margin: 20px 0;
+}
+
+.profile-card {
+    background: #f9f9f9; /* Card background */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-card h3 {
+    margin: 10px 0;
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+  /* JournalPage.css */
+  .journal-page {
+    padding: 20px;
+  }
+  
+  .journal-list {
+    margin-top: 20px;
+  }
+  
+  .journal-entry {
+    border: 2px solid #cccccc; /* Adds an outline */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px; /* Optional: rounds corners */
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+  }
+  
+  .add-journal-form input,
+  .add-journal-form textarea {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+  }
+  
+.add-journal-button {
+    position: fixed;          
+    bottom: 20px;             
+    right: 20px;              
+    width: 60px;              
+    height: 60px;             
+    border-radius: 50%;       
+    background-color: #4CAF50; 
+    color: white;             
+    font-size: 24px;          
+    border: none;             
+    cursor: pointer;          
+    display: flex;            
+    align-items: center;      
+    justify-content: center;  
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a slight shadow */
+    transition: transform 0.2s ease; /* Adds a hover effect */
+  }
+  
+  .add-journal-button:hover {
+    transform: scale(1.1); /* Slightly enlarges the button on hover */
+  }
+
+  .add-journal-form .color-picker {
+    margin-top: 10px;
+}
+
+.add-journal-form .color-options {
+    display: flex;
+    gap: 5px;
+}
+
+.suggestions {
+  display:inline-flex;
+  gap: 10px;
+}
+
+.suggestion-button {
+  padding: 8px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+  gap: 5px;
+}
+
+.suggestion-button:hover {
+  background-color: #0056b3;
+}

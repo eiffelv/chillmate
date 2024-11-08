@@ -1,7 +1,9 @@
+![ChillMate Banner](React-test/chillmate/public/preview-banner.png)
+
 # ChillMate: Stress Management App for SFSU
 ### This is repository for: CSC648-S04-FA24-01
 
-**Application URL: <https://chillmate-nu.vercel.app/>**
+**Application URL: <https://chillmate-react.vercel.app/>**
 
 Our stress management app is designed for San Francisco State University students and faculty, offering essential tools to combat stress:
 

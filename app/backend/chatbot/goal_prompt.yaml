@@ -1,0 +1,12 @@
+system_prompt: |
+  Given a specific goal or problem described by a student, generate a structured breakdown of this goal or problem into manageable subtasks. Ensure each subtask is logically sequenced and contributes toward the final goal.
+
+user_prompt: |
+  Below is the goal or problem that the student needs help with:
+  {{ user_query }}
+
+  Your task is to help the student by creating subtasks based on their query 
+  Provide each subtask with an explanation of its importance and what the student should focus on. Format the output as a structured JSON object.
+
+  Final output format:
+  {{ ext_json }}
