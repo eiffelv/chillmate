@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "./style.css";
 import "./ChillMateLogo.png"
+import { LoginContext } from "./LoginContext";
 import Navbar from "./navbar";
 
 
-const suggestions = ["Find the resources in campus for you. ", "Organizing your tasks for you.", "Gernal conversation.😊"];
-
-
+const suggestions = ["Find the resources in campus for you.📚", "Organizing your tasks for you.📋", "Gernal conversation.😊"];
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -60,8 +59,6 @@ const Chatbot = () => {
 
   return (
     <div>
-      <body>
-      <Navbar />
       <div className="chatbot-container">
         <h1>Chatbot</h1>
         <div className="chatbot-messages">
@@ -82,23 +79,21 @@ const Chatbot = () => {
           <div ref={messagesEndRef} /> {/* Element to scroll to */}
         </div>
         <div className="chatbot-input">
-        <input
-          type="text"
-          placeholder="Type a message..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
+          <input
+            type="text"
+            placeholder="Type a message..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
 
-        <button onClick={sendMessage}>Send</button>
+          <button onClick={sendMessage}>Send</button>
+        </div>
       </div>
-      </div>
-      
-      </body>
+
     </div>
-    
+
   );
 };
 
 export default Chatbot;
-
