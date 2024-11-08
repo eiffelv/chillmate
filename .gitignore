@@ -178,3 +178,8 @@ dist/
 htmlcov/
 .tox/
 docs/_build/
+flask_session/
+
+# Vercel #
+##########
+.vercel

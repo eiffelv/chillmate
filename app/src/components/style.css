@@ -1,0 +1,1308 @@
+body {
+    
+    border-style: outset;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #DEDDFF;
+    align-content: start;
+    
+}
+
+.homeDescription{
+    text-align: left;
+}
+
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #DEDDFF; /* Optional: background color */
+}
+
+.login-container {
+  width: 100%;
+  max-width: 85%; /* Set a max-width for the container */
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 15px; /* Optional: rounded corners */
+  background-color: white; /* Optional: background color */
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DEDDFF; /* Optional: background color */
+}
+
+
+.register-container {
+  width: 900px;
+  margin: auto;
+  padding: 20px;
+  display: flex; /* Use flexbox */
+  justify-content:center; /* Center horizontally */
+  flex-wrap: wrap; /* Allow items to wrap onto the next line */
+  align-items: center; /* Center vertically */
+  align-content: start;
+  gap:10px;
+  height: 120vh; 
+  margin-bottom: 1px;
+  border-radius: 15px; /* Smoother, rounded corners */
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.747);
+
+}
+
+.register-form {
+  display:flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Space between input groups */
+}
+
+.register-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 50%; /* Centered button with 50% width */
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.register-container button:hover {
+  background-color: #0056b3;
+}
+
+.register-container p {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.address-group {
+  display:flex;
+  gap: 10px;
+}
+
+
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.required {
+  color: red;
+}
+
+.input-group {
+  display:flex;
+  margin-bottom: 10px; /* Allow groups to take equal space */
+  flex-direction:column;
+  align-items: flex-start; /* Ensures the label aligns to the left */
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  position: relative; /* Keeps label always positioned above */
+}
+
+.name-container {
+  display:flex;
+  gap: 20px; /* Space between first and last name inputs */
+}
+
+.name-container input {
+  flex: 2; /* Make each name input take equal space */
+}
+
+.state-zip-container {
+  width:100%;
+  display: flex;
+  gap: 10px; /* Space between state and zip code inputs */
+}
+
+.state-zip-container select,
+.state-zip-container input {
+  flex:1; /* Make state and zip inputs take equal space */
+}
+
+.input-group input, .input-group select {
+  width: 80%; /* Make inputs fill the width of the group */
+  padding: 10px;
+  margin-bottom: 20px; /* Space between inputs */
+  font-size: 16px;
+}
+
+
+h1{
+    font-size: 60px;
+    text-align: center;
+}
+
+
+ul.a {
+    text-indent: 10px;
+    list-style-type: circle;
+    list-style-position: inside;
+
+  }
+div.container{
+
+    background-color: #F5F5F5;
+    margin: 35px;
+    border-radius:10px
+}
+
+
+nav {
+    border-style: none none inset none;
+    background-color: #D9D9D9;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    top: 0; /* Position at the top of the viewport */
+    width: 99%; /* Make it span the entire width of the page */
+  
+    
+}
+
+nav ul {
+ display: flex;
+ align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size:20px;
+    
+}
+
+.navbar li:last-child {
+    margin-left: 850px; /* Add extra space for the last item */
+    
+}
+
+/*Using flexbox to try to make alignment easier*/
+.container {
+    
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: flex-start; /* Align children to the left */
+    padding: 20px;
+    margin-top: 20px;
+    gap: 20px;
+}
+/*For the Chillmate header*/
+.container > :first-child {
+    margin: 0 auto; /* Center the first item */
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    
+    padding: 8px 15px;
+    background-color: #d6c692;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: 1px solid #000000;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    text-align: center;
+}
+.login-container h2 {
+    margin-bottom: 20px;
+    
+}
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: right;
+}
+.login-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 925px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Logout button */
+.logout-button {
+  /* Change the background color */
+  color: rgb(17, 17, 17);  /* Text color */
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  
+}
+
+.logout-button:hover {
+  background-color: #0056b3;  /* Darken background on hover */
+}
+
+/* Move logout button to the far right */
+nav ul {
+  display: flex;
+  justify-content: space-between; /* Space out the items */
+  width: 100%;  /* Ensure it takes full width */
+}
+
+nav ul li:last-child {
+  margin-left: auto; /* Move the last item (Logout button) to the far right */
+}
+
+.register-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.register-container button:hover {
+    background-color: #0056b3;
+}
+.register-container p {
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    display: none;
+}
+
+
+/*About US*/
+
+.content-section {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 20px;
+}
+
+.left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.left-images {
+  display: flex;
+ 
+  flex-direction: row;
+}
+
+.left-column img {
+  width: 100%;
+  height: auto;
+}
+
+.left-column {
+  position: relative; /* Set position relative for the left column */
+}
+
+.left-column img[src*="ss5"] {
+
+  align-items: center;
+  position: absolute;
+  top: 60px; /* Align it to the top */
+  right: 0; /* Align it to the right */
+  width: 450px; /* Adjust width as per your requirement */
+  height: 450px; /* Adjust height as per your requirement */
+  
+}
+
+.gradient-text {
+  margin-top: 220px; /* Adjust margin to avoid overlap with the image */
+}
+
+.gradient-text {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Forum CSS*/
+
+.forum {
+  padding-top: 20px;
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+.container1 {
+    
+    margin: 35px;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    
+}
+
+h1{
+    text-align: center;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start; /* Center-aligns the elements inside */
+  text-align: start; /* Center-aligns text within the container */
+}
+.post-form button{
+  align-items: center;
+}
+
+
+.posts-section {
+  margin-top: 30px;
+}
+
+.post-form h2 {
+  width: 100%;
+  text-align: center; /* Center-aligns the "Create a New Post" text */
+  margin-bottom: 20px; /* Optional: Add spacing below the heading */
+}
+
+.post-form textarea {
+  width: 130%; /* Full width of the container */
+  height:100px;
+  font-size: 16px;
+  text-align: left; /* Align text inside the field to the left */
+  padding: 8px; /* Add padding for a better look */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.post-form input{
+  width: 50%; /* Full width of the container */
+  font-size: 16px;
+  text-align: left; /* Align text inside the field to the left */
+  padding: 8px; /* Add padding for a better look */
+  box-sizing: border-box; /* Ensure padding does not affect the width */
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+
+.post-form button{
+    width: 20%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.posts-section li{
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-content {
+    margin-top: 5px;
+}
+
+.like-Text {
+    color: #000000;
+}
+
+.like-container {
+    display: flex;
+    justify-content:end;
+    margin-top: 50px;
+  }
+  
+  .like-btn {
+    background-color: #d3dfdf;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .like-btn .like-icon {
+    margin-right: 10px;
+    font-size: 24px;
+    color: #b9e9d1;  /* Default color */
+    transition: color 0.3s ease;
+  }
+  
+  .like-btn.liked {
+    background-color: #008829; /* Button background changes when liked */
+  }
+  
+  .left-align {
+    text-align: left;
+  }
+
+  .chatbot-container {
+
+    background:#f9f9f9;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .chatbot-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  
+  .message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+  }
+  
+  .message.user {
+    background-color: #e0f7fa;
+    text-align: right;
+  }
+  
+  .message.bot {
+    background-color: #f1f8e9;
+    text-align: left;
+    white-space: pre-wrap; /* or pre-line */
+  }
+  
+  .chatbot-input {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .chatbot-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .chatbot-input button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .chatbot-input button:hover {
+    background-color: #0056b3;
+  }
+  
+  /*About Page*/
+  .radial-gradient-text {
+    background: Radial-gradient(to right, navy,); /* Gradient colors */
+    -webkit-background-clip: text; /* For Chrome and Safari */
+    background-clip: text; /* For modern browsers */
+    -webkit-text-fill-color: transparent; /* Makes text transparent to show gradient */
+    text-align: center; /* Aligns text to the center */
+    font-size: 16px; /* Adjusts font size */
+    font-family: Arial, sans-serif; /* Adjust font if needed */
+  }
+  
+  .gradient-text {
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .gradient-text2 {
+    font-size: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .gradient-text3 {
+    font-size: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gradient-text4 {
+    font-size: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, navy, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+
+  .highlighted-background {
+    background-color: #DEDDFF;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+  .content-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Add space between columns */
+    padding: 20px;
+}
+
+.left-column, .right-column {
+    flex: 1;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.right-column {
+  text-align: center; /* Center-aligns the content within the right column */
+}
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* Space between cards */
+    margin: 20px 0;
+}
+
+.profile-card {
+    background: #f9f9f9; /* Card background */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-card h3 {
+    margin: 10px 0;
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+  /* JournalPage.css */
+  .journal-page {
+    padding: 200px;
+  }
+  
+  .journal-list {
+    margin-top: 20px;
+  }
+  
+  .journal-entry {
+    border: 2px solid #cccccc; /* Adds an outline */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px; /* Optional: rounds corners */
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+  }
+  
+  .add-journal-form input,
+  .add-journal-form textarea {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+  }
+  
+.add-journal-button {
+    position: fixed;          
+    bottom: 20px;             
+    right: 20px;              
+    width: 60px;              
+    height: 60px;             
+    border-radius: 50%;       
+    background-color: #4CAF50; 
+    color: white;             
+    font-size: 24px;          
+    border: none;             
+    cursor: pointer;          
+    display: flex;            
+    align-items: center;      
+    justify-content: center;  
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a slight shadow */
+    transition: transform 0.2s ease; /* Adds a hover effect */
+  }
+  
+  .add-journal-button:hover {
+    transform: scale(1.1); /* Slightly enlarges the button on hover */
+  }
+
+  .add-journal-form .color-picker {
+    margin-top: 10px;
+}
+
+.add-journal-form .color-options {
+    display: flex;
+    gap: 5px;
+}
+
+.suggestions {
+  display:inline-flex;
+  gap: 10px;
+}
+
+.suggestion-button {
+  padding: 8px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+  gap: 5px;
+}
+
+.suggestion-button:hover {
+  background-color: #0056b3;
+}
+
+/*profile pge*/
+/*
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fcfbfc;
+}
+
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px; /* Adjust the width of the navbar *
+  height: 100%; /* Full height *
+  background-color: #333;
+  color: white;
+  padding-top: 20px;
+  z-index: 1000; /* Ensure it stays above other content *
+}
+
+/* Navbar list and item styling *
+.navbar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navbar li {
+  padding: 15px;
+  text-align: center;
+}
+
+.navbar li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.navbar li a:hover {
+  background-color: #575757;
+}
+
+
+
+
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Profile Container *
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Sidebar Styles *
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 220px;
+  background-color: #f4e6f3;
+  padding: 20px;
+  border-radius: 8px 0 0 8px;
+}
+
+.sidebar-item {
+  margin: 10px 0;
+  color: #333;
+  cursor: pointer;
+}
+
+.sidebar-item:hover {
+  text-decoration: underline;
+}
+
+/* Profile Content Styles *
+.profile-content {
+  flex: 1;
+  padding: 20px;
+  text-align: left; /* Align text to the left *
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center; /* Center-align "My Profile" heading *
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: #666;
+}
+
+.profile-details {
+  width: 100%;
+}
+
+.profile-form {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  flex: 1; /* Ensure equal space between form groups *
+}
+
+.form-group label {
+  margin-right: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input[readonly] {
+  background-color: #f9f9f9;
+}
+
+input[type="text"],
+input[type="email"] {
+  font-size: 16px;
+}
+
+select {
+  background-color: white;
+}
+
+/* Mood Tracker *
+.mood-tracker {
+  width: 48%;
+  padding: 15px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.mood-tracker h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0a0606;
+  margin-bottom: 10px;
+}
+
+.Current.Mood {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+.emoji-tracker {
+  font-size: 4em;
+  margin-top: 5px;
+  padding: 2px;
+}
+
+/* Emergency Contact Details *
+.emergency-contact-details {
+  width: 48%; 
+  margin-top: 20px;
+  margin-right: 20px; 
+  display: inline-block; 
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  align-items: right;
+  text-align: right;
+}
+
+.emergency-contact-details h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.emergency-contact-details .form-group {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* Responsive Design *
+@media (max-width: 768px) {
+  .profile-content {
+    width: 48%;
+    flex-direction: column;
+  }
+
+  .mood-tracker, 
+  .emergency-contact-details {
+    width: 48%; /* Make each section full width on small screens *
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+.mood-tracker-container {
+  display: flex;
+  justify-content: space-between; /* Ensures space between the two sections *
+  gap: 20px; /* Optional: Adds some space between the mood tracker and emergency contact *
+}
+
+.mood-tracker {
+  flex: 1; /* Ensures the mood tracker takes available space *
+  padding: 15px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.emergency-contact-details {
+  flex: 1; /* Ensures the emergency contact section takes available space *
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  text-align: left;
+}
+
+.mood-tracker h3,
+.emergency-contact-details h4 {
+  margin-top: 0;
+}*/
+
+
+
+
+
+
+/* Profile Layout 
+.profile {
+  display: flex;
+  min-height: 100vh;
+  padding-left: 200px; /* Leave space for the navbar *
+  justify-content: center; /* Center profile content horizontally *
+  align-items: flex-start; /* Align content at the top *
+}
+
+/* Profile Content - Adjusted for the navbar *
+.profile-container {
+  flex: 1; /* Take the remaining space after the navbar *
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: calc(100% - 200px); /* Ensure it fills remaining space and takes into account navbar *
+}
+
+/* Profile Content Styles */
+.profile-content {
+  padding: 20px;
+  text-align: left;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: #666;
+}
+
+.profile-details {
+  width: 100%;
+}
+
+.profile-form {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  flex: 1; /* Ensure equal space between form groups */
+}
+
+.form-group label {
+  margin-right: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input[readonly] {
+  background-color: #f9f9f9;
+}
+
+input[type="text"],
+input[type="email"] {
+  font-size: 16px;
+}
+
+select {
+  background-color: white;
+}
+
+/* Mood Tracker */
+.mood-tracker {
+  width: 48%;
+  padding: 15px;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.mood-tracker h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0a0606;
+  margin-bottom: 10px;
+}
+
+.Current.Mood {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+.emoji-tracker {
+  font-size: 4em;
+  margin-top: 5px;
+  padding: 2px;
+}
+
+/* Emergency Contact Details */
+.emergency-contact-details {
+  width: 48%; 
+  margin-top: 20px;
+  margin-right: 20px; 
+  display: inline-block; 
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  align-items: right;
+  text-align: right;
+}
+
+.emergency-contact-details h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.emergency-contact-details .form-group {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.profile-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.profile-content {
+  width: 100%;
+  flex-direction: column;
+}
+
+.mood-tracker, 
+.emergency-contact-details {
+  width: 100%; /* Make each section full width on small screens */
+  margin-left: 0;
+  margin-top: 20px;
+}
+}
+
+.mood-tracker-container {
+display: flex;
+justify-content: space-between; /* Ensures space between the two sections */
+gap: 20px; /* Optional: Adds some space between the mood tracker and emergency contact */
+}
+
+.mood-tracker {
+flex: 1; /* Ensures the mood tracker takes available space */
+padding: 15px;
+background-color: #f6f6f6;
+border-radius: 8px;
+text-align: left;
+}
+
+.emergency-contact-details {
+flex: 1; /* Ensures the emergency contact section takes available space */
+padding: 20px;
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+margin-top: 20px;
+text-align: left;
+}
+
+.mood-tracker h3,
+.emergency-contact-details h4 {
+margin-top: 0;
+text-align: center;
+}
+
+/* Target logout button only when on the profile page *
+.profile .navbar .logout-button {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background-color: #d9534f; /* Optional for a unique color *
+  padding: 8px 16px;
+  border-radius: 4px;
+  z-index: 1000; /* Ensure it stays on top *
+}*/
+
+/* Apply styles only when navbar has the class left-navbar */
+.left-navbar {
+  position: fixed;   /* Fix the navbar to the left */
+  top: 0;            /* Align the navbar to the top */
+  left: 0;           /* Align the navbar to the left edge of the screen */
+  width: 250px;      /* Define the width of the navbar */
+  height: 100vh;     /* Make navbar take the full height */
+  background-color: #333; /* Background color for the navbar */
+  color: white;      /* Text color */
+  padding: 20px;     /* Padding inside the navbar */
+  z-index: 1000;     /* Ensure navbar stays above content */
+}
+
+/* Offset the profile content to the right to accommodate the navbar */
+.profile-container {
+  margin-left: 250px;  /* Move the profile content to the right */
+  padding: 20px;       /* Add padding for aesthetics */
+}
+
+/* Optional: If you want to style the profile content */
+.profile-content {
+  padding-left: 20px;
+}
+
+
