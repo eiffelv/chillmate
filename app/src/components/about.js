@@ -28,22 +28,46 @@ export default class About extends React.Component {
                         <h1>All About ChillMate</h1>
                     </div>
 
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
+    {/* Left side containing ss2 and ss4 images */}
+    <div className="content-section">
+  <div className="left-column">
+    <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
+    <div className="left-images">
+      <img src={ss2Image} alt="App Screenshot 2" width="300" height="200" />
+      <img src={ss4Image} alt="App Screenshot 4" width="300" height="200" />
+    </div>
+  </div>
+
+  <div className="left-column">
+  <div className="left-column">
+  <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
+    <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
+   
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
                     {/* Replace layout tables with CSS-based divs */}
-                    <div className="content-section">
+                   {/*<div className="content-section">
                         <div className="left-column">
                             <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
                             <div className="image-row">
                                 <img src={ss2Image} alt="App Screenshot 2" width="300" height="200" />
                                 <img src={ss4Image} alt="App Screenshot 4" width="300" height="200" />
                             </div>
+                            <div className="right-images">
+                                    <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
+                                    <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
+                         </div>
                         </div>
-                        <div className="right-column">
-                            <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
-                            <div className="float-center">
-                                <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
-                            </div>
-                        </div>
-                    </div>
+                       </div>*/}
 
                     <div className="radial-gradient-text highlight-section">
                         <span className="gradient-text2">
@@ -53,8 +77,8 @@ export default class About extends React.Component {
 
                     <div className="about-section">
                         <img src={mentalHealthImage} alt="Mental Health Awareness" width="100%" />
-                        <h2>Why do we do this?</h2>
-                        <p>We understand the pressures of balancing academics, teaching, and maintaining mental wellness. We have experienced the challenges students and teachers face, from juggling deadlines to handling stress. We created ChillMate - a campus-specific, all-in-one solution that provides quick access to mental health support. Whether you are seeking strategies to manage anxiety, looking for instant stress relief, or simply need a space to reflect, ChillMate is here to help.</p>
+                        <h2 className="gradient-text4">Why do we do this?</h2>
+                        <p className="gradient-text">We understand the pressures of balancing academics, teaching, and maintaining mental wellness. We have experienced the challenges students and teachers face, from juggling deadlines to handling stress. We created ChillMate - a campus-specific, all-in-one solution that provides quick access to mental health support. Whether you are seeking strategies to manage anxiety, looking for instant stress relief, or simply need a space to reflect, ChillMate is here to help.</p>
                     </div>
 
                     {/* Team Member Profiles */}

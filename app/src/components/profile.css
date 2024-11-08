@@ -1,0 +1,75 @@
+/* Style for the left-aligned Navbar */
+.left-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px; /* Width of the left sidebar */
+    height: 100vh; /* Full height */
+    background-color: rgb(243, 219, 242);
+    color: rgb(18, 4, 56);
+    padding: 20px;
+    z-index: 1000;
+    box-sizing: border-box; /* Ensure padding doesn't add extra width */
+  }
+  
+  .left-navbar .navbar-content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .left-navbar .navbar-content ul li {
+    margin: 20px 0;
+    color: rgb(68, 0, 255);
+  }
+  
+  .left-navbar .navbar-content ul li a {
+    color: rgb(37, 9, 33);
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .left-navbar .navbar-content ul li a:hover {
+    color: #f4f8f8;
+  }
+  
+  /* Adjust profile container to fit next to the navbar without horizontal scroll */
+  .profile-container {
+    margin-left: 250px; /* Offset by the width of the navbar */
+    width: calc(100% - 250px); /* Ensure the container width fills remaining space */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  .profile-content {
+    padding-left: 20px;
+  }
+  
+  .profile-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  
+  .profile-picture {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-details {
+    margin-top: 20px;
+  }
+  
+  /* Styling for mood tracker, if any */
+  .mood-tracker-container {
+    margin-top: 30px;
+  }
+  
+  .nav-icon {
+    align-items: center;
+    width: 50px; /* Set desired width */
+    height: 50px; /* Set desired height */
+    object-fit: cover; /* Ensures the image scales without distortion */
+  }
+  

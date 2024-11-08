@@ -48,10 +48,13 @@ export default function Navbar() {
             <Link to="/resources">Resources</Link>
           </li>
           <li>
+            <Link to="/Profile">Profile</Link>
+          </li>
+          <li>
           {isLoggedIn ? (
               <Link to="/journal">Journal</Link>
             ) : (
-              <Link to="/login">Chatbot</Link>
+              <Link to="/login">Journal</Link>
             )} 
           </li>
           <li>
