@@ -1,4 +1,4 @@
-![ChillMate Banner](React-test/chillmate/public/preview-banner.png)
+![ChillMate Banner](app/public/preview-banner.png)
 
 # ChillMate: Stress Management App for SFSU
 ### This is repository for: CSC648-S04-FA24-01
