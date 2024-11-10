@@ -54,6 +54,7 @@ const Register = () => {
             const data = await response.json();
 
             if (response.ok) {
+                alert("registered successfully!");
                 setMessage(data.message);
             } else {
                 setMessage(data.error || "An error occurred");
