@@ -34,6 +34,7 @@ jwt = JWTManager(app)
 
 # Dynamic CORS configuration
 frontend_origin = os.getenv("FRONTEND_ORIGIN")
+
 cors = CORS(app, origins=[frontend_origin], supports_credentials=True)
 
 load_dotenv()

@@ -1,27 +1,27 @@
-name: Vercel Frontend-React Production Deployment
+name: Vercel Preview Deployment Frontend
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_REACT }}
-  WEB_URL: 'https://chillmate-react.vercel.app'
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FRONTEND }}
 on:
   push:
-    branches:
+    branches-ignore:
       - master
     paths:
-      - React-test/chillmate/**
+      - 'app/**'
+      - '!app/backend/**'
 jobs:
-  Deploy-Production:
+  Deploy-Preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: echo "DEPLOY_URL=$(vercel deploy --prebuilt --archive=tgz --prod --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
+        run: echo "DEPLOY_URL=$(vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
       - name: Send Deployment Notification to Discord
         if: ${{ env.DEPLOY_URL != '' }}
         run: |
@@ -33,5 +33,5 @@ jobs:
           BRANCH_NAME=${{ github.ref_name }}
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"\n\n🚀 **New Production Frontend deployment successful!**\n\n🔗 Deployment URL: $DEPLOYMENT_URL (${{ env.WEB_URL }}) \n\n📜 Commit: [$COMMIT_HASH_SHORT](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)\n📝 $COMMIT_USER - $COMMIT_MESSAGE\n\"}" \
+          -d "{\"content\": \"\n\n🚀 **New PREVIEW Frontend deployment successful!**\n\n🔗 Preview Link: $DEPLOYMENT_URL\n\n📜 Commit: [$COMMIT_HASH_SHORT](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)\n📝 $COMMIT_USER - $COMMIT_MESSAGE\n🌿 Branch: $BRANCH_NAME\"}" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
