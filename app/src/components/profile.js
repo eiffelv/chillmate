@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./style.css";
-import Navbar from "./navbar";
 import "./profile.css";
 
 export default function Profile() {
@@ -16,11 +15,11 @@ export default function Profile() {
         password: "",
         confirmPassword: "",
         emergencyemail: "",
-        
+
         emergencyContactNumber: "987-654-3210",
-        
+
         relationship: "Parent"
-          });
+    });
 
     const [editableFields, setEditableFields] = useState({
         firstName: false,
@@ -57,40 +56,22 @@ export default function Profile() {
 
     return (
         <div className="profile">
-            
-      {/* Navbar Logic Inside Profile Page */}
-      <div className="left-navbar">
-        <div className="navbar-content">
-          <ul>
-          <li><a href="/">Home</a></li>
-            <li><a href="/forum">Forum</a></li>
-            <li><a href="/resources">Resources</a></li>
-            <li><a href="/chatbot">Chatbot</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/logout">Logout</a></li>
-
-          </ul>
-        </div>
-      </div> 
             <div className="profile-container">
-                
-                
-
                 {/* Profile Content */}
                 <div className="profile-content">
-                    
+
                     <h2>My Profile</h2>
-                    
+
                     <div className="profile-card">
                         <div className="profile-picture">
                             <div className="circle">
                                 <span className="edit-icon">✎</span>
-                                </div>
-                                <div>
-                            <h3>{profile.firstName} {profile.lastName}</h3>
-                        </div>
                             </div>
-                            <div className="profile-details">
+                            <div>
+                                <h3>{profile.firstName} {profile.lastName}</h3>
+                            </div>
+                        </div>
+                        <div className="profile-details">
                             <form className="profile-form">
                                 <div className="form-row">
                                     <div className="form-group">
@@ -186,54 +167,45 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="mood-tracker-container">
-  <div className="mood-tracker">
-    <h3>Mood tracker</h3>
-    <div className="Current Mood">
-      Current Mood: {moodText[mood]} 
-    </div>
-    <div className="emoji-tracker">
-      {moodEmoji[mood]}
-    </div>
-  </div>
+                        <div className="mood-tracker">
+                            <h3>Mood tracker</h3>
+                            <div className="Current Mood">
+                                Current Mood: {moodText[mood]}
+                            </div>
+                            <div className="emoji-tracker">
+                                {moodEmoji[mood]}
+                            </div>
+                        </div>
 
-  <div className="emergency-contact-details">
-    <h4>Emergency Contact Details</h4>
-    <div className="form-group">                       
-      <label>Contact Number:</label>
-      <input
-        type="text"
-        name="contactnumber"
-        value={profile.emergencyContactNumber}
-        onChange={handleInputChange}
-        onDoubleClick={() => toggleEditable('emergencyContactNumber')}
-        readOnly={!editableFields.emergencyContactNumber}
-      />
-    </div>
-    <div className="form-group">
-      <label>Email:</label>
-      <input
-        type="text"
-        name="email"
-        value={profile.emergencyemail}
-        onChange={handleInputChange}
-        onDoubleClick={() => toggleEditable('email')}
-        readOnly={!editableFields.emergencyemail}             
-      />           
-    </div>  
-  </div>  
-</div>
-
-
-
-
-
-
-
-
-                                
+                        <div className="emergency-contact-details">
+                            <h4>Emergency Contact Details</h4>
+                            <div className="form-group">
+                                <label>Contact Number:</label>
+                                <input
+                                    type="text"
+                                    name="contactnumber"
+                                    value={profile.emergencyContactNumber}
+                                    onChange={handleInputChange}
+                                    onDoubleClick={() => toggleEditable('emergencyContactNumber')}
+                                    readOnly={!editableFields.emergencyContactNumber}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Email:</label>
+                                <input
+                                    type="text"
+                                    name="email"
+                                    value={profile.emergencyemail}
+                                    onChange={handleInputChange}
+                                    onDoubleClick={() => toggleEditable('email')}
+                                    readOnly={!editableFields.emergencyemail}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
-               
+

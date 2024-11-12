@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import "./ChillMateLogo.png"
 import { LoginContext } from "./LoginContext";
-import Navbar from "./navbar";
 import JournalList from './journalList';
 import AddJournalForm from './addjournalForm';
 
