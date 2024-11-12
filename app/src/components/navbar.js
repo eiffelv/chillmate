@@ -34,7 +34,7 @@ export default function Navbar() {
             )}
           </li>
           <li>
-          {isLoggedIn ? (
+            {isLoggedIn ? (
               <Link to="/chatbot">Chatbot</Link>
             ) : (
               <Link to="/login">Chatbot</Link>
@@ -48,14 +48,18 @@ export default function Navbar() {
             <Link to="/resources">Resources</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            {isLoggedIn ? (
+              <Link to="/profile">Profile</Link>
+            ) : (
+              <Link to="/login">Profile</Link>
+            )}
           </li>
           <li>
-          {isLoggedIn ? (
+            {isLoggedIn ? (
               <Link to="/journal">Journal</Link>
             ) : (
               <Link to="/login">Journal</Link>
-            )} 
+            )}
           </li>
           <li>
             {isLoggedIn ? (

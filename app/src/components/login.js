@@ -10,7 +10,7 @@ function Login() {
         username: "",
         password: ""
     });
-    console.log(user);
+    // console.log(user);
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
@@ -34,16 +34,19 @@ function Login() {
 
             const data = await response.json();
             if (data.message === 'Invalid username or password') {
-                alert("Username/password is incorrect");
-            } else {
+                setMessage("Username/Password is incorrect");
+            } else if (data.accessToken !== null) {
                 login();  // Update login state
                 //store data token
                 localStorage.setItem('accessToken', data.access_token);
-                alert("Login successful");
-                navigate('/');
+                setMessage("Login successful!");
+                // Redirect to home page after 2 seconds
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
             }
         } catch (error) {
-            setMessage("An error occurred while logging in.");
+            setMessage("Something went wrong. Please try again later.");
         }
     };
 
