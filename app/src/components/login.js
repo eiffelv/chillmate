@@ -40,6 +40,7 @@ function Login() {
                 login();  // Update login state
                 //store data token
                 localStorage.setItem('accessToken', data.access_token);
+                alert("Login successful");
                 navigate('/');
             }
         } catch (error) {
