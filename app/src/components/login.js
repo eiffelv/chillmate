@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "./LoginContext";
 import "./style.css";
 import "./ChillMateLogo.png";
-import Navbar from "./navbar";
 
 function Login() {
     const { login } = useContext(LoginContext);

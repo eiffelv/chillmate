@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png"
-import Navbar from "./navbar";
-import { Link } from "react-router-dom";
 
 const resourcesData = [
   {

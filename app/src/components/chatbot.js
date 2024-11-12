@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import "./style.css";
 import "./ChillMateLogo.png"
 import { LoginContext } from "./LoginContext";
-import Navbar from "./navbar";
 
 
 const suggestions = ["Find the resources in campus for you.📚", "Organizing your tasks for you.📋", "Gernal conversation.😊"];
