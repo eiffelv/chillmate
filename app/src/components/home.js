@@ -20,13 +20,26 @@ function Home() {
         navigate('/register');
     };
 
+    const goToAbout = () => {
+        console.log("Navigating to about");
+        navigate('/about');
+    };
+
     return (
         <div className="containerHome" id="home">
             <h1>ChillMate</h1>
+            <div classname="Title">
+                <h5>
+                    <em>Empowering You on Your Mental Health Journey</em>
+                </h5>
+                <p>Discover a Path to Better Mental Health with ChillMate</p>
+                <button onClick={goToAbout}>Learn more ➜</button>
+            </div>
+            <p></p>
             <div className="missionStatement">
                  <h2>Our Mission</h2>
                 <h3>
-                    We <em>empower</em> you with the knowledge and skills you need to strengthen                        your mental health & well-being
+                    We <em>empower</em> you with the knowledge and skills you need to strengthen your mental health & well-being
                 </h3>
             </div>
             <div className="features">
