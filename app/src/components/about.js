@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./navbar";
 import luisImage from "./LuisCarrillo.JPG";
 import gioImage from "./GioJung.jpg";
 import eifImage from "./Eiffel.jpg";
@@ -29,25 +28,25 @@ export default class About extends React.Component {
                     </div>
 
                     <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
-    {/* Left side containing ss2 and ss4 images */}
-    <div className="content-section">
-  <div className="left-column">
-    <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
-    <div className="left-images">
-      <img src={ss2Image} alt="App Screenshot 2" width="300" height="200" />
-      <img src={ss4Image} alt="App Screenshot 4" width="300" height="200" />
-    </div>
-  </div>
+                        {/* Left side containing ss2 and ss4 images */}
+                        <div className="content-section">
+                            <div className="left-column">
+                                <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
+                                <div className="left-images">
+                                    <img src={ss2Image} alt="App Screenshot 2" width="300" height="200" />
+                                    <img src={ss4Image} alt="App Screenshot 4" width="300" height="200" />
+                                </div>
+                            </div>
 
-  <div className="left-column">
-  <div className="left-column">
-  <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
-    <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
-   
-  </div>
-</div>
-</div>
-</div>
+                            <div className="left-column">
+                                <div className="left-column">
+                                    <p className="gradient-text">Breaking Cycle: Empower Your Thoughts, Transform Your Feelings, Control Your Situation</p>
+                                    <img src={ss5Image} width="300" height="300" alt="Mental Wellness" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -55,7 +54,7 @@ export default class About extends React.Component {
 
 
                     {/* Replace layout tables with CSS-based divs */}
-                   {/*<div className="content-section">
+                    {/*<div className="content-section">
                         <div className="left-column">
                             <img src={ss1Image} width="600" height="150" alt="ChillMate screenshot" />
                             <div className="image-row">

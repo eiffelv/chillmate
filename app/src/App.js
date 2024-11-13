@@ -8,7 +8,7 @@ import About from "./components/about.js";
 import Resources from "./components/resources.js";
 import Chatbot from "./components/chatbot.js";
 import Journal from "./components/journal.js";
-import Profile from './components/Profile';
+import Profile from './components/profile.js';
 import Navbar from "./components/navbar.js";
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LoginProvider } from "./components/LoginContext";  // Import LoginProvider for global state
@@ -28,7 +28,7 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/journal" element={<Journal />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </LoginProvider>
@@ -40,7 +40,7 @@ function NavbarWithLocation() {
   const location = useLocation();  // This can now safely be used since it's inside a Router
 
   // Conditionally render the Navbar only for the Profile page
-  return location.pathname !== "/Profile" ? <Navbar /> : null;
+  return <Navbar />
 }
 
 export default App;

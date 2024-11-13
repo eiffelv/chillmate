@@ -4,7 +4,6 @@ import { LoginContext } from "./LoginContext";
 import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png";
-import Navbar from "./navbar";
 
 
 function Home() {

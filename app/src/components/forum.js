@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { LoginContext } from "./LoginContext";
 import "./style.css";
 import "./ChillMateLogo.png"
-import Navbar from "./navbar";
-import { Link } from "react-router-dom";
 
 const Forum = () => {
 
