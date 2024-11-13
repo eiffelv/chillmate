@@ -4,6 +4,7 @@ import "./ChillMateLogo.png"
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import FormEnabler from "./FormEnabler";
 
 
 const Register = () => {
@@ -26,20 +27,18 @@ const Register = () => {
         zip_code: ""
     });
 
-
-
     const [message, setMessage] = useState("");
 
-    console.log("this user", user);
-
     const handleSubmit = async (event) => {
+
+        disableFields();
+        setMessage("Please Wait, Trying to Register...");
 
         setUser(prevUser => ({
             ...prevUser,
             Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`
         }));
 
-        console.log("bangsat");
         event.preventDefault();
         try {
             const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/register`, {
@@ -53,15 +52,19 @@ const Register = () => {
             const data = await response.json();
 
             if (response.ok) {
-                alert("registered successfully!");
-                setMessage(data.message);
+                setMessage("Register successful! Redirecting to login page...");
+                enableFields();
+                setTimeout(() => {
+                    goToLogin();
+                }, 1000);
             } else {
                 setMessage(data.error || "An error occurred");
             }
         } catch (error) {
-            setMessage("An error occurred while registering.");
+            enableFields();
+            console.error("Backend error:", error);
+            setMessage("Something went wrong while registering. Please try again later.");
         }
-        goToLogin()
     };
 
 
@@ -92,14 +95,26 @@ const Register = () => {
     const navigate = useNavigate();
 
     const goToLogin = () => {
-        console.log("tai");
-        navigate('/');
+        navigate('/login');
     };
+
+    // Enable Input and Button fields
+    const enableFields = () => {
+        // use FormEnabler to enable fields
+        FormEnabler.toggleEnable();
+    }
+
+    // Disable Input and Button fields
+    const disableFields = () => {
+        // use FormEnabler to disable fields
+        FormEnabler.toggleDisable();
+    }
 
     return (
         <div className="register">
             <div className="register-container">
                 <h2>Register</h2>
+                {message && <p className="error-message">{message}</p>}
                 <form onSubmit={handleSubmit} className="register-form">
                     {/* Name Section */}
                     <div className="input-group">
