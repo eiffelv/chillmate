@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "./LoginContext";
+// import FormEnabler
+import FormEnabler from "./FormEnabler";
 import "./style.css";
 import "./ChillMateLogo.png";
 
@@ -19,10 +21,27 @@ function Login() {
         setUser({ ...user, [name]: value });
     };
 
+    // Enable Input and Button fields
+    const enableFields = () => {
+        // use FormEnabler to enable fields
+        FormEnabler.toggleEnable();
+    }
+
+    // Disable Input and Button fields
+    const disableFields = () => {
+        // use FormEnabler to disable fields
+        FormEnabler.toggleDisable();
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
+            // Disable input fields and button while waiting for response
+            disableFields();
+            setMessage("Please Wait, Trying to Login...")
+
+            // Send POST request to login endpoint
             const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/login`, {
                 method: "POST",
                 credentials: 'include',
@@ -31,8 +50,12 @@ function Login() {
                 },
                 body: JSON.stringify(user),
             });
-
+            
             const data = await response.json();
+
+            // Re-enable input fields and button after response
+            enableFields();
+
             if (data.message === 'Invalid username or password') {
                 setMessage("Username/Password is incorrect");
             } else if (data.accessToken !== null) {
@@ -40,13 +63,14 @@ function Login() {
                 //store data token
                 localStorage.setItem('accessToken', data.access_token);
                 setMessage("Login successful!");
-                // Redirect to home page after 2 seconds
+                // Redirect to profile page after a brief delay
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/profile');
                 }, 1000);
             }
         } catch (error) {
             setMessage("Something went wrong. Please try again later.");
+            enableFields();
         }
     };
 
