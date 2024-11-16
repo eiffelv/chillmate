@@ -5,6 +5,7 @@ import { LoginContext } from "./LoginContext";
 import FormEnabler from "./FormEnabler";
 import "./style.css";
 import "./ChillMateLogo.png";
+import LoginPic from "./Chill.pic.jpg";
 
 function Login() {
     const { login } = useContext(LoginContext);
@@ -50,7 +51,7 @@ function Login() {
                 },
                 body: JSON.stringify(user),
             });
-            
+
             const data = await response.json();
 
             // Re-enable input fields and button after response
@@ -75,9 +76,12 @@ function Login() {
     };
 
     return (
+
         <div className="login">
+            <img src={LoginPic} width="1000" height="700" alt="LoginPic" />
             <div className="login-container">
                 <h2>Login</h2>
+
                 {message && <p className="error-message">{message}</p>}
                 <form onSubmit={handleSubmit}>
                     <input

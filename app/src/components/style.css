@@ -17,6 +17,7 @@ body {
 .containerHome {
   text-align: center;
   font-family: Arial, sans-serif;
+  padding: 3em;
 }
 
 .containerHome p {
@@ -29,8 +30,9 @@ font-size: 40px;
   color:#025816;
 }
 
+
 .Tilte p {
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 .missionStatement h2 {
@@ -79,27 +81,6 @@ font-size: 40px;
 }
 
 
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  /* Full viewport height */
-  background-color: #DEDDFF;
-  /* Optional: background color */
-}
-
-.login-container {
-  width: 100%;
-  max-width: 85%;
-  /* Set a max-width for the container */
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-  /* Optional: rounded corners */
-  background-color: white;
-  /* Optional: background color */
-}
 
 .register {
   display: flex;
@@ -337,11 +318,19 @@ button:hover {
   background-color: #555;
 }
 
+.login {
+  display: flex;
+  height: 100vh;
+  /* Full viewport height */
+  background-color: #DEDDFF;
+  /* Optional: background color */
+}
+
 .login-container {
-  background-color: #fff;
-  padding: 30px;
+  background-color: #ffffff;
+  padding: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 1000px;
+  width: 500px;
   text-align: center;
 }
 
@@ -351,12 +340,12 @@ button:hover {
 }
 
 .login-container input {
-  width: 90%;
+  width: 50%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #5868fe;
   border-radius: 5px;
-  text-align: right;
+  text-align: left;
 }
 
 .login-container button {
@@ -364,7 +353,7 @@ button:hover {
   color: white;
   border: none;
   padding: 10px;
-  width: 925px;
+  width: 230px;
   border-radius: 5px;
   cursor: pointer;
 }
