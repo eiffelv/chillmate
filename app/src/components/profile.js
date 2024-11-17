@@ -60,7 +60,7 @@ export default function Profile() {
                 {/* Profile Content */}
                 <div className="profile-content">
 
-                    <h2>My Profile</h2>
+                    <h1>My Profile</h1>
 
                     <div className="profile-card">
                         <div className="profile-picture">

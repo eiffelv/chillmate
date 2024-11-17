@@ -14,6 +14,28 @@ const Chatbot = () => {
 
   const [loading, setLoading] = useState(true);
 
+  // AnimatedText Component
+const AnimatedText = () => {
+  const [displayedText, setDisplayedText] = useState("");
+  const fullText = "Hello! Choose one of the options below to get started.";
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < fullText.length-1) {
+        setDisplayedText((prev) => prev + fullText[index]);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 70); // Adjust speed as needed
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  return <div className="animated-text">{displayedText}</div>;
+};
+
   const getChatBot = async (message) => {
     console.log("message: ", message);
     try {
@@ -104,6 +126,7 @@ const Chatbot = () => {
     <div>
       <div className="chatbot-container">
         <h1>Chatbot</h1>
+        <AnimatedText/> {/* Animated Text Component */}
         <div className="chatbot-messages">
           <div className="suggestions">
             {suggestions.map((suggestion, index) => (

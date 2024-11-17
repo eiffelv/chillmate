@@ -85,6 +85,7 @@ font-size: 40px;
 .register {
   display: flex;
   justify-content: center;
+  padding: 50px;
   align-items: center;
   background-color: #DEDDFF;
   /* Optional: background color */
@@ -94,7 +95,7 @@ font-size: 40px;
 .register-container {
   width: 900px;
   margin: auto;
-  padding: 20px;
+  padding: 50px 20px;
   display: flex;
   /* Use flexbox */
   justify-content: center;
@@ -173,10 +174,29 @@ input[type="email"] {
 }
 
 .input-group label {
+  font-size: 12px;
   margin-bottom: 5px;
   font-weight: bold;
   position: relative;
   /* Keeps label always positioned above */
+}
+
+.input-group input::placeholder {
+  font-size: 14px; /* Adjust font size */
+  color: #888; /* Adjust placeholder color */
+  font-style: italic; /* Example: italic style */
+  font-weight: normal; /* Adjust font weight */
+  font-family: Arial, sans-serif; /* Specify font family */
+}
+
+.input-group input, select {
+  width: 125px; /* Set the width */
+  height: 30px; /* Set the height */
+  padding: 4px; /* Adjust padding */
+  font-size: 4px; /* Adjust font size for content */
+  border: 1px solid #ccc; /* Define border */
+  border-radius: 4px; /* Optional: Rounded corners */
+  box-sizing: border-box; /* Ensures padding doesn't affect total size */
 }
 
 .name-container {
@@ -832,7 +852,7 @@ ul {
 
 /* JournalPage.css */
 .journal-page {
-  padding: 200px;
+  padding: 50px 200px;
 }
 
 .journal-list {
