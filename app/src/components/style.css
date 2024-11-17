@@ -223,6 +223,15 @@ input[type="email"] {
   /* Make state and zip inputs take equal space */
 }
 
+.state-field option {
+  font-size: 10px; /* Changes the font size of the options */
+}
+
+.state-field {
+  font-size: 10px; /* Changes the font size of the select box */
+  height: auto;
+}
+
 .input-group input,
 .input-group select {
   width: 80%;

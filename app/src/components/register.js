@@ -118,10 +118,15 @@ const Register = () => {
                 <form onSubmit={handleSubmit} className="register-form">
                     {/* Name Section */}
                     <div className="input-group">
-                        <label>Name<span className="required">*</span></label>
+                        <label>First Name<span className="required">*</span></label>
                         <div className="name-container">
-                            <input type="text" name="first_name" placeholder="First" value={user.FirstName} onChange={handleChange} required />
-                            <input type="text" name="last_name" placeholder="Last" value={user.LastName} onChange={handleChange} required />
+                            <input type="text" name="first_name" placeholder="Robert" value={user.FirstName} onChange={handleChange} required />
+                        </div>
+                    </div>
+                    <div className="input-group">
+                        <label>Last Name<span className="required">*</span></label>
+                        <div className="name-container">
+                            <input type="text" name="last_name" placeholder="Bierman" value={user.LastName} onChange={handleChange} required />
                         </div>
                     </div>
 
@@ -129,20 +134,20 @@ const Register = () => {
                     <div className="input-group">
                     <label>Address</label>
                         <div className="address-group">
-                            <input type="text" name="address_line_1" placeholder="Address Line 1" value={user.address_line_1} onChange={handleChange} />
-                            <input type="text" name="address_line_2" placeholder="Address Line 2" value={user.address_line_2} onChange={handleChange} />
+                            <input type="text" name="address_line_1" placeholder="123 Sesame St." pattern="^[a-zA-Z0-9\s,.'-]{3,}$"  title="Please enter a valid address." value={user.address_line_1} onChange={handleChange} />
+                            <input type="text" name="address_line_2" placeholder="Secondary Address Line" pattern="^[a-zA-Z0-9\s,.'-]{3,}$"  value={user.address_line_2} onChange={handleChange} />
                         </div>
                     </div>
 
                     <div className="input-group">
                         <label>City</label>
-                        <input type="text" name="city" placeholder="City" value={user.city} onChange={handleChange} required />
+                        <input type="text" name="city" placeholder="San Francisco" value={user.city} onChange={handleChange} required />
                     </div>
 
                     <div className="input-group">    
                         <label>State</label>
                         <div className="state-zip-container">
-                            <select name="state" value={user.state} onChange={handleChange} required>
+                            <select name="state" class="state-field" value={user.state} onChange={handleChange} required>
                                 <option value="" disabled selected>Select State</option>
                                 <option value="Alabama">Alabama</option>
                                 <option value="Alaska">Alaska</option>
@@ -201,7 +206,7 @@ const Register = () => {
 
                     <div className="input-group">
                         <label>Zip Code</label>
-                        <input type="text" name="zip_code" value={user.zip} onChange={handleChange} required />
+                        <input type="text" name="zip_code" placeholder="94016" pattern="^\d{5}(-\d{4})?$" title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)." value={user.zip} onChange={handleChange} required />
                     </div>
 
                     {/* Other fields */}
@@ -212,7 +217,7 @@ const Register = () => {
 
                     <div className="input-group">
                         <label>Email<span className="required">*</span></label>
-                        <input type="email" name="email" value={user.Email} onChange={handleChange} required />
+                        <input type="email" placeholder="yourname@sfsu or yourname@mail" name="email" pattern="^[a-zA-Z0-9._%+-]+@(sfsu|mail)$"  title="Enter a valid email ending with @sfsu or @mail." value={user.Email} onChange={handleChange} required />
                     </div>
 
                     <div className="input-group">
@@ -237,6 +242,7 @@ const Register = () => {
                     <div className="input-group">
                         <label>Phone number<span className="required">*</span></label>
                         <input
+                            placeholder = "1234567890"
                             type="tel"
                             name="phone_number"
                             value={user.PhoneNum} onChange={handleChange}
@@ -249,8 +255,11 @@ const Register = () => {
                     <div className="input-group">
                         <label>SFSU ID<span className="required">*</span></label>
                         <input
+                            placeholder = "900000000"
                             type="number"
                             name="sfsu_id"
+                            pattern="^9\d{8}$"
+                            title="SFSU ID must be 9 digits long and start with '9'."
                             value={user.sfsu_id} onChange={handleChange}
                             required
                         />
