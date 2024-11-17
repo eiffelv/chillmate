@@ -106,7 +106,7 @@ font-size: 40px;
   /* Center vertically */
   align-content: start;
   gap: 10px;
-  height: 120vh;
+  height: 240vh;
   margin-bottom: 1px;
   border-radius: 15px;
   /* Smoother, rounded corners */
@@ -114,6 +114,8 @@ font-size: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.747);
 
 }
+
+
 
 .register-form {
   display: flex;
@@ -149,6 +151,10 @@ font-size: 40px;
   gap: 10px;
 }
 
+.name {
+  display: flex;
+  gap: 1rem; /* Optional: Space between the fields */
+}
 
 input[type="text"],
 input[type="tel"],
@@ -172,6 +178,8 @@ input[type="email"] {
   align-items: flex-start;
   /* Ensures the label aligns to the left */
 }
+
+
 
 .input-group label {
   font-size: 12px;
@@ -200,10 +208,16 @@ input[type="email"] {
 }
 
 .name-container {
-  display: flex;
-  gap: 20px;
-  /* Space between first and last name inputs */
+    display: flex;
+    gap: 20px;
+    
 }
+
+.label{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 
 .name-container input {
   flex: 2;
