@@ -14,7 +14,50 @@ const Chatbot = () => {
 
   const [loading, setLoading] = useState(true);
 
-  //getting chatbot response
+  //getting chatbot response find resources
+  const getResources = async (message) => {
+    console.log("message: ", message);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/chatbot/find_sim_docs`, {
+        method: "POST",
+        // credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input_text: message }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to upload post');
+      }
+  
+      const data = await response.json();
+
+      let resourceString ='';
+
+      data.forEach((resources, index) => {
+        resourceString += `
+        ${index + 1}: ${resources.Resource_title}
+        ${resources.Resource_link}
+        ${resources.Resource_body}
+            `;
+      });
+
+      return resourceString;
+
+
+    } catch (error) {
+      console.error('Error uploading post:', error);
+      // Handle error, e.g., display an error message to the user
+    }
+    finally {
+      setLoading(false); // Once the promise settles, update loading state
+    }
+  }
+
+
+
+  //getting chatbot to do list response
   const getChatBot = async (message) => {
     console.log("message: ", message);
     try {
@@ -63,7 +106,7 @@ const Chatbot = () => {
 
     const userMessage = { text: input, sender: 'user' };
 
-    const botReply = await getChatBot(input);
+    const botReply = await getResources(input);
 
 
 

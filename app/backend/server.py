@@ -115,12 +115,13 @@ def logout():
     return jsonify({"message": "User logged out successfully"}), 200
 
 # Find similar docs endpoint
-@app.route("/chatbot/find_sim_docs", methods=['GET'])
+@app.route("/chatbot/find_sim_docs", methods=['GET', 'POST'])
 def find_similar_docs():
     # if 'user_id' not in session:
     #     return jsonify({"error": "Unauthorized"}), 401
 
     inputText = request.json.get('input_text', "")
+    logger.debug(inputText)
     mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Resources')
 
     input_text_emb = mongoUtils.generate_embeddings(inputText)
@@ -128,6 +129,7 @@ def find_similar_docs():
 
     f_docs = [{"Resource_title": doc.get("RecourseTitle", ""), "Resource_link": doc.get("RecourseLink", ""), "Resource_body": doc.get("ResourseBody", "")} for doc in similar_docs]
 
+    logger.debug(f_docs)
     return jsonify(f_docs)
 
 @app.route("/chatbot/generate_goal_tasks", methods=['GET', 'POST'])
