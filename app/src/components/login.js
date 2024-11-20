@@ -6,6 +6,7 @@ import FormEnabler from "./FormEnabler";
 import "./style.css";
 import "./ChillMateLogo.png";
 import LoginPic from "./Chill.pic.jpg";
+import FlowerPic from "./lavender.jpg"
 
 function Login() {
     const { login } = useContext(LoginContext);
@@ -78,7 +79,7 @@ function Login() {
     return (
 
         <div className="login">
-            <img src={LoginPic} width="1000" height="700" alt="LoginPic" />
+            <img src={FlowerPic} width="900" height="593" alt="LoginPic" />
             <div className="login-container">
                 <h2>Login</h2>
 
