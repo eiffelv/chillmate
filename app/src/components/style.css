@@ -137,7 +137,7 @@ font-size: 40px;
 }
 
 .register-container button:hover {
-  background-color: #0056b3;
+  background-color: #2d00b3;
 }
 
 .register-container p {
@@ -348,7 +348,7 @@ input {
 button {
 
   padding: 16px 30px;
-  background-color: #048019;
+  background-color: #966fd6;
   color: white;
   border: none;
   border-radius: 1cap;
@@ -392,7 +392,7 @@ button:hover {
 }
 
 .login-container button {
-  background-color: #007bff;
+  background-color: #966fd6;
   color: white;
   border: none;
   padding: 10px;
@@ -402,7 +402,7 @@ button:hover {
 }
 
 .login-container button:hover {
-  background-color: #0056b3;
+  background-color: #2d00b3;
 }
 
 /* Logout button */
@@ -419,7 +419,26 @@ button:hover {
 }
 
 .logout-button:hover {
-  background-color: #0056b3;
+  background-color: #2d00b3;
+  /* Darken background on hover */
+}
+
+/* Logout button */
+.login-button {
+  /* Change the background color */
+  color: rgb(17, 17, 17);
+  /* Text color */
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  background-color: #966fd6;
+
+}
+
+.login-button:hover {
+  background-color: #2d00b3;
   /* Darken background on hover */
 }
 
@@ -448,7 +467,7 @@ nav ul li:last-child {
 }
 
 .register-container button:hover {
-  background-color: #0056b3;
+  background-color: #2d00b3;
 }
 
 .register-container p {
@@ -629,7 +648,7 @@ h1 {
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #2d00b3;
 }
 
 ul {
@@ -749,7 +768,7 @@ ul {
 }
 
 .chatbot-input button:hover {
-  background-color: #0056b3;
+  background-color: #2d00b3;
 }
 
 /*About Page*/
@@ -955,7 +974,7 @@ ul {
 }
 
 .suggestion-button:hover {
-  background-color: #0056b3;
+  background-color: #2d00b3;
 }
 
 /* Profile Content Styles */

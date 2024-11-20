@@ -67,7 +67,7 @@ export default function Navbar() {
               <button onClick={handleLogout} className="logout-button">Logout</button>
             ) : (
               /*Link is basically the same thing as <a> in html so don't need to worry about it too much*/
-              < Link to="/login">Login</Link>
+              < Link to="/login" className="login-button">Login</Link>
             )}
           </li>
         </ul>
