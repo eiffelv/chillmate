@@ -233,6 +233,29 @@ def createJournal():
 
 #_____________________________
 
+# ----------- profile api
+@app.route('/getProfile', methods=['POST','GET'])
+@jwt_required() 
+def getProfile():
+    current_user = get_jwt_identity() 
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='user')  
+
+    user = mongoUtils.collection.find_one({'SFStateID': current_user})
+    # logger.debug(user)
+    result = {
+        "SFStateID": current_user,
+        "FirstName": user['FirstName'],
+        "LastName": user['LastName'],
+        "Address": user['Address'],
+        "Email": user['Email'],
+        "PhoneNum": user['PhoneNum']
+    }
+
+    if user:
+        return jsonify(result)
+    else:
+        return jsonify({'error': 'user not found'})
+
 #-------------------------------
 
 

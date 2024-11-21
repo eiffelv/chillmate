@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import "./profile.css";
 
@@ -53,6 +53,45 @@ export default function Profile() {
         neutral: "Neutral",
         sad: "Sad",
     };
+
+
+    const getProfileData = async(e) => {
+        const token = localStorage.getItem('accessToken');
+        try {
+            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/getProfile`, {
+                method: "POST",
+                credentials: 'include',
+                headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+                },
+                //body: JSON.stringify(newJournal),
+            });
+
+
+            const user =  await response.json();
+            console.log(user);
+
+            setProfile({
+                firstName: user.FirstName,
+                lastName: user.LastName,
+                phoneNumber: user.PhoneNum,
+                address: user.Address,
+                sfsuId: user.SFStateID,
+                sfsuEmail: user.Email
+             })
+
+        }
+        catch (error) {
+
+        }
+    }
+
+    //function that call api to get profile data
+    useEffect(() => {
+        console.log("getting profile");
+        getProfileData();
+    })
 
     return (
         <div className="profile">
