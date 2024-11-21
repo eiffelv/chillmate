@@ -91,7 +91,7 @@ export default function Profile() {
     useEffect(() => {
         console.log("getting profile");
         getProfileData();
-    })
+    }, [])
 
     return (
         <div className="profile">
