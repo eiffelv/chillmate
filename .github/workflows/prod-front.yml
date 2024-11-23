@@ -5,8 +5,8 @@ env:
   WEB_URL: 'https://chillmate-react.vercel.app'
 on:
   push:
-    # branches:
-    #   - master
+    branches:
+      - master
     paths:
       - 'app/**'
       - '!app/backend/**'
