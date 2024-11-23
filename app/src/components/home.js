@@ -29,11 +29,11 @@ function Home() {
         <div className="containerHome" id="home">
             <h1>ChillMate</h1>
             <div classname="Title">
-                <h5>
+                <h5 className="fade-in">
                     <em>Empowering You on Your Mental Health Journey</em>
                 </h5>
                 <p>Discover a Path to Better Mental Health with ChillMate</p>
-                <button onClick={goToAbout}>Learn more ➜</button>
+                <button className="pulse-button" onClick={goToAbout}>Learn more ➜</button>
             </div>
             <p></p>
             <div className="missionStatement">
@@ -70,7 +70,7 @@ function Home() {
                 </div>
             </div>
             <p>Join us in fostering a healthier academic environment!</p>
-            <button onClick={goToRegister}>Register Now!</button>
+            <button className="pulse-button" onClick={goToRegister}>Register Now!</button>
         </div>
         
     );

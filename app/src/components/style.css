@@ -3,7 +3,7 @@ body {
   /* border-style: outset; */
   font-size: 20px;
   font-family: Arial, sans-serif;
-  background-color: #DEDDFF;
+  background-image: linear-gradient(to right,#afaaff, #f7ccff);
   align-content: start;
 
 }
@@ -30,6 +30,61 @@ font-size: 40px;
   color:#025816;
 }
 
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade-in effect for title */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Pulsing animation for button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0px rgba(237, 164, 226, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(238, 97, 214, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(222, 38, 198, 0.7);
+  }
+}
+
+.pulse-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #e693ec; /* Adjust color as desired */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 3s infinite;
+  transition: transform 0.2s;
+}
+
+.pulse-button:hover {
+  transform: scale(1.05);
+  background-color: #d700a5;
+}
+
 
 .Tilte p {
   font-size: 1.5em;
@@ -54,6 +109,7 @@ font-size: 40px;
 .missionStatement em {
   font-style: italic;
 }
+
 
 .features {
   display: grid;
@@ -280,7 +336,7 @@ div.container {
 
 nav {
   border-style: none none inset none;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -345,21 +401,7 @@ input {
   margin-bottom: 10px;
 }
 
-button {
 
-  padding: 16px 30px;
-  background-color: #966fd6;
-  color: white;
-  border: none;
-  border-radius: 1cap;
-  cursor: pointer;
-  outline: 1px solid #000000;
-  font-size: 15px;
-}
-
-button:hover {
-  background-color: #555;
-}
 
 .login {
   display: flex;
