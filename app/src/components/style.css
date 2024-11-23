@@ -110,7 +110,6 @@ font-size: 40px;
   font-style: italic;
 }
 
-
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -123,6 +122,13 @@ font-size: 40px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: translateX(-100%); /* Start off-screen to the left */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.feature.animate {
+  animation: slideInFromLeft 1.8s forwards; /* Apply animation when the class is added */
 }
 
 .feature h4 {
