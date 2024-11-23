@@ -779,10 +779,16 @@ ul {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  /* Use Flexbox for layout */
+  display: flex;
+  flex-direction: column;
+  height: 80vh; /* Adjust height as needed */
 }
 
 .chatbot-messages {
-  max-height: 300px;
+  flex: 1; /* Let messages take up most of the space */
+  max-height: calc(100% - 100px); /* Adjust for dynamic sizing */
   overflow-y: auto;
   margin-bottom: 15px;
 }
@@ -807,7 +813,10 @@ ul {
 
 .chatbot-input {
   display: flex;
-  gap: 8px;
+  gap: 20px;
+
+  /* Push input box to the bottom */
+  margin-top: auto;
 }
 
 .chatbot-input input {
@@ -828,6 +837,24 @@ ul {
 
 .chatbot-input button:hover {
   background-color: #2d00b3;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .chatbot-container {
+    width: 100%;
+    height: 90vh;
+  }
+
+  .chatbot-input input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .chatbot-input button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
 }
 
 /*About Page*/
@@ -1015,26 +1042,47 @@ ul {
 }
 
 .suggestions {
-  display: inline-flex;
-  gap: 10px;
+  display: flex;            /* Use flexbox */
+  justify-content: center;  /* Center horizontally */
+  align-items: center;      /* Center vertically */
+  gap: 10px;                /* Add spacing between buttons */
+  margin-bottom: 15px;      /* Add some space below suggestions */
+  margin-top: 15px;      /* Add some space below suggestions */
 }
 
 .suggestion-button {
-  padding: 8px;
-  cursor: pointer;
+  padding: 10px 20px;       /* Ensure buttons have consistent size */
   background-color: #007bff;
+  border: 1px solid #ddd;
   color: #fff;
-  border: none;
   border-radius: 5px;
+  cursor: pointer;
   text-align: center;
   font-size: 0.9em;
-  transition: background-color 0.2s;
-  gap: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .suggestion-button:hover {
   background-color: #2d00b3;
 }
+
+.intro-container {
+  display: flex;             /* Enable Flexbox */
+  flex-direction: column;    /* Stack items vertically */
+  align-items: center;       /* Center horizontally */
+  justify-content: center;   /* Center vertically */
+  text-align: center;        /* Center-align text inside */
+  margin-bottom: 20px;       /* Add space between intro and chat messages */
+}
+
+.animated-text {
+  margin-bottom: 15px;       /* Add spacing below the animated text */
+  font-size: 18px;           /* Adjust font size as needed */
+  font-weight: bold;         /* Make it visually distinct */
+  color: #333;             /* Ensure good contrast */
+  text-align: center;
+}
+
 
 /* Profile Content Styles */
 .profile-content {
