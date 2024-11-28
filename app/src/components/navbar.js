@@ -34,7 +34,7 @@ export default function Navbar() {
             )}
           </li>
           <li>
-          {isLoggedIn ? (
+            {isLoggedIn ? (
               <Link to="/chatbot">Chatbot</Link>
             ) : (
               <Link to="/login">Chatbot</Link>
@@ -47,22 +47,27 @@ export default function Navbar() {
           <li>
             <Link to="/resources">Resources</Link>
           </li>
+          
           <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-          {isLoggedIn ? (
+            {isLoggedIn ? (
               <Link to="/journal">Journal</Link>
             ) : (
               <Link to="/login">Journal</Link>
-            )} 
+            )}
+          </li>
+          <li>
+            {isLoggedIn ? (
+              <Link to="/profile">Profile</Link>
+            ) : (
+              <Link to="/login">Profile</Link>
+            )}
           </li>
           <li>
             {isLoggedIn ? (
               <button onClick={handleLogout} className="logout-button">Logout</button>
             ) : (
               /*Link is basically the same thing as <a> in html so don't need to worry about it too much*/
-              < Link to="/login">Login</Link>
+              < Link to="/login" className="login-button">Login</Link>
             )}
           </li>
         </ul>
