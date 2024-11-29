@@ -539,6 +539,236 @@ nav ul li:last-child {
   margin-top: 10px;
 }
 
+/*profile*/
+/* Main profile container - Center the content */
+/* Center the profile container on the page */
+/* Main profile container - Center the content */
+ 
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align content to the top */
+  min-height: 100vh; /* Take full viewport height */
+  box-sizing: border-box;
+  padding-top: 20px; /* Add some top padding */
+  padding-left: 20px;
+  background-color: #ebe1fb;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Profile container styling */
+.profile-container {
+  background: 
+    linear-gradient(to bottom, #9e66f2 90px, rgb(244, 240, 244) 50px); /* Strip color and container color */
+  padding-left: 10px;
+  padding-left: 10px;
+  border-radius: 8px;
+  padding: 20px;
+  width: 650px; /* Fixed width */
+  margin-top: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+  text-align: left;
+  position: relative;
+}
+
+
+
+
+
+
+.button-container {
+  
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding-top: 30px;
+  
+}
+
+.edit-button,
+.save-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  color: rgb(11, 11, 11);
+  background-color: white;
+  
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+  transition: background-color 0.3s ease;
+  
+}
+
+.edit-button:hover,
+.save-button:hover {
+  background-color: #4e3ae6;
+}
+
+
+
+
+
+
+
+
+
+
+ /* Mood tracker styling */
+ /* Mood tracker styling */
+.mood-tracker-container {
+  display: flex;
+  justify-content: center; /* Center the mood emoji */
+  margin-bottom: 20px;
+}
+
+.emoji {
+  font-size: 80px; /* Big emoji */
+  margin: 0;
+}
+
+.mood-text {
+  font-size: 16px;
+  color: #666;
+  margin-top: 5px;
+  text-align: center;
+}
+
+
+
+
+
+/* Profile name and description */
+.profile-header {
+  margin-bottom: 20px; /* Add space below header */
+  text-align: left;
+}
+
+.profile-header h3 {
+  margin: 5px 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 24px; /* Slightly larger name text */
+  font-weight: bold;
+  color: #6200ee; /* Purple accent color */
+}
+
+.profile-details-heading{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px; /* Space between profile and details */
+  padding-left: 10px;
+  font-family:'Times New Roman', Times, serif;
+  text-align: left;
+
+
+}
+
+/* Row layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Space between columns */
+  align-items: left; /* Align items vertically */
+  margin-bottom: 15px; /* Add spacing between rows */
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 6px;
+  
+  overflow: hidden;
+  box-sizing: border-box;
+
+ 
+}
+
+.row p {
+  margin: 0; /* Remove default paragraph margins */
+  font-size: 13px; /* Adjust font size */
+  font-family:Arial, Helvetica, sans-serif;
+  color: #333; /* Text color */
+  line-height: 1.4; /* Improve readability */
+  /* Allow items to take full width and avoid crossing */
+  flex: 1 1 48%;
+}
+
+/* Styling for strong elements (labels) */
+.row strong {
+  font-weight: bold;
+  color: #555; /* Slightly muted label color */
+}
+
+/* Profile details box */
+.profile-details {
+  padding-top: 5px;
+  background-color: #f9f9f9; /* Light gray background for contrast */
+  border-radius: 6px; /* Rounded corners */
+  margin-top: 10px; /* Space between profile and details */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); /* Light shadow for separation */
+  padding-left: 10px;
+  padding: 2px;
+  padding-right: 0.0px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .profile-container {
+    width: 90%; /* Adjust width for smaller screens */
+    padding: 15px;
+  }
+
+  .row {
+    flex-wrap: wrap; /* Allow rows to wrap on smaller screens */
+  }
+
+  .row p {
+    flex: 1 1 100%; /* Make each item take full width */
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
+
+.Emergency-details-heading{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px; /* Space between profile and details */
+  padding-left: 0.5px;
+  font-family:'Times New Roman', Times, serif;
+  text-align: left;
+
+
+}
+
+.emergency-details {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  padding: 15px;
+  margin: 15px 0;
+}
+
+/* Editable Fields */
+input[type="text"], textarea {
+  border: 1px solid #ccc; /* Border for input fields */
+  padding: 8px; /* Padding inside input fields */
+  font-size: 14px; /* Keep the font size same as regular text */
+  font-family: Arial, Helvetica, sans-serif; /* Same font family as regular text */
+  background-color: #f9f9f9; /* Light background for input fields */
+  border-radius: 4px; /* Slightly rounded borders */
+  width: calc(100% - 16px); /* Ensures input takes full width minus padding */
+  margin-top: 5px;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: #6200ee; /* Purple border color on focus */
+  background-color: #fff; /* White background on focus */
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing of text area */
+  min-height: 80px; /* Set minimum height for textareas */
+}
+
 
 
 

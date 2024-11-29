@@ -1,4 +1,5 @@
 /* Adjust profile container to fit next to the navbar without horizontal scroll */
+
 .profile-container {
   width: 100%;
   /* Ensure the container width fills remaining space */
@@ -6,6 +7,7 @@
   box-sizing: border-box;
   /* Include padding in width calculation */
   overflow-x: hidden;
+  align-items: center;
   /* Prevent horizontal scrolling */
 }
 
@@ -23,7 +25,8 @@
 }
 
 .profile-details {
-  margin-top: 20px;
+  margin-top: 50px;
+
 }
 
 /* Styling for mood tracker, if any */
