@@ -1,4 +1,5 @@
-import React from "react";
+//import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from "./LoginContext";
 import PropTypes from "prop-types";
@@ -25,15 +26,37 @@ function Home() {
         navigate('/about');
     };
 
+     // Add the scroll animation logic
+     useEffect(() => {
+        const features = document.querySelectorAll('.feature');
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target); // Stop observing after animation
+                    }
+                });
+            },
+            { threshold: 0.1 } // Trigger when 10% of the element is visible
+        );
+
+        features.forEach(feature => observer.observe(feature));
+
+        return () => observer.disconnect(); // Cleanup observer
+    }, []);
+
+
+
     return (
         <div className="containerHome" id="home">
             <h1>ChillMate</h1>
             <div classname="Title">
-                <h5>
+                <h5 className="fade-in">
                     <em>Empowering You on Your Mental Health Journey</em>
                 </h5>
                 <p>Discover a Path to Better Mental Health with ChillMate</p>
-                <button onClick={goToAbout}>Learn more ➜</button>
+                <button className="pulse-button" onClick={goToAbout}>Learn more ➜</button>
             </div>
             <p></p>
             <div className="missionStatement">
@@ -70,7 +93,7 @@ function Home() {
                 </div>
             </div>
             <p>Join us in fostering a healthier academic environment!</p>
-            <button onClick={goToRegister}>Register Now!</button>
+            <button className="pulse-button" onClick={goToRegister}>Register Now!</button>
         </div>
         
     );

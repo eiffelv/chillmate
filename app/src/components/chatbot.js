@@ -10,31 +10,34 @@ const Chatbot = () => {
   const [input, setInput] = useState('');
   const [typingMessage, setTypingMessage] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);  // Controls the visibility of the search bar
+  const [showAnimatedText, setShowAnimatedText] = useState(true); // Controls the visibility of the animated text
   const messagesEndRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
 
   // AnimatedText Component
-const AnimatedText = () => {
-  const [displayedText, setDisplayedText] = useState("");
-  const fullText = "Hello! Choose one of the options below to get started.";
+  const AnimatedText = () => {
+    const [displayedText, setDisplayedText] = useState("");
+    const fullText = "Heello! Choose one of the options below to get started.";
 
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < fullText.length-1) {
-        setDisplayedText((prev) => prev + fullText[index]);
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 70); // Adjust speed as needed
 
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
+    useEffect(() => {
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index < fullText.length - 1) {
+          setDisplayedText((prev) => prev + fullText[index]);
+          console.log(fullText[index]);
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 70); // Adjust speed as needed
 
-  return <div className="animated-text">{displayedText}</div>;
-};
+      return () => clearInterval(interval); // Cleanup on unmount
+    }, []);
+
+    return <div className="animated-text">{displayedText}</div>;
+  };
 
   const getChatBot = async (message) => {
     console.log("message: ", message);
@@ -108,6 +111,7 @@ const AnimatedText = () => {
 
   const handleSuggestionClick = (suggestion) => {
     setShowSearchBar(true);  // Show the search bar when a suggestion is clicked
+    setShowAnimatedText(false); // Hide the animated text when a suggestion is clicked
 
     getChatBot(suggestion).then((botResponse) => {
       simulateTyping(botResponse); // Display the chatbot response in the chat
@@ -126,7 +130,7 @@ const AnimatedText = () => {
     <div>
       <div className="chatbot-container">
         <h1>Chatbot</h1>
-        <AnimatedText/> {/* Animated Text Component */}
+        {showAnimatedText && <AnimatedText />} {/* Only show AnimatedText if showAnimatedText is true */}
         <div className="chatbot-messages">
           <div className="suggestions">
             {suggestions.map((suggestion, index) => (

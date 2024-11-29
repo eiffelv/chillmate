@@ -2,7 +2,7 @@
 
 ![ChillMate Banner](app/public/preview-banner.png)
 
-## This is repository for: CSC648-S04-FA24-01
+## This is repository for: CSC648-S04-FA24-01.
 
 **Application URL: <https://chillmate-react.vercel.app/>**
 

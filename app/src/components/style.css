@@ -3,7 +3,7 @@ body {
   /* border-style: outset; */
   font-size: 20px;
   font-family: Arial, sans-serif;
-  background-color: #DEDDFF;
+  background-image: linear-gradient(to right,#afaaff, #f7ccff);
   align-content: start;
 
 }
@@ -28,6 +28,61 @@ font-size: 40px;
   font-size: 3em;
   font-weight: 200;
   color:#025816;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade-in effect for title */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Pulsing animation for button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0px rgba(237, 164, 226, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(238, 97, 214, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(222, 38, 198, 0.7);
+  }
+}
+
+.pulse-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #e693ec; /* Adjust color as desired */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 3s infinite;
+  transition: transform 0.2s;
+}
+
+.pulse-button:hover {
+  transform: scale(1.05);
+  background-color: #d700a5;
 }
 
 
@@ -55,6 +110,17 @@ font-size: 40px;
   font-style: italic;
 }
 
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -67,6 +133,13 @@ font-size: 40px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: translateX(-100%); /* Start off-screen to the left */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.feature.animate {
+  animation: slideInFromLeft 1.8s forwards; /* Apply animation when the class is added */
 }
 
 .feature h4 {
@@ -280,7 +353,7 @@ div.container {
 
 nav {
   border-style: none none inset none;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -345,21 +418,7 @@ input {
   margin-bottom: 10px;
 }
 
-button {
 
-  padding: 16px 30px;
-  background-color: #966fd6;
-  color: white;
-  border: none;
-  border-radius: 1cap;
-  cursor: pointer;
-  outline: 1px solid #000000;
-  font-size: 15px;
-}
-
-button:hover {
-  background-color: #555;
-}
 
 .login {
   display: flex;
@@ -771,171 +830,150 @@ textarea {
 
 
 
-
-
-
-
-
-
-
-
-
 /* Forum CSS*/
 
+/* Container styling */
 .forum {
-  padding-top: 20px;
-  padding-left: 75px;
-  padding-right: 75px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  
 }
 
 .container1 {
-
-  margin: 35px;
-  padding: 40px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-
+  background-color: #fff;
+  border-radius:10px;
 }
 
-h1 {
-  text-align: center;
-  background: linear-gradient(to right, navy, purple);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Heading */
+.forum h1, .forum h2 {
+  color: #000000;
   text-align: center;
 }
 
+/* Post form styling */
 .post-form {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  /* Center-aligns the elements inside */
-  text-align: start;
-  /* Center-aligns text within the container */
-}
-
-.post-form button {
-  align-items: center;
-}
-
-
-.posts-section {
-  margin-top: 30px;
-}
-
-.post-form h2 {
-  width: 100%;
-  text-align: center;
-  /* Center-aligns the "Create a New Post" text */
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  /* Optional: Add spacing below the heading */
 }
 
+/* Input and textarea styling */
+.post-form input,
 .post-form textarea {
-  width: 130%;
-  /* Full width of the container */
-  height: 100px;
-  font-size: 16px;
-  text-align: left;
-  /* Align text inside the field to the left */
-  padding: 8px;
-  /* Add padding for a better look */
-  box-sizing: border-box;
-  /* Ensure padding does not affect the width */
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.post-form input {
-  width: 50%;
-  /* Full width of the container */
-  font-size: 16px;
-  text-align: left;
-  /* Align text inside the field to the left */
-  padding: 8px;
-  /* Add padding for a better look */
-  box-sizing: border-box;
-  /* Ensure padding does not affect the width */
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-
-.post-form button {
-  width: 20%;
+  width: 100%;
+  margin-bottom: 10px;
   padding: 10px;
-  background-color: #28a745;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Button styling */
+.create-post-section {
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+.postbutton {
+  background-color: #f568f5;
+  position:static;
   color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
-
+  float:right;
 }
 
-button:hover {
-  background-color: #2d00b3;
+.postbutton:hover {
+  background-color: #d808c7;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.post-form {
+  margin-top: 20px;
+  padding: 40px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.posts-section li {
-  background-color: #f9f9f9;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.forumul {
+  display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+
+/* Posts section styling */
+.posts-section {
+  margin-bottom: 20px;
+}
+
+/* Post card styling */
+.post-item {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    margin: 10px;
+    text-align: center;
 }
 
 .post-author {
   font-weight: bold;
+  color: #e979e0;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
 }
 
 .post-content {
-  margin-top: 5px;
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 16px;
 }
 
-.like-Text {
-  color: #000000;
-}
-
+/* Like button styling */
 .like-container {
-  display: flex;
-  justify-content: end;
-  margin-top: 50px;
+  text-align: center;
 }
 
 .like-btn {
-  background-color: #d3dfdf;
-  border: 1px solid #000000;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.like-btn .like-icon {
-  margin-right: 10px;
-  font-size: 24px;
-  color: #b9e9d1;
-  /* Default color */
-  transition: color 0.3s ease;
+.like-btn.liked {
+  background-color: #e760e0;
+  color: #fff;
 }
 
-.like-btn.liked {
-  background-color: #008829;
-  /* Button background changes when liked */
+.like-icon {
+  margin-right: 5px;
 }
+
+.like-btn:hover {
+  background-color: #e99cd6;
+}
+
 
 .left-align {
   text-align: left;
@@ -950,10 +988,16 @@ ul {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  /* Use Flexbox for layout */
+  display: flex;
+  flex-direction: column;
+  height: 80vh; /* Adjust height as needed */
 }
 
 .chatbot-messages {
-  max-height: 300px;
+  flex: 1; /* Let messages take up most of the space */
+  max-height: calc(100% - 100px); /* Adjust for dynamic sizing */
   overflow-y: auto;
   margin-bottom: 15px;
 }
@@ -978,7 +1022,10 @@ ul {
 
 .chatbot-input {
   display: flex;
-  gap: 8px;
+  gap: 20px;
+
+  /* Push input box to the bottom */
+  margin-top: auto;
 }
 
 .chatbot-input input {
@@ -999,6 +1046,24 @@ ul {
 
 .chatbot-input button:hover {
   background-color: #2d00b3;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .chatbot-container {
+    width: 100%;
+    height: 90vh;
+  }
+
+  .chatbot-input input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .chatbot-input button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
 }
 
 /*About Page*/
@@ -1186,26 +1251,47 @@ ul {
 }
 
 .suggestions {
-  display: inline-flex;
-  gap: 10px;
+  display: flex;            /* Use flexbox */
+  justify-content: center;  /* Center horizontally */
+  align-items: center;      /* Center vertically */
+  gap: 10px;                /* Add spacing between buttons */
+  margin-bottom: 15px;      /* Add some space below suggestions */
+  margin-top: 15px;      /* Add some space below suggestions */
 }
 
 .suggestion-button {
-  padding: 8px;
-  cursor: pointer;
+  padding: 10px 20px;       /* Ensure buttons have consistent size */
   background-color: #007bff;
+  border: 1px solid #ddd;
   color: #fff;
-  border: none;
   border-radius: 5px;
+  cursor: pointer;
   text-align: center;
   font-size: 0.9em;
-  transition: background-color 0.2s;
-  gap: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .suggestion-button:hover {
   background-color: #2d00b3;
 }
+
+.intro-container {
+  display: flex;             /* Enable Flexbox */
+  flex-direction: column;    /* Stack items vertically */
+  align-items: center;       /* Center horizontally */
+  justify-content: center;   /* Center vertically */
+  text-align: center;        /* Center-align text inside */
+  margin-bottom: 20px;       /* Add space between intro and chat messages */
+}
+
+.animated-text {
+  margin-bottom: 15px;       /* Add spacing below the animated text */
+  font-size: 18px;           /* Adjust font size as needed */
+  font-weight: bold;         /* Make it visually distinct */
+  color: #333;             /* Ensure good contrast */
+  text-align: center;
+}
+
 
 /* Profile Content Styles */
 .profile-content {
