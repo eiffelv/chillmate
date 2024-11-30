@@ -55,7 +55,7 @@ def register():
 
 
 # Login API logic with session management
-@auth_bp.route('/register', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     data = request.json
     username = data.get("username")
