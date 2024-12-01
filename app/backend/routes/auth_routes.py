@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, session
-from chatbot.db_utils import MongoUtils
+from app.backend.chatbot.db_utils import MongoUtils
 from pymongo import MongoClient
 import os
 from flask_jwt_extended import (

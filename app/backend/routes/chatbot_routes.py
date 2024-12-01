@@ -1,7 +1,7 @@
 import os
 
-from chatbot.db_utils import MongoUtils
-from chatbot.generate_goals import GenerateGoal
+from app.backend.chatbot.db_utils import MongoUtils
+from app.backend.chatbot.generate_goals import GenerateGoal
 from flask import Blueprint, jsonify, request
 from langchain.chains import LLMChain
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
@@ -56,7 +56,7 @@ def generate_subtasks():
     logger.debug(input_text)
 
     if not input_text:
-        return jsonify({})
+        return jsonify({}), 400
 
     model_name = "accounts/fireworks/models/llama-v3p1-70b-instruct"
     provider_name = "fireworks"
@@ -80,7 +80,7 @@ def generate_subtasks():
         return jsonify({"error": "Failed to generate subtasks"}), 500
 
     logger.debug(parsed_output)
-    return jsonify(parsed_output)
+    return jsonify(parsed_output), 200
 
 
 @chatbot_bp.route('/generic_chat', methods=['POST'])
@@ -97,7 +97,7 @@ def chat():
     try:
         # Generate response using the chatbot
         response = conversation.predict(human_input=user_question)
-        return jsonify({"response": response})
+        return jsonify({"response": response}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -107,31 +107,29 @@ def find_similar_docs():
     """
     Find similar documents based on input text embeddings.
     """
-    # Ensure the request contains input text
-    input_text = request.json.get('input_text', "")
-    if not input_text:
-        return jsonify({"error": "Input text is required"}), 400
+    try:
+        input_text = request.json.get('input_text', "")
+        if not input_text:
+            return jsonify({"error": "Input text is required"}), 400
 
-    logger.debug(input_text)
+        logger.debug(input_text)
 
-    # Initialize MongoUtils for Resources collection
-    mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Resources')
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Resources')
+        input_text_emb = mongo_utils.generate_embeddings(input_text)
+        similar_docs = mongo_utils.find_similar_documents(input_text_emb, embedding_name="ResourceEmbedding")
 
-    # Generate embeddings for the input text
-    input_text_emb = mongo_utils.generate_embeddings(input_text)
+        formatted_docs = [
+            {
+                "Resource_title": doc.get("RecourseTitle", ""),
+                "Resource_link": doc.get("RecourseLink", ""),
+                "Resource_body": doc.get("ResourseBody", "")
+            }
+            for doc in similar_docs
+        ]
 
-    # Find similar documents using the generated embeddings
-    similar_docs = mongo_utils.find_similar_documents(input_text_emb, embedding_name="ResourceEmbedding")
+        logger.debug(formatted_docs)
+        return jsonify(formatted_docs), 200
 
-    # Format the documents for response
-    formatted_docs = [
-        {
-            "Resource_title": doc.get("RecourseTitle", ""),
-            "Resource_link": doc.get("RecourseLink", ""),
-            "Resource_body": doc.get("ResourseBody", "")
-        }
-        for doc in similar_docs
-    ]
-
-    logger.debug(formatted_docs)
-    return jsonify(formatted_docs)
+    except Exception as e:
+        logger.error(f"Error occurred: {e}")
+        return jsonify({"error": str(e)}), 500
