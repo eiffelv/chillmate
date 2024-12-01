@@ -11,6 +11,8 @@ const Chatbot = () => {
   const [typingMessage, setTypingMessage] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);  // Controls the visibility of the search bar
   const [showAnimatedText, setShowAnimatedText] = useState(true); // Controls the visibility of the animated text
+  const [showBubbles, setShowBubbles] = useState(false); //Ensure `showBubbles` is declared with useState
+  
   const messagesEndRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ const Chatbot = () => {
   // AnimatedText Component
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
-    const fullText = "Heello! Choose one of the options below to get started.";
+    const fullText = "Hello! Choose one of the options below to get started.";
 
 
     useEffect(() => {
@@ -113,10 +115,18 @@ const Chatbot = () => {
     setShowSearchBar(true);  // Show the search bar when a suggestion is clicked
     setShowAnimatedText(false); // Hide the animated text when a suggestion is clicked
 
+    if (suggestion === "General conversation.😊") 
+    {
+      const specialMessage = { text: "Hello! How is your day?", sender: "bot", special: "general-conversation" };
+    setMessages([...messages, specialMessage]);
+    } 
+    else
+    {
     getChatBot(suggestion).then((botResponse) => {
       simulateTyping(botResponse); // Display the chatbot response in the chat
     });
-  };
+    }
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') sendMessage();
@@ -126,12 +136,37 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typingMessage]);
 
+
+  useEffect(() => {
+    // Trigger bubbles only when the component mounts
+    setShowBubbles(true);
+  
+    // Set a timer to hide the bubbles after 2 minutes
+    const timer = setTimeout(() => {
+      setShowBubbles(false); // Hide bubbles after the specified time
+    }, 120000); // 2 minutes in milliseconds
+  
+    // Cleanup the timer on component unmount
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array ensures this runs only once on mount
+  
+
+//const bubbles = Array.from({ length: 80 }).map((_, index) => (
+  //<div key={index} className="bubble"></div>
+//));
+
   return (
     <div>
-      <div className="chatbot-container">
-        <h1>Chatbot</h1>
+        <div className="chatbot-container">
+         <h1>Chatbot</h1>
         {showAnimatedText && <AnimatedText />} {/* Only show AnimatedText if showAnimatedText is true */}
         <div className="chatbot-messages">
+           {/* Add bubbles as the background */}
+           {showBubbles && 
+    Array.from({ length: 80 }).map((_, index) => (
+      <div key={index} className="bubble"></div>
+    ))
+  }
           <div className="suggestions">
             {suggestions.map((suggestion, index) => (
               <button key={index} className="suggestion-button" onClick={() => handleSuggestionClick(suggestion)}>
@@ -153,7 +188,7 @@ const Chatbot = () => {
           <div className="chatbot-input">
             <input
               type="text"
-              placeholder="Type a message..."
+              placeholder="Type your message..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}

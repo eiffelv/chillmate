@@ -4,6 +4,9 @@ import { ReactComponent as Logo } from "./ChillMate.svg";
 import "./style.css";
 import { LoginContext } from "./LoginContext";  // Import the LoginContext
 
+
+
+
 export default function Navbar() {
   const { isLoggedIn, logout } = useContext(LoginContext);  // Get login state and logout function
   const navigate = useNavigate();
