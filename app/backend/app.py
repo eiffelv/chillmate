@@ -17,6 +17,9 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
     load_dotenv()
 
+    # Set Temporary Secret Key
+    app.secret_key = os.urandom(24)
+
     # Enable CORS
     frontend_origin = os.getenv("FRONTEND_ORIGIN")
     CORS(app, origins=[frontend_origin], supports_credentials=True)

@@ -23,7 +23,7 @@ function Login() {
         event.preventDefault();
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/login`, {
+            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/login`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {

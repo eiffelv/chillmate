@@ -19,7 +19,7 @@ const Forum = () => {
           //event.preventDefault();  // Prevents the default form submission behavior
         
           const token = localStorage.getItem('accessToken');
-          const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/getForum`, {
+          const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/forum/getForum`, {
               headers: {
                   'Authorization': `Bearer ${token}`
               }
@@ -49,7 +49,7 @@ const Forum = () => {
       const token = localStorage.getItem('accessToken');
     
       try {
-        const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/createForum`, {
+        const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/forum/createForum`, {
           method: "POST",
           credentials: 'include',
           headers: {

@@ -42,7 +42,7 @@ const Register = () => {
         console.log("bangsat");
         event.preventDefault();
         try {
-            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/register`, {
+            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
