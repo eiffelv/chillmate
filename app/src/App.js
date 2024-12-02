@@ -8,7 +8,7 @@ import About from "./components/about.js";
 import Resources from "./components/resources.js";
 import Chatbot from "./components/chatbot.js";
 import Journal from "./components/journal.js";
-import Profile from "./components/Profile.js";
+import Profile from "./components/profile.js";
 import Navbar from "./components/navbar.js";
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LoginProvider } from "./components/LoginContext";  // Import LoginProvider for global state

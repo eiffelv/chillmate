@@ -20,7 +20,7 @@ const Chatbot = () => {
   // AnimatedText Component
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
-    const fullText = "Hello! Choose one of the options below to get started.";
+    const fullText = "Heello! Choose one of the options below to get started.";
 
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const Chatbot = () => {
         } else {
           clearInterval(interval);
         }
-      }, 70); // Adjust speed as needed
+      }, 40); // Adjust speed as needed
 
       return () => clearInterval(interval); // Cleanup on unmount
     }, []);
@@ -144,7 +144,7 @@ const Chatbot = () => {
     // Set a timer to hide the bubbles after 2 minutes
     const timer = setTimeout(() => {
       setShowBubbles(false); // Hide bubbles after the specified time
-    }, 120000); // 2 minutes in milliseconds
+    }, 5000); // 2 minutes in milliseconds
   
     // Cleanup the timer on component unmount
     return () => clearTimeout(timer);
