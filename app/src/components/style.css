@@ -3,7 +3,7 @@ body {
   /* border-style: outset; */
   font-size: 20px;
   font-family: Arial, sans-serif;
-  background-image: linear-gradient(to right,#afaaff, #f7ccff);
+  background-image: linear-gradient(to right, #afaaff, #f7ccff);
   align-content: start;
 
 }
@@ -21,13 +21,13 @@ body {
 }
 
 .containerHome p {
-font-size: 40px;
+  font-size: 40px;
 }
 
 .containerHome h5 {
   font-size: 3em;
   font-weight: 200;
-  color:#025816;
+  color: #025816;
 }
 
 .fade-in {
@@ -39,6 +39,7 @@ font-size: 40px;
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -51,8 +52,12 @@ font-size: 40px;
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Pulsing animation for button */
@@ -60,9 +65,11 @@ font-size: 40px;
   0% {
     box-shadow: 0 0 0px rgba(237, 164, 226, 0.7);
   }
+
   50% {
     box-shadow: 0 0 15px rgba(238, 97, 214, 0.7);
   }
+
   100% {
     box-shadow: 0 0 0px rgba(222, 38, 198, 0.7);
   }
@@ -71,7 +78,8 @@ font-size: 40px;
 .pulse-button {
   padding: 12px 24px;
   font-size: 1rem;
-  background-color: #e693ec; /* Adjust color as desired */
+  background-color: #e693ec;
+  /* Adjust color as desired */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -91,7 +99,8 @@ font-size: 40px;
 }
 
 .missionStatement h2 {
-  color: #a09d05; /* Adjust color for emphasis */
+  color: #a09d05;
+  /* Adjust color for emphasis */
   font-size: 2em;
 }
 
@@ -115,6 +124,7 @@ font-size: 40px;
     opacity: 0;
     transform: translateX(-100%);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -133,13 +143,18 @@ font-size: 40px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 0; /* Initially hidden */
-  transform: translateX(-100%); /* Start off-screen to the left */
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  /* Initially hidden */
+  transform: translateX(-100%);
+  /* Start off-screen to the left */
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
 .feature.animate {
-  animation: slideInFromLeft 1.8s forwards; /* Apply animation when the class is added */
+  animation: slideInFromLeft 1.8s forwards;
+  /* Apply animation when the class is added */
 }
 
 .feature h4 {
@@ -160,7 +175,7 @@ font-size: 40px;
   justify-content: center;
   padding: 50px;
   align-items: center;
-  background-color: #DEDDFF;
+  background-color: #deddff;
   /* Optional: background color */
 }
 
@@ -226,7 +241,8 @@ font-size: 40px;
 
 .name {
   display: flex;
-  gap: 1rem; /* Optional: Space between the fields */
+  gap: 1rem;
+  /* Optional: Space between the fields */
 }
 
 input[type="text"],
@@ -263,30 +279,43 @@ input[type="email"] {
 }
 
 .input-group input::placeholder {
-  font-size: 14px; /* Adjust font size */
-  color: #888; /* Adjust placeholder color */
-  font-style: italic; /* Example: italic style */
-  font-weight: normal; /* Adjust font weight */
-  font-family: Arial, sans-serif; /* Specify font family */
+  font-size: 14px;
+  /* Adjust font size */
+  color: #888;
+  /* Adjust placeholder color */
+  font-style: italic;
+  /* Example: italic style */
+  font-weight: normal;
+  /* Adjust font weight */
+  font-family: Arial, sans-serif;
+  /* Specify font family */
 }
 
-.input-group input, select {
-  width: 125px; /* Set the width */
-  height: 30px; /* Set the height */
-  padding: 4px; /* Adjust padding */
-  font-size: 4px; /* Adjust font size for content */
-  border: 1px solid #ccc; /* Define border */
-  border-radius: 4px; /* Optional: Rounded corners */
-  box-sizing: border-box; /* Ensures padding doesn't affect total size */
+.input-group input,
+select {
+  width: 125px;
+  /* Set the width */
+  height: 30px;
+  /* Set the height */
+  padding: 4px;
+  /* Adjust padding */
+  font-size: 4px;
+  /* Adjust font size for content */
+  border: 1px solid #ccc;
+  /* Define border */
+  border-radius: 4px;
+  /* Optional: Rounded corners */
+  box-sizing: border-box;
+  /* Ensures padding doesn't affect total size */
 }
 
 .name-container {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
     
 }
 
-.label{
+.label {
   display: flex;
   flex-wrap: wrap;
 }
@@ -311,11 +340,13 @@ input[type="email"] {
 }
 
 .state-field option {
-  font-size: 10px; /* Changes the font size of the options */
+  font-size: 10px;
+  /* Changes the font size of the options */
 }
 
 .state-field {
-  font-size: 10px; /* Changes the font size of the select box */
+  font-size: 10px;
+  /* Changes the font size of the select box */
   height: auto;
 }
 
@@ -344,10 +375,9 @@ ul.a {
 }
 
 div.container {
-
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   margin: 35px;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 
@@ -424,7 +454,7 @@ input {
   display: flex;
   height: 100vh;
   /* Full viewport height */
-  background-color: #DEDDFF;
+  background-color: #deddff;
   /* Optional: background color */
 }
 
@@ -841,11 +871,12 @@ textarea {
 
 .container1 {
   background-color: #fff;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 /* Heading */
-.forum h1, .forum h2 {
+.forum h1,
+.forum h2 {
   color: #000000;
   text-align: center;
 }
@@ -881,13 +912,13 @@ textarea {
 
 .postbutton {
   background-color: #f568f5;
-  position:static;
+  position: static;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  float:right;
+  float: right;
 }
 
 .postbutton:hover {
@@ -904,9 +935,9 @@ textarea {
 
 
 .forumul {
-  display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 
@@ -918,17 +949,17 @@ textarea {
 
 /* Post card styling */
 .post-item {
-    width: 250px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-    margin: 10px;
-    text-align: center;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  margin: 10px;
+  text-align: center;
 }
 
 .post-author {
@@ -993,7 +1024,7 @@ textarea {
 
   background: #f9f9f9;
   width: 1000px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -1002,12 +1033,15 @@ textarea {
   /* Use Flexbox for layout */
   display: flex;
   flex-direction: column;
-  height: 80vh; /* Adjust height as needed */
+  height: 80vh;
+  /* Adjust height as needed */
 }
 
 .chatbot-messages {
-  flex: 1; /* Let messages take up most of the space */
-  max-height: calc(100% - 100px); /* Adjust for dynamic sizing */
+  flex: 1;
+  /* Let messages take up most of the space */
+  max-height: calc(100% - 100px);
+  /* Adjust for dynamic sizing */
   overflow-y: auto;
   margin-bottom: 15px;
   overflow: hidden;
@@ -1209,7 +1243,7 @@ textarea {
 
 /*About Page*/
 .radial-gradient-text {
-  background: Radial-gradient(to right, navy, );
+  background: Radial-gradient(to right, navy);
   /* Gradient colors */
   -webkit-background-clip: text;
   /* For Chrome and Safari */
@@ -1237,7 +1271,8 @@ textarea {
 
 .gradient-text2 {
   font-size: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: linear-gradient(to right, navy, purple);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1247,7 +1282,8 @@ textarea {
 
 .gradient-text3 {
   font-size: 24px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: linear-gradient(to right, navy, purple);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1256,7 +1292,8 @@ textarea {
 
 .gradient-text4 {
   font-size: 30px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: linear-gradient(to right, navy, purple);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1265,7 +1302,7 @@ textarea {
 }
 
 .highlighted-background {
-  background-color: #DEDDFF;
+  background-color: #deddff;
   padding: 15px;
   border-radius: 8px;
 }
@@ -1363,7 +1400,7 @@ textarea {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   font-size: 24px;
   border: none;
@@ -1392,16 +1429,23 @@ textarea {
 }
 
 .suggestions {
-  display: flex;            /* Use flexbox */
-  justify-content: center;  /* Center horizontally */
-  align-items: center;      /* Center vertically */
-  gap: 10px;                /* Add spacing between buttons */
-  margin-bottom: 15px;      /* Add some space below suggestions */
-  margin-top: 15px;      /* Add some space below suggestions */
+  display: flex;
+  /* Use flexbox */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  gap: 10px;
+  /* Add spacing between buttons */
+  margin-bottom: 15px;
+  /* Add some space below suggestions */
+  margin-top: 15px;
+  /* Add some space below suggestions */
 }
 
 .suggestion-button {
-  padding: 10px 20px;       /* Ensure buttons have consistent size */
+  padding: 10px 20px;
+  /* Ensure buttons have consistent size */
   background-color: #007bff;
   border: 1px solid #ddd;
   color: #fff;
@@ -1417,19 +1461,29 @@ textarea {
 }
 
 .intro-container {
-  display: flex;             /* Enable Flexbox */
-  flex-direction: column;    /* Stack items vertically */
-  align-items: center;       /* Center horizontally */
-  justify-content: center;   /* Center vertically */
-  text-align: center;        /* Center-align text inside */
-  margin-bottom: 20px;       /* Add space between intro and chat messages */
+  display: flex;
+  /* Enable Flexbox */
+  flex-direction: column;
+  /* Stack items vertically */
+  align-items: center;
+  /* Center horizontally */
+  justify-content: center;
+  /* Center vertically */
+  text-align: center;
+  /* Center-align text inside */
+  margin-bottom: 20px;
+  /* Add space between intro and chat messages */
 }
 
 .animated-text {
-  margin-bottom: 15px;       /* Add spacing below the animated text */
-  font-size: 18px;           /* Adjust font size as needed */
-  font-weight: bold;         /* Make it visually distinct */
-  color: #333;             /* Ensure good contrast */
+  margin-bottom: 15px;
+  /* Add spacing below the animated text */
+  font-size: 18px;
+  /* Adjust font size as needed */
+  font-weight: bold;
+  /* Make it visually distinct */
+  color: #333;
+  /* Ensure good contrast */
   text-align: center;
 }
 
@@ -1683,6 +1737,69 @@ select {
   padding-left: 20px;
 }
 
+/* General container styles */
+.resources {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+.resources_container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+/* General container styles */
+.columns {
+  display: grid;
+  grid-gap: 20px;
+  /* Space between columns */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* Dynamic column size */
+}
+/* Ensures a maximum of 2 columns */
+.columns {
+  grid-template-columns: repeat(2, 1fr);
+  /* Forces a max of 2 columns */
+}
+/* Responsive fallback: Stack in 1 column on smaller screens */
+@media (max-width: 600px) {
+  .columns {
+    grid-template-columns: 1fr;
+    /* Stacks all items into 1 column for smaller screens */
+  }
+}
+.column {
+  flex: 1;
+  /* Makes columns take equal space */
+  min-width: 300px;
+  /* Prevents columns from getting too narrow */
+}
+/* Styles for titles and links */
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin-bottom: 20px;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #555;
+}
 
 /*profile pge*/
 /*
