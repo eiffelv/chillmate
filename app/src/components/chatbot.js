@@ -32,7 +32,7 @@ const Chatbot = () => {
   // AnimatedText Component
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
-    const fullText = "Hallo! Choose one of the options below to get started.";
+    const fullText = "Heello! Choose one of the options below to get started.";
 
 
     useEffect(() => {
@@ -133,7 +133,7 @@ const Chatbot = () => {
     setShowSearchBar(true); // Show the search bar when a suggestion is clicked
     setShowAnimatedText(false); // Hide the animated text when a suggestion is clicked
 
-    if (suggestion === "General conversation.😊") 
+    if (suggestion.text === "General conversation.😊") 
     {
       const specialMessage = { text: "Hello! How is your day?", sender: "bot", special: "general-conversation" };
     setMessages([...messages, specialMessage]);
