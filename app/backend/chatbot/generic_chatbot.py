@@ -16,7 +16,7 @@ def main():
     """
 
     # Get Groq API key
-    groq_api_key = os.getenv('GROQ_API_KEY', "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")
+    groq_api_key = os.getenv('GROQ_API_KEY', "")
     model = 'llama3-8b-8192'
     # Initialize Groq Langchain chat object and conversation
     groq_chat = ChatGroq(
