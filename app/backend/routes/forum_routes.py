@@ -42,24 +42,29 @@ def create_forum():
     """
     Create a new forum post.
     """
-    data = request.json
-    current_user = get_jwt_identity()
+    try:
+        data = request.json
+        current_user = get_jwt_identity()
 
-    topic = data.get("topic")
-    text = data.get("content")
+        topic = data.get("topic")
+        text = data.get("content")
 
-    if not topic or not text:
-        return jsonify({"error": "Topic and content are required"}), 400
+        if not topic or not text:
+            return jsonify({"error": "Topic and content are required"}), 400
 
-    # Insert new post into the forum collection
-    new_post = {
-        "SFStateID": current_user,
-        "Topic": topic,
-        "Text": text,
-        "NoofLikes": 0
-    }
+        # Insert new post into the forum collection
+        new_post = {
+            "SFStateID": current_user,
+            "Topic": topic,
+            "Text": text,
+            "NoofLikes": 0
+        }
 
-    mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
-    mongo_utils.collection.insert_one(new_post)
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+        mongo_utils.collection.insert_one(new_post)
 
-    return jsonify({"message": "Post successfully added"}), 201
+        return jsonify({"message": "Post successfully added"}), 201
+
+    except Exception as e:
+        logger.error(f"Error in /createForum: {e}")
+        return jsonify({"error": str(e)}), 500
