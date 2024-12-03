@@ -9,19 +9,19 @@ import LoginPic from "./Chill.pic.jpg";
 import FlowerPic from "./lavender.jpg"
 
 function Login() {
-    const { login } = useContext(LoginContext);
-    const [user, setUser] = useState({
-        username: "",
-        password: ""
-    });
-    // console.log(user);
-    const [message, setMessage] = useState("");
-    const navigate = useNavigate();
+  const { login } = useContext(LoginContext);
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
+  console.log(user);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser({ ...user, [name]: value });
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
 
     // Enable Input and Button fields
     const enableFields = () => {
