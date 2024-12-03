@@ -113,7 +113,7 @@ const JournalPage = () => {
     return (
         <div className="journal">
             <div className="journal-page">
-                <h2>Journal</h2>
+                <h1>Journal</h1>
                 <input
                     type="text"
                     placeholder="Search journal..."
