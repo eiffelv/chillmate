@@ -1,8 +1,11 @@
-from app.backend.chatbot.db_utils import MongoUtils
+import os
+
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from loguru import logger
 from pymongo import MongoClient
-import os
+
+from app.backend.chatbot.db_utils import MongoUtils
 
 mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
@@ -10,22 +13,28 @@ client = MongoClient(mongo_uri)
 # Create a blueprint for forum routes
 forum_bp = Blueprint('forum', __name__)
 
+
 @forum_bp.route('/getForum', methods=['GET', 'POST'])
 @jwt_required()
 def get_forum():
     """
     Fetch forum posts, sorted by the latest.
     """
-    current_user = get_jwt_identity()
-    mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+    try:
+        current_user = get_jwt_identity()
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
 
-    # Retrieve all forum posts, sorted by latest
-    result = [
-        {**doc, "_id": str(doc["_id"])}
-        for doc in mongo_utils.collection.find().sort("_id", -1)
-    ]
+        # Retrieve all forum posts, sorted by latest
+        result = [
+            {**doc, "_id": str(doc["_id"])}
+            for doc in mongo_utils.collection.find().sort("_id", -1)
+        ]
 
-    return jsonify(result)
+        return jsonify(result), 200
+    except Exception as e:
+        logger.error(f"Error fetching forum posts: {e}")
+        return jsonify({"error": str(e)}), 500
+
 
 @forum_bp.route('/createForum', methods=['POST'])
 @jwt_required()
