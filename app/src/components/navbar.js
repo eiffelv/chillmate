@@ -9,7 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch(`${process.env.REACT_APP_FLASK_URI}/logout`, {
+    await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/logout`, {
       method: "POST",
       credentials: "include",
     });
