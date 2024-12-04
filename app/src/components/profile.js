@@ -39,6 +39,47 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
 
+  const getProfileData = async (e) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/getProfile`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          //body: JSON.stringify(newJournal),
+        }
+      );
+
+      const user = await response.json();
+      console.log(user);
+
+      setProfile({
+        username: user.Username,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        occupation: user.Occupation,
+        age: user.Age,
+        phoneNumber: user.PhoneNum,
+        address1: user.Address,
+        address2: user.Address,
+        state: "California",
+        city: "San Francisco",
+        sfsuId: user.SFStateID,
+        sfsuEmail: user.Email,
+        EmergencycontactfirstName: "John",
+        EmergencycontactlastName: "Doe",
+        emergencyContactNumber: "9110000000",
+        emergencyemail: user.EmergencyContactEmail,
+        relationship: "Father",
+        mood: "neutral",
+      });
+    } catch (error) {}
+  };
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -61,10 +102,16 @@ export default function Profile() {
     setMood(newMood);
   };
 
+  //function that call api to get profile data
+  useEffect(() => {
+    console.log("getting profile");
+    getProfileData();
+  }, []);
+
   return (
     <div className="profile">
       <div className="profile-container">
-        <div class="strip"></div>
+        <div className="strip"></div>
         {/* Edit/Save Button */}
         <div className="button-container">
           {!isEditing ? (
