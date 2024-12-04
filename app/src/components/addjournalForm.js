@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddJournalForm = ({ onAddEntry, onClose }) => {
   const [title, setTitle] = useState("");
@@ -20,7 +20,15 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
     }
   };
 
-  const colors = ["#FFCDD2", "#C8E6C9", "#BBDEFB", "#FFECB3", "#D1C4E9", "#B3E5FC", "#FFF9C4"];
+  const colors = [
+    "#FFCDD2",
+    "#C8E6C9",
+    "#BBDEFB",
+    "#FFECB3",
+    "#D1C4E9",
+    "#B3E5FC",
+    "#FFF9C4",
+  ];
 
   return (
     <div className="add-journal-form">
@@ -54,10 +62,10 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
                 type="button"
                 style={{
                   backgroundColor: c,
-                  border: color === c ? '2px solid #000' : '1px solid #ddd',
-                  width: '30px',
-                  height: '30px',
-                  cursor: 'pointer',
+                  border: color === c ? "2px solid #000" : "1px solid #ddd",
+                  width: "30px",
+                  height: "30px",
+                  cursor: "pointer",
                 }}
                 onClick={() => setColor(c)}
               />
@@ -65,7 +73,9 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
           </div>
         </div>
         <button type="submit">Save</button>
-        <button type="button" onClick={onClose}>Cancel</button>
+        <button type="button" onClick={onClose}>
+          Cancel
+        </button>
       </form>
     </div>
   );

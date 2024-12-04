@@ -1,7 +1,7 @@
-name: Vercel Preview Deployment Frontend
+name: Vercel React - Preview
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FRONTEND }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_REACT }}
 on:
   push:
     branches-ignore:
@@ -10,7 +10,7 @@ on:
       - 'app/**'
       - '!app/backend/**'
 jobs:
-  Deploy-Preview:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,6 +22,11 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: echo "DEPLOY_URL=$(vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
+      - name: Error Workflow if No Deployment URL
+        if: ${{ env.DEPLOY_URL == '' }}
+        run: |
+          echo "::error::No Deployment URL found, errors must exist while deploying."
+          exit 1
       - name: Send Deployment Notification to Discord
         if: ${{ env.DEPLOY_URL != '' }}
         run: |
@@ -33,5 +38,5 @@ jobs:
           BRANCH_NAME=${{ github.ref_name }}
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"\n\n🚀 **New PREVIEW Frontend deployment successful!**\n\n🔗 Preview Link: $DEPLOYMENT_URL\n\n📜 Commit: [$COMMIT_HASH_SHORT](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)\n📝 $COMMIT_USER - $COMMIT_MESSAGE\n🌿 Branch: $BRANCH_NAME\"}" \
+          -d "{\"content\": \"## 🚀 Deployed React!\n\n🔗 **Preview Link**: $DEPLOYMENT_URL\n\n📜 *Commit*: [$COMMIT_HASH_SHORT](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)\n📝 $COMMIT_USER - $COMMIT_MESSAGE\n🌿 Branch: $BRANCH_NAME\"}" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
