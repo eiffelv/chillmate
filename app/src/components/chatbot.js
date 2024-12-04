@@ -23,7 +23,7 @@ const Chatbot = () => {
   const [showSearchBar, setShowSearchBar] = useState(false); // Controls the visibility of the search bar
   const [showAnimatedText, setShowAnimatedText] = useState(true); // Controls the visibility of the animated text
   const [showBubbles, setShowBubbles] = useState(false); //Ensure `showBubbles` is declared with useState
-  
+
   const messagesEndRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,6 @@ const Chatbot = () => {
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
     const fullText = "Heello! Choose one of the options below to get started.";
-
 
     useEffect(() => {
       let index = 0;
@@ -104,19 +103,19 @@ const Chatbot = () => {
       console.error("simulateTyping received undefined text.");
       return;
     }
-  
+
     setTypingMessage("");
     let index = 0;
     const typingInterval = setInterval(() => {
       const currentChar = text.charAt(index);
-  
+
       if (currentChar === "\n") {
         setTypingMessage((prevText) => prevText + "\n");
       } else {
         setTypingMessage((prevText) => prevText + currentChar);
       }
       index++;
-  
+
       if (index === text.length) {
         clearInterval(typingInterval);
         setMessages((prevMessages) => [
@@ -127,24 +126,24 @@ const Chatbot = () => {
       }
     }, 10);
   };
-  
 
   const handleSuggestionClick = (suggestion) => {
     setShowSearchBar(true); // Show the search bar when a suggestion is clicked
     setShowAnimatedText(false); // Hide the animated text when a suggestion is clicked
 
-    if (suggestion.text === "General conversation.😊") 
-    {
-      const specialMessage = { text: "Hello! How is your day?", sender: "bot", special: "general-conversation" };
-    setMessages([...messages, specialMessage]);
-    } 
-    else
-    {
-    getChatBot(suggestion).then((botResponse) => {
-      simulateTyping(botResponse); // Display the chatbot response in the chat
-    });
+    if (suggestion.text === "General conversation.😊") {
+      const specialMessage = {
+        text: "Hello! How is your day?",
+        sender: "bot",
+        special: "general-conversation",
+      };
+      setMessages([...messages, specialMessage]);
+    } else {
+      getChatBot(suggestion).then((botResponse) => {
+        simulateTyping(botResponse); // Display the chatbot response in the chat
+      });
     }
-  }
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") sendMessage();
@@ -154,39 +153,37 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typingMessage]);
 
-
   useEffect(() => {
     // Trigger bubbles only when the component mounts
     setShowBubbles(true);
-  
+
     // Set a timer to hide the bubbles after 2 minutes
     const timer = setTimeout(() => {
       setShowBubbles(false); // Hide bubbles after the specified time
     }, 5000); // 2 minutes in milliseconds
-  
+
     // Cleanup the timer on component unmount
     return () => clearTimeout(timer);
   }, []); // Empty dependency array ensures this runs only once on mount
-  
 
-//const bubbles = Array.from({ length: 80 }).map((_, index) => (
+  //const bubbles = Array.from({ length: 80 }).map((_, index) => (
   //<div key={index} className="bubble"></div>
-//));
+  //));
 
   return (
     <div>
-        <div className="chatbot-container">
-         <h1>Chatbot</h1>
-        {showAnimatedText && <AnimatedText />} {/* Only show AnimatedText if showAnimatedText is true */}
+      <div className="chatbot-container">
+        <h1>Chatbot</h1>
+        {showAnimatedText && <AnimatedText />}{" "}
+        {/* Only show AnimatedText if showAnimatedText is true */}
         <div className="chatbot-messages">
-           {/* Add bubbles as the background */}
-           {showBubbles && 
-    Array.from({ length: 80 }).map((_, index) => (
-      <div key={index} className="bubble"></div>
-    ))
-  }
+          {/* Add bubbles as the background */}
+          {showBubbles &&
+            Array.from({ length: 80 }).map((_, index) => (
+              <div key={index} className="bubble"></div>
+            ))}
           <div className="suggestions">
-          {suggestions.map((suggestion) => (
+            {suggestions.map((suggestion) => (
               <button
                 key={suggestion.id} // Use the unique ID as the key
                 className="suggestion-button"
@@ -204,7 +201,6 @@ const Chatbot = () => {
           {typingMessage && <div className="message bot">{typingMessage}</div>}
           <div ref={messagesEndRef} />
         </div>
-
         {/* Conditional rendering for search bar */}
         {showSearchBar && (
           <div className="chatbot-input">

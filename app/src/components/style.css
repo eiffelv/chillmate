@@ -1,11 +1,9 @@
 body {
-
   /* border-style: outset; */
   font-size: 20px;
   font-family: Arial, sans-serif;
   background-image: linear-gradient(to right, #afaaff, #f7ccff);
   align-content: start;
-
 }
 
 .homeDescription {
@@ -93,7 +91,6 @@ body {
   background-color: #d700a5;
 }
 
-
 .Tilte p {
   font-size: 1.5em;
 }
@@ -168,8 +165,6 @@ body {
   color: #555;
 }
 
-
-
 .register {
   display: flex;
   justify-content: center;
@@ -178,7 +173,6 @@ body {
   background-color: #deddff;
   /* Optional: background color */
 }
-
 
 .register-container {
   width: 900px;
@@ -200,10 +194,7 @@ body {
   /* Smoother, rounded corners */
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.747);
-
 }
-
-
 
 .register-form {
   display: flex;
@@ -268,8 +259,6 @@ input[type="email"] {
   /* Ensures the label aligns to the left */
 }
 
-
-
 .input-group label {
   font-size: 12px;
   margin-bottom: 5px;
@@ -312,14 +301,12 @@ select {
 .name-container {
   display: flex;
   gap: 20px;
-    
 }
 
 .label {
   display: flex;
   flex-wrap: wrap;
 }
-
 
 .name-container input {
   flex: 2;
@@ -360,18 +347,15 @@ select {
   font-size: 16px;
 }
 
-
 h1 {
   font-size: 60px;
   text-align: center;
 }
 
-
 ul.a {
   text-indent: 10px;
   list-style-type: circle;
   list-style-position: inside;
-
 }
 
 div.container {
@@ -379,7 +363,6 @@ div.container {
   margin: 35px;
   border-radius: 10px;
 }
-
 
 nav {
   border-style: none none inset none;
@@ -392,8 +375,6 @@ nav {
   /* Position at the top of the viewport */
   width: 99%;
   /* Make it span the entire width of the page */
-
-
 }
 
 nav ul {
@@ -414,18 +395,15 @@ nav ul li a {
   text-align: center;
   text-decoration: none;
   font-size: 20px;
-
 }
 
 .navbar li:last-child {
   /* Move the last item (Logout button) to the far right */
   margin-left: auto;
-
 }
 
 /*Using flexbox to try to make alignment easier*/
 .container {
-
   display: flex;
   /* Enable Flexbox */
   flex-direction: column;
@@ -438,7 +416,7 @@ nav ul li a {
 }
 
 /*For the Chillmate header*/
-.container> :first-child {
+.container > :first-child {
   margin: 0 auto;
   /* Center the first item */
 }
@@ -447,8 +425,6 @@ input {
   padding: 8px;
   margin-bottom: 10px;
 }
-
-
 
 .login {
   display: flex;
@@ -462,17 +438,16 @@ input {
   background-color: #ffffff;
   padding: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 500px;
+  width: 50%;
   text-align: center;
 }
 
 .login-container h2 {
   margin-bottom: 20px;
-
 }
 
 .login-container input {
-  width: 50%;
+  width: 87%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #5868fe;
@@ -485,6 +460,7 @@ input {
   color: white;
   border: none;
   padding: 10px;
+  margin: 10px;
   width: 230px;
   border-radius: 5px;
   cursor: pointer;
@@ -504,7 +480,6 @@ input {
   cursor: pointer;
   border-radius: 5px;
   font-size: 18px;
-
 }
 
 .logout-button:hover {
@@ -523,7 +498,6 @@ input {
   border-radius: 5px;
   font-size: 18px;
   background-color: #966fd6;
-
 }
 
 .login-button:hover {
@@ -568,7 +542,6 @@ nav ul li:last-child {
   display: none;
 }
 
-
 /*About US*/
 
 .content-section {
@@ -602,7 +575,6 @@ nav ul li:last-child {
 }
 
 .left-column img[src*="ss5"] {
-
   align-items: center;
   position: absolute;
   top: 60px;
@@ -613,7 +585,6 @@ nav ul li:last-child {
   /* Adjust width as per your requirement */
   height: 450px;
   /* Adjust height as per your requirement */
-
 }
 
 .gradient-text {
@@ -632,7 +603,7 @@ nav ul li:last-child {
 /* Main profile container - Center the content */
 /* Center the profile container on the page */
 /* Main profile container - Center the content */
- 
+
 .profile {
   display: flex;
   justify-content: center;
@@ -644,13 +615,15 @@ nav ul li:last-child {
   background: linear-gradient(to right, rgb(194, 182, 240), rgb(232, 179, 232));
   position: relative;
   overflow: hidden;
-  
 }
 
 /* Profile container styling */
 .profile-container {
-  background: 
-    linear-gradient(to bottom, #7c32eb 90px, rgb(244, 240, 244) 50px); /* Strip color and container color */
+  background: linear-gradient(
+    to bottom,
+    #7c32eb 90px,
+    rgb(244, 240, 244) 50px
+  ); /* Strip color and container color */
   padding-left: 10px;
   padding-left: 10px;
   border-radius: 8px;
@@ -662,18 +635,11 @@ nav ul li:last-child {
   position: relative;
 }
 
-
-
-
-
-
 .button-container {
-  
   position: absolute;
   top: 10px;
   right: 10px;
   padding-top: 30px;
-  
 }
 
 .edit-button,
@@ -687,7 +653,6 @@ nav ul li:last-child {
   border-radius: 5px;
   /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
   transition: background-color 0.3s ease;
-  
 }
 
 .edit-button:hover,
@@ -695,17 +660,8 @@ nav ul li:last-child {
   background-color: #e2a8ee;
 }
 
-
-
-
-
-
-
-
-
-
- /* Mood tracker styling */
- /* Mood tracker styling */
+/* Mood tracker styling */
+/* Mood tracker styling */
 .mood-tracker-container {
   display: flex;
   justify-content: center; /* Center the mood emoji */
@@ -724,10 +680,6 @@ nav ul li:last-child {
   text-align: center;
 }
 
-
-
-
-
 /* Profile name and description */
 .profile-header {
   margin-bottom: 20px; /* Add space below header */
@@ -736,21 +688,19 @@ nav ul li:last-child {
 
 .profile-header h3 {
   margin: 5px 0;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 24px; /* Slightly larger name text */
   font-weight: bold;
   color: #6200ee; /* Purple accent color */
 }
 
-.profile-details-heading{
+.profile-details-heading {
   font-size: 18px;
   font-weight: bold;
   margin-top: 30px; /* Space between profile and details */
   padding-left: 10px;
-  font-family:'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   text-align: left;
-
-
 }
 
 /* Row layout */
@@ -763,17 +713,15 @@ nav ul li:last-child {
   padding-left: 15px;
   padding-top: 15px;
   padding-bottom: 6px;
-  
+
   overflow: hidden;
   box-sizing: border-box;
-
- 
 }
 
 .row p {
   margin: 0; /* Remove default paragraph margins */
   font-size: 13px; /* Adjust font size */
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: #333; /* Text color */
   line-height: 1.4; /* Improve readability */
   /* Allow items to take full width and avoid crossing */
@@ -795,8 +743,9 @@ nav ul li:last-child {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); /* Light shadow for separation */
   padding-left: 10px;
   padding: 2px;
-  padding-right: 0.0px;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-right: 0px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 /* Responsive adjustments */
 @media (max-width: 400px) {
@@ -816,15 +765,13 @@ nav ul li:last-child {
   }
 }
 
-.emergency-details-heading{
+.emergency-details-heading {
   font-size: 18px;
   font-weight: bold;
   margin-top: 30px; /* Space between profile and details */
   padding-left: 10px;
-  font-family:'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   text-align: left;
-
-
 }
 
 .emergency-details {
@@ -836,7 +783,8 @@ nav ul li:last-child {
 }
 
 /* Editable Fields */
-input[type="text"], textarea {
+input[type="text"],
+textarea {
   border: 1px solid #ccc; /* Border for input fields */
   padding: 8px; /* Padding inside input fields */
   font-size: 14px; /* Keep the font size same as regular text */
@@ -848,7 +796,8 @@ input[type="text"], textarea {
   box-sizing: border-box; /* Include padding in width calculation */
 }
 
-input[type="text"]:focus, textarea:focus {
+input[type="text"]:focus,
+textarea:focus {
   outline: none;
   border-color: #6200ee; /* Purple border color on focus */
   background-color: #fff; /* White background on focus */
@@ -859,15 +808,12 @@ textarea {
   min-height: 80px; /* Set minimum height for textareas */
 }
 
-
-
 /* Forum CSS*/
 
 /* Container styling */
 .forum {
   padding: 20px;
   font-family: Arial, sans-serif;
-  
 }
 
 .container1 {
@@ -912,18 +858,28 @@ textarea {
 }
 
 .postbutton {
-  background-color: #f568f5;
-  position: static;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #4caf50;
   color: white;
-  padding: 10px 20px;
+  font-size: 24px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  /* Adds a slight shadow */
+  transition: transform 0.2s ease;
 }
 
 .postbutton:hover {
   background-color: #d808c7;
+  transform: scale(1.1);
 }
 
 .post-form {
@@ -934,14 +890,11 @@ textarea {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-
 .forumul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-
 
 /* Posts section styling */
 .posts-section {
@@ -1006,7 +959,6 @@ textarea {
   background-color: #e99cd6;
 }
 
-
 .left-align {
   text-align: left;
 }
@@ -1022,7 +974,6 @@ textarea {
 }
 
 .chatbot-container {
-
   background: #f9f9f9;
   width: 1000px;
   margin: 20px auto;
@@ -1048,11 +999,14 @@ textarea {
   overflow: hidden;
 }
 
-
-
 .bubble {
   position: absolute; /* Positioning relative to .chatbot-messages */
-  background-color: rgba(235, 151, 217, 0.6); /* Semi-transparent white for bubbles */
+  background-color: rgba(
+    235,
+    151,
+    217,
+    0.6
+  ); /* Semi-transparent white for bubbles */
   border-radius: 50%;
   animation: bubble-animation 10s infinite ease-in-out;
   pointer-events: none; /* Prevents bubbles from blocking user interactions */
@@ -1167,7 +1121,6 @@ textarea {
   }
 }
 
-
 .message {
   padding: 10px;
   margin: 5px 0;
@@ -1240,7 +1193,6 @@ textarea {
     padding: 8px 10px;
   }
 }
-
 
 /*About Page*/
 .radial-gradient-text {
@@ -1412,7 +1364,6 @@ textarea {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   /* Adds a slight shadow */
   transition: transform 0.2s ease;
-  /* Adds a hover effect */
 }
 
 .add-journal-button:hover {
@@ -1487,7 +1438,6 @@ textarea {
   /* Ensure good contrast */
   text-align: center;
 }
-
 
 /* Profile Content Styles */
 .profile-content {
@@ -1600,7 +1550,7 @@ select {
 }
 
 .emoji-tracker .mood-selector {
-  display:inline-flex;
+  display: inline-flex;
   gap: 10px; /* Add spacing between buttons */
 }
 
@@ -1611,7 +1561,9 @@ select {
   padding: 10px 20px; /* Add some padding */
   font-size: 24px; /* Larger font size for emojis */
   cursor: pointer; /* Show pointer cursor on hover */
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth hover effects */
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease; /* Smooth hover effects */
 }
 
 .emoji-tracker .mood-selector button:hover {
@@ -2106,7 +2058,6 @@ select {
 .emergency-contact-details h4 {
   margin-top: 0;
 }*/
-
 
 /* Profile Layout 
 .profile {

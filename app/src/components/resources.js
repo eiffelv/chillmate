@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
-import "./ChillMateLogo.png"
+import "./ChillMateLogo.png";
 
 const resourcesData = [
   {
@@ -15,7 +15,7 @@ const resourcesData = [
           "- Dedicated to assisting students with their transition, wellness, and overall academic success.",
           "- Services provided include:",
           "\t • Degree planning, Choosing and registering for classes, Major exploration, Academic success strategies, Policy clarification and appeals",
-          "- Support is available both virtually and in-person through advising appointments and drop-in sessions."
+          "- Support is available both virtually and in-person through advising appointments and drop-in sessions.",
         ],
       },
 
@@ -24,7 +24,7 @@ const resourcesData = [
         url: "https://sfsustudentcenter.com/",
         description: [
           "- The Cesar Chavez Student Center is a non-profit supporting organization of San Francisco State University.",
-          "- The Cesar Chavez Student Center is located at the heart of campus and has been a dynamic hub of student activities since September 1975."
+          "- The Cesar Chavez Student Center is located at the heart of campus and has been a dynamic hub of student activities since September 1975.",
         ],
       },
     ],
@@ -40,7 +40,7 @@ const resourcesData = [
           "\t • Food assistance, Housing support, Financial crisis programs and referrals",
           "- Advocates for equitable access to:",
           "\t • Housing, food, medical care, and education",
-          "- Stands in solidarity with equality and social justice"
+          "- Stands in solidarity with equality and social justice",
         ],
       },
       {
@@ -51,7 +51,7 @@ const resourcesData = [
           "- Opportunities for healthy behaviors through:",
           "\t • Advocacy, events, workshops, and campaigns, Peer health leadership programs",
           "- Focus Areas: Alcohol and drug education, Mental health, Nutrition, Sexual and emotional wellness",
-          "- Achieves health equity to enhance academic, personal, and professional success."
+          "- Achieves health equity to enhance academic, personal, and professional success.",
         ],
       },
       {
@@ -61,7 +61,7 @@ const resourcesData = [
           "- Offers individual and group psychotherapy for:",
           "\t • Depression, Anxiety, Adjustment to life stressors, Relationship difficulties",
           "- Provides intake appointments to discuss concerns and explore therapy options.",
-          "- No obligation to continue therapy after the initial session."
+          "- No obligation to continue therapy after the initial session.",
         ],
       },
       {
@@ -85,28 +85,28 @@ const resourcesData = [
         url: "https://www.helpguide.org/",
         description: [
           "- HelpGuide.org is an independent nonprofit that runs one of the world’s leading mental health websites.",
-          "- Each month, millions of people from all around the world turn to us for trustworthy information they can use to improve their mental health and make healthy changes."
+          "- Each month, millions of people from all around the world turn to us for trustworthy information they can use to improve their mental health and make healthy changes.",
         ],
       },
       {
         name: "Active Minds",
         url: "https://www.activeminds.org/",
         description: [
-          "- Active Minds is the nation’s premier nonprofit organization supporting mental health awareness and education for young adults."
+          "- Active Minds is the nation’s premier nonprofit organization supporting mental health awareness and education for young adults.",
         ],
       },
       {
         name: "Mindful",
         url: "https://www.mindful.org/category/health/covid-resources/",
         description: [
-          "- Covid resources to navigate the pandemic stress-free. Explore COVID-19 coping tips, mindfulness exercises, and self-care articles curated for you."
+          "- Covid resources to navigate the pandemic stress-free. Explore COVID-19 coping tips, mindfulness exercises, and self-care articles curated for you.",
         ],
       },
       {
         name: "Hey Nod",
         url: "https://heynod.com/",
         description: [
-          "- Nod is the app for addressing college student loneliness and depression, bolstering social connection, and supporting mental health on campus."
+          "- Nod is the app for addressing college student loneliness and depression, bolstering social connection, and supporting mental health on campus.",
         ],
       },
     ],
@@ -124,7 +124,7 @@ const resourcesData = [
           "\t • Interpersonal relationships",
           "\t • Anxiety and depression",
           "\t • Pain and finances",
-          "\t • Alcohol or drug use"
+          "\t • Alcohol or drug use",
         ],
       },
       {
@@ -133,7 +133,7 @@ const resourcesData = [
         description: [
           "- SAMHSA’s National Helpline is free, confidential, and available 24/7, year-round.",
           "- Offers treatment referrals and information in English and Spanish.",
-          "- Supports individuals and families facing mental health or substance use disorders."
+          "- Supports individuals and families facing mental health or substance use disorders.",
         ],
       },
     ],
@@ -154,7 +154,11 @@ const Resources = ({ numberOfColumns }) => {
               <ul>
                 {section.items.map((item, itemIndex) => (
                   <li key={itemIndex}>
-                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {item.name}
                     </a>
                     <div>
