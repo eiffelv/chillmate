@@ -1,14 +1,29 @@
-from flask import Flask, request, jsonify, session
-from flask_cors import CORS
-from flask_session import Session
-import pymongo
-from pymongo import MongoClient
 import os
-from dotenv import load_dotenv
+
+import pymongo
 from chatbot.db_utils import MongoUtils
 from chatbot.generate_goals import GenerateGoal
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from dotenv import load_dotenv
+from flask import Flask, jsonify, request, session
+from flask_cors import CORS
+from flask_jwt_extended import (
+    JWTManager,
+    create_access_token,
+    get_jwt_identity,
+    jwt_required,
+)
+from flask_session import Session
+from langchain.chains import LLMChain
+from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+from langchain_core.messages import SystemMessage
+from langchain_core.prompts import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    MessagesPlaceholder,
+)
+from langchain_groq import ChatGroq
 from loguru import logger
+from pymongo import MongoClient
 
 # Initializing flask app
 app = Flask(__name__)
@@ -41,6 +56,35 @@ load_dotenv()
 
 mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
+
+# Setup global variables for chatbot
+groq_api_key = os.getenv('GROQ_API_KEY')
+model = 'llama3-8b-8192'groq_api_key = os.getenv('GROQ_API_KEY')
+groq_chat = ChatGroq(
+    groq_api_key=groq_api_key, 
+    model_name=model
+)
+
+system_prompt = 'You are a mental health assisstant chatbot for college going students and you are tasked with helping them by providing mental health assisstance and necesary tips.'
+conversational_memory_length = 8
+memory = ConversationBufferWindowMemory(k=conversational_memory_length, memory_key="chat_history", return_messages=True)
+
+# Construct a chat prompt template
+prompt = ChatPromptTemplate.from_messages(
+    [
+        SystemMessage(content=system_prompt),
+        MessagesPlaceholder(variable_name="chat_history"),
+        HumanMessagePromptTemplate.from_template("{human_input}"),
+    ]
+)
+
+# Initialize the conversation chain
+conversation = LLMChain(
+    llm=groq_chat,
+    prompt=prompt,
+    verbose=False,
+    memory=memory,
+)
 
 # Register API logic
 @app.route('/register', methods=['GET', 'POST'])
@@ -113,24 +157,6 @@ def logout():
     #session.clear()  # Clears all session data
     session.pop('user_id', None)
     return jsonify({"message": "User logged out successfully"}), 200
-
-# Find similar docs endpoint
-@app.route("/chatbot/find_sim_docs", methods=['GET', 'POST'])
-def find_similar_docs():
-    # if 'user_id' not in session:
-    #     return jsonify({"error": "Unauthorized"}), 401
-
-    inputText = request.json.get('input_text', "")
-    logger.debug(inputText)
-    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='Resources')
-
-    input_text_emb = mongoUtils.generate_embeddings(inputText)
-    similar_docs = mongoUtils.find_similar_documents(input_text_emb, embedding_name="ResourceEmbedding")
-
-    f_docs = [{"Resource_title": doc.get("RecourseTitle", ""), "Resource_link": doc.get("RecourseLink", ""), "Resource_body": doc.get("ResourseBody", "")} for doc in similar_docs]
-
-    logger.debug(f_docs)
-    return jsonify(f_docs)
 
 @app.route("/chatbot/generate_goal_tasks", methods=['GET', 'POST'])
 def generate_subtasks():
@@ -257,6 +283,25 @@ def getProfile():
         return jsonify({'error': 'user not found'})
 
 #-------------------------------
+
+@app.route('/chatbot/generic_chat', methods=['POST'])
+def chat():
+    """
+    Chat endpoint to handle user input and return chatbot responses.
+    Expects JSON input with a "user_question" key.
+    """
+    data = request.get_json()
+    user_question = data.get("user_question", "")
+
+    if not user_question:
+        return jsonify({"error": "Please provide a valid question."}), 400
+
+    try:
+        # Generate response using the chatbot
+        response = conversation.predict(human_input=user_question)
+        return jsonify({"response": response})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # Running app
