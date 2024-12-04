@@ -1,7 +1,7 @@
 import os
 
-from app.backend.chatbot.db_utils import MongoUtils
-from app.backend.chatbot.generate_goals import GenerateGoal
+from chatbot.db_utils import MongoUtils
+from chatbot.generate_goals import GenerateGoal
 from flask import Blueprint, jsonify, request
 from langchain.chains import LLMChain
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory

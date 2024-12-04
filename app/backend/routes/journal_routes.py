@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app.backend.chatbot.db_utils import MongoUtils
+from chatbot.db_utils import MongoUtils
 from loguru import logger
 from pymongo import MongoClient
 import os

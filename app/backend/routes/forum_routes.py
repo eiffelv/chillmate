@@ -5,7 +5,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from loguru import logger
 from pymongo import MongoClient
 
-from app.backend.chatbot.db_utils import MongoUtils
+from chatbot.db_utils import MongoUtils
 
 mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)

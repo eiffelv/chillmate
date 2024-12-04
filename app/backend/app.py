@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from app.backend.routes.auth_routes import auth_bp  # Import the auth blueprint
-from app.backend.routes.chatbot_routes import chatbot_bp  # Import the chatbot blueprint
-from app.backend.routes.forum_routes import forum_bp  # Import the forum blueprint
-from app.backend.routes.journal_routes import journal_bp  # Import the journal blueprint
+from routes.auth_routes import auth_bp  # Import the auth blueprint
+from routes.chatbot_routes import chatbot_bp  # Import the chatbot blueprint
+from routes.forum_routes import forum_bp  # Import the forum blueprint
+from routes.journal_routes import journal_bp  # Import the journal blueprint
 
 
 def create_app():

@@ -1,4 +1,4 @@
-from app.backend.chatbot.generate_embeddings import Embeddings
+from chatbot.generate_embeddings import Embeddings
 from pymongo import MongoClient
 import pymongo
 from typing import List, Dict
