@@ -1,250 +1,316 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import "./profile.css";
 
 export default function Profile() {
-    const [profile, setProfile] = useState({
-        firstName: "Sneha",
-        lastName: "Katturu",
-        occupation: "Student",
-        age: "",
-        phoneNumber: "123-456-7890",
-        address: "123 Market St, San Francisco",
-        sfsuId: "12345678",
-        sfsuEmail: "skatturu@sfsu.edu",
-        password: "",
-        confirmPassword: "",
-        emergencyemail: "",
+  const [profile, setProfile] = useState({
+    username: "Sneha Katturu",
+    firstName: "Sneha",
+    lastName: "Katturu",
+    occupation: "Student",
+    age: "24",
+    phoneNumber: "123-456-7890",
+    address1: "123 Market St, San Francisco",
+    address2: "Market St",
+    state: "California",
+    city: "San Francisco",
+    sfsuId: "12345678",
+    sfsuEmail: "skatturu@sfsu.edu",
+    EmergencycontactfirstName: "Anjali",
+    EmergencycontactlastName: "Chiruvandhulu",
+    emergencyContactNumber: "987-654-3210",
+    emergencyemail: "parent@gmail.com",
+    relationship: "Mother",
+    mood: "neutral",
+  });
 
-        emergencyContactNumber: "987-654-3210",
+  const moodEmoji = {
+    happy: "😊",
+    neutral: "😐",
+    sad: "😢",
+  };
 
-        relationship: "Parent"
-    });
+  const moodText = {
+    happy: "Happy",
+    neutral: "Neutral",
+    sad: "Sad",
+  };
 
-    const [editableFields, setEditableFields] = useState({
-        firstName: false,
-        lastName: false,
-        sfsuEmail: false,
-        sfsuId: false,
-        age: false,
-        address: false,
-        occupation: false,
-    });
+  const [mood, setMood] = useState("neutral");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedProfile, setEditedProfile] = useState({ ...profile });
 
-    const [mood, setMood] = useState("neutral");
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setProfile({ ...profile, [name]: value });
-    };
+  const handleSaveClick = () => {
+    setProfile(editedProfile);
+    setIsEditing(false);
+  };
 
-    const toggleEditable = (field) => {
-        setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedProfile({ ...editedProfile, [name]: value });
+  };
 
-    const moodEmoji = {
-        happy: "😊",
-        neutral: "😐",
-        sad: "😢",
-    };
+  const handleMoodChange = (newMood) => {
+    setEditedProfile({ ...editedProfile, mood: newMood });
+  };
 
-    const moodText = {
-        happy: "Happy",
-        neutral: "Neutral",
-        sad: "Sad",
-    };
+  const changeMood = (newMood) => {
+    setMood(newMood);
+  };
 
-
-    const getProfileData = async(e) => {
-        const token = localStorage.getItem('accessToken');
-        try {
-            const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/getProfile`, {
-                method: "POST",
-                credentials: 'include',
-                headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-                },
-                //body: JSON.stringify(newJournal),
-            });
-
-
-            const user =  await response.json();
-            console.log(user);
-
-            setProfile({
-                firstName: user.FirstName,
-                lastName: user.LastName,
-                phoneNumber: user.PhoneNum,
-                address: user.Address,
-                sfsuId: user.SFStateID,
-                sfsuEmail: user.Email
-             })
-
-        }
-        catch (error) {
-
-        }
-    }
-
-    //function that call api to get profile data
-    useEffect(() => {
-        console.log("getting profile");
-        getProfileData();
-    }, [])
-
-    return (
-        <div className="profile">
-            <div className="profile-container">
-                {/* Profile Content */}
-                <div className="profile-content">
-
-                    <h1>My Profile</h1>
-
-                    <div className="profile-card">
-                        <div className="profile-picture">
-                            <div className="circle">
-                                <span className="edit-icon">✎</span>
-                            </div>
-                            <div>
-                                <h3>{profile.firstName} {profile.lastName}</h3>
-                            </div>
-                        </div>
-                        <div className="profile-details">
-                            <form className="profile-form">
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label>First Name:</label>
-                                        <input
-                                            type="text"
-                                            name="firstName"
-                                            value={profile.firstName}
-                                            onChange={handleInputChange}
-                                            onDoubleClick={() => toggleEditable('firstName')}
-                                            readOnly={!editableFields.firstName}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Last Name:</label>
-                                        <input
-                                            type="text"
-                                            name="lastName"
-                                            value={profile.lastName}
-                                            onChange={handleInputChange}
-                                            onDoubleClick={() => toggleEditable('lastName')}
-                                            readOnly={!editableFields.lastName}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label>SFSU Email:</label>
-                                        <input
-                                            type="email"
-                                            name="sfsuEmail"
-                                            value={profile.sfsuEmail}
-                                            onChange={handleInputChange}
-                                            onDoubleClick={() => toggleEditable('sfsuEmail')}
-                                            readOnly={!editableFields.sfsuEmail}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>SFSU ID:</label>
-                                        <input
-                                            type="text"
-                                            name="sfsuId"
-                                            value={profile.sfsuId}
-                                            onChange={handleInputChange}
-                                            onDoubleClick={() => toggleEditable('sfsuId')}
-                                            readOnly={!editableFields.sfsuId}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label>Age:</label>
-                                        <input
-                                            type="text"
-                                            name="age"
-                                            value={profile.age}
-                                            onChange={handleInputChange}
-                                            onDoubleClick={() => toggleEditable('age')}
-                                            readOnly={!editableFields.age}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Occupation:</label>
-                                        <select
-                                            name="occupation"
-                                            value={profile.occupation}
-                                            onChange={handleInputChange}
-                                            onDoubleClick={() => toggleEditable('occupation')}
-                                            disabled={!editableFields.occupation}
-                                        >
-                                            <option value="Faculty">Faculty</option>
-                                            <option value="Student">Student</option>
-                                            <option value="Professor">Professor</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div className="form-group">
-                                    <label>Address:</label>
-                                    <input
-                                        type="text"
-                                        name="address"
-                                        value={profile.address}
-                                        onChange={handleInputChange}
-                                        onDoubleClick={() => toggleEditable('address')}
-                                        readOnly={!editableFields.address}
-                                    />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div className="mood-tracker-container">
-                        <div className="mood-tracker">
-                            <h3>Mood tracker</h3>
-                            <div className="Current Mood">
-                                Current Mood: {moodText[mood]}
-                            </div>
-                            <div className="emoji-tracker">
-                                {moodEmoji[mood]}
-                            </div>
-                        </div>
-
-                        <div className="emergency-contact-details">
-                            <h4>Emergency Contact Details</h4>
-                            <div className="form-group">
-                                <label>Contact Number:</label>
-                                <input
-                                    type="text"
-                                    name="contactnumber"
-                                    value={profile.emergencyContactNumber}
-                                    onChange={handleInputChange}
-                                    onDoubleClick={() => toggleEditable('emergencyContactNumber')}
-                                    readOnly={!editableFields.emergencyContactNumber}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Email:</label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    value={profile.emergencyemail}
-                                    onChange={handleInputChange}
-                                    onDoubleClick={() => toggleEditable('email')}
-                                    readOnly={!editableFields.emergencyemail}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="profile">
+      <div className="profile-container">
+        <div class="strip"></div>
+        {/* Edit/Save Button */}
+        <div className="button-container">
+          {!isEditing ? (
+            <button className="edit-button" onClick={handleEditClick}>
+              Edit
+            </button>
+          ) : (
+            <button className="save-button" onClick={handleSaveClick}>
+              Save
+            </button>
+          )}
         </div>
-    );
-}
 
+        {/* Mood Tracker */}
+        <div className="mood-tracker-container">
+          <div className="emoji-tracker">
+            {isEditing ? (
+              <div className="mood-selector">
+                <button onClick={() => handleMoodChange("happy")}>😊</button>
+                <button onClick={() => handleMoodChange("neutral")}>😐</button>
+                <button onClick={() => handleMoodChange("sad")}>😢</button>
+              </div>
+            ) : (
+              <span>{moodEmoji[profile.mood]}</span>
+            )}
+          </div>
+        </div>
+
+        {/* Profile Information */}
+        <div className="profile-header">
+          <h3>
+            {isEditing ? (
+              <input
+                type="text"
+                name="username"
+                value={editedProfile.username}
+                onChange={handleInputChange}
+              />
+            ) : (
+              profile.username
+            )}{" "}
+          </h3>
+        </div>
+
+        <div className="profile-details-heading">
+          <h4>Profile Details</h4>
+        </div>
+
+        <div className="profile-details">
+          <div className="row">
+            <p>
+              <strong>First Name:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="firstName"
+                  value={editedProfile.firstName}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.firstName
+              )}
+            </p>
+            <p>
+              <strong>Last Name:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="lastName"
+                  value={editedProfile.lastName}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.lastName
+              )}
+            </p>
+          </div>
+
+          <div className="row">
+            <p>
+              <strong>Address:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="address1"
+                  value={editedProfile.address1}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.address1
+              )}
+            </p>
+            <p>
+              <strong>Phone Number:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  value={editedProfile.phoneNumber}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.phoneNumber
+              )}
+            </p>
+          </div>
+
+          <div className="row">
+            <p>
+              <strong>State:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="state"
+                  value={editedProfile.state}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.state
+              )}
+            </p>
+            <p>
+              <strong>City:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="city"
+                  value={editedProfile.city}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.city
+              )}
+            </p>
+          </div>
+
+          <div className="row">
+            <p>
+              <strong>SFSU Email:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="state"
+                  value={editedProfile.sfsuEmail}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.sfsuEmail
+              )}
+            </p>
+            <p>
+              <strong>SFSU ID:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="city"
+                  value={editedProfile.sfsuId}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.sfsuId
+              )}
+            </p>
+          </div>
+        </div>
+
+        <div className="emergency-details-heading">
+          <h4>Emergency Details</h4>
+        </div>
+
+        <div className="emergency-details">
+          <div className="row">
+            <p>
+              <strong>First Name:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="EmergencycontactfirstName"
+                  value={editedProfile.EmergencycontactfirstName}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.EmergencycontactfirstName
+              )}
+            </p>
+            <p>
+              <strong>Last Name:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="EmergencycontactlastName"
+                  value={editedProfile.EmergencycontactlastName}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.EmergencycontactlastName
+              )}
+            </p>
+          </div>
+
+          <div className="row">
+            <p>
+              <strong>Contact:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="emergencyContactNumber"
+                  value={editedProfile.emergencyContactNumber}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.emergencyContactNumber
+              )}
+            </p>
+            <p>
+              <strong>Email:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="emergencyemail"
+                  value={editedProfile.emergencyemail}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.emergencyemail
+              )}
+            </p>
+          </div>
+
+          <div className="row">
+            <p>
+              <strong>Relationship:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="relationship"
+                  value={editedProfile.relationship}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                profile.relationship
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

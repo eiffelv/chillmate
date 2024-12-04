@@ -1,7 +1,7 @@
 name: Vercel React - Preview
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FRONTEND }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_REACT }}
 on:
   push:
     branches-ignore:
@@ -22,6 +22,11 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: echo "DEPLOY_URL=$(vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
+      - name: Error Workflow if No Deployment URL
+        if: ${{ env.DEPLOY_URL == '' }}
+        run: |
+          echo "::error::No Deployment URL found, errors must exist while deploying."
+          exit 1
       - name: Send Deployment Notification to Discord
         if: ${{ env.DEPLOY_URL != '' }}
         run: |
