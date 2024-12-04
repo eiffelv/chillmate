@@ -1,9 +1,21 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 
-test("renders learn react link", () => {
-  render(<App />);
-  // Check if the component renders without crashing
-  const appElement = screen.getByRole("navigation");
-  expect(appElement).toBeInTheDocument();
+// Mock IntersectionObserver before tests
+const mockIntersectionObserver = jest.fn();
+mockIntersectionObserver.mockImplementation(() => ({
+  observe: () => null,
+  unobserve: () => null,
+  disconnect: () => null
+}));
+window.IntersectionObserver = mockIntersectionObserver;
+
+test('renders home page', () => {
+  render(
+    <BrowserRouter>
+      <App router={false} />
+    </BrowserRouter>
+  );
+  expect(screen.getByText(/chillmate/i)).toBeInTheDocument();
 });

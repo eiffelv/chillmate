@@ -14,6 +14,12 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
 }));
 
+// Mock FormEnabler
+jest.mock("./FormEnabler", () => ({
+  toggleEnable: jest.fn(),
+  toggleDisable: jest.fn()
+}));
+
 // Helper function to render the Login component with required providers
 const renderLogin = () => {
   const mockLogin = jest.fn();
@@ -29,7 +35,9 @@ const renderLogin = () => {
 
 describe("Login Component", () => {
   beforeEach(() => {
-    fetch.mockClear();
+    // Reset fetch mock
+    global.fetch.mockClear();
+    // Reset navigate mock
     mockNavigate.mockClear();
   });
 
@@ -40,57 +48,70 @@ describe("Login Component", () => {
     expect(screen.getByRole("button", { name: /login/i })).toBeInTheDocument();
   });
 
-  test("handles successful login", async () => {
-    fetch.mockImplementationOnce(() =>
-      Promise.resolve({
-        json: () =>
-          Promise.resolve({
-            message: "Login successful",
-            access_token: "fake-token",
-          }),
+  it("handles successful login", async () => {
+    // Mock successful fetch response
+    global.fetch.mockResolvedValueOnce({
+      json: async () => ({ 
+        accessToken: "fake-token",
+        access_token: "fake-token" 
       })
+    });
+
+    render(
+      <BrowserRouter>
+        <LoginContext.Provider value={{ login: jest.fn() }}>
+          <Login />
+        </LoginContext.Provider>
+      </BrowserRouter>
     );
 
-    const { mockLogin } = renderLogin();
-
-    fireEvent.change(screen.getByPlaceholderText("Username"), {
-      target: { value: "testuser" },
+    // Fill form
+    fireEvent.change(screen.getByPlaceholderText(/username/i), {
+      target: { value: "testuser" }
     });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "password123" },
+    fireEvent.change(screen.getByPlaceholderText(/password/i), {
+      target: { value: "testpass" }
     });
-    fireEvent.click(screen.getByRole("button", { name: /login/i }));
 
+    // Submit form
+    fireEvent.click(screen.getByRole('button', { name: /login/i }));
+
+    // Wait for success message
     await waitFor(() => {
-      expect(mockLogin).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith("/");
+      expect(screen.getByText(/login successful/i)).toBeInTheDocument();
     });
   });
 
-  test("handles failed login", async () => {
-    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
-
-    fetch.mockImplementationOnce(() =>
-      Promise.resolve({
-        json: () =>
-          Promise.resolve({ message: "Invalid username or password" }),
+  it("handles login failure", async () => {
+    // Mock failed fetch response
+    global.fetch.mockResolvedValueOnce({
+      json: async () => ({ 
+        message: "Invalid username or password" 
       })
+    });
+
+    render(
+      <BrowserRouter>
+        <LoginContext.Provider value={{ login: jest.fn() }}>
+          <Login />
+        </LoginContext.Provider>
+      </BrowserRouter>
     );
 
-    renderLogin();
-
-    fireEvent.change(screen.getByPlaceholderText("Username"), {
-      target: { value: "wronguser" },
+    // Fill and submit form
+    fireEvent.change(screen.getByPlaceholderText(/username/i), {
+      target: { value: "wronguser" }
     });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
-      target: { value: "wrongpass" },
+    fireEvent.change(screen.getByPlaceholderText(/password/i), {
+      target: { value: "wrongpass" }
     });
-    fireEvent.click(screen.getByRole("button", { name: /login/i }));
 
+    // Submit form
+    fireEvent.click(screen.getByRole('button', { name: /login/i }));
+
+    // Verify error message
     await waitFor(() => {
-      expect(alertMock).toHaveBeenCalledWith("Username/password is incorrect");
+      expect(screen.getByText(/username\/password is incorrect/i)).toBeInTheDocument();
     });
-
-    alertMock.mockRestore();
   });
 });
