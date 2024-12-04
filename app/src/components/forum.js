@@ -120,7 +120,7 @@ const Forum = () => {
         <div className="posts-section">
           <h2>Posts</h2>
           <button className="postbutton" onClick={() => setShowForm(!showForm)}>
-            {showForm ? "Close" : "Create New Post"}
+            {showForm ? "Close" : "+"}
           </button>
           {/* Post Form */}
           <div className="create-post-section">
@@ -142,7 +142,7 @@ const Forum = () => {
                     required
                   />
                   <button className="postbutton" type="submit">
-                    Submit
+                    +
                   </button>
                 </form>
               </div>
