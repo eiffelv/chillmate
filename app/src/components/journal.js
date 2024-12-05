@@ -22,7 +22,7 @@ const JournalPage = () => {
       const token = localStorage.getItem("accessToken");
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_FLASK_URI}/getJournal`,
+          `${process.env.REACT_APP_FLASK_URI}/journal/getJournal`,
           {
             method: "POST",
             credentials: "include",
@@ -63,7 +63,7 @@ const JournalPage = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_FLASK_URI}/createJournal`,
+        `${process.env.REACT_APP_FLASK_URI}/journal/createJournal`,
         {
           method: "POST",
           credentials: "include",

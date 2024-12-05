@@ -3,7 +3,10 @@ from chatbot.db_utils import MongoUtils
 from pymongo import MongoClient
 import os
 from flask_jwt_extended import (
+    JWTManager,
     create_access_token,
+    get_jwt_identity,
+    jwt_required,
 )
 
 mongo_uri = os.getenv("MONGO_URI")
@@ -89,3 +92,32 @@ def logout():
     #session.clear()  # Clears all session data
     session.pop('user_id', None)
     return jsonify({"message": "User logged out successfully"}), 200
+
+# ----------- profile api
+@auth_bp.route('/getProfile', methods=['POST','GET'])
+@jwt_required() 
+def getProfile():
+    current_user = get_jwt_identity() 
+    mongoUtils = MongoUtils(client, db_name="chillmate", collection_name='user')  
+
+    user = mongoUtils.collection.find_one({'SFStateID': current_user})
+    # logger.debug(user)
+    result = {
+        "SFStateID": current_user,
+        "FirstName": user['FirstName'],
+        "LastName": user['LastName'],
+        "Address": user['Address'],
+        "Email": user['Email'],
+        "PhoneNum": user['PhoneNum'],
+        "Age": user['Age'],
+        "Occupation": user['Occupation'],
+        "Username": user['Username'],
+        "EmergencyContactEmail": user['EmergencyContactEmail']
+    }
+
+    if user:
+        return jsonify(result)
+    else:
+        return jsonify({'error': 'user not found'})
+
+#-------------------------------
