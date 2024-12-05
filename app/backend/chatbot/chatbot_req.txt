@@ -1,5 +1,7 @@
 pymongo==4.7.2
 google-generativeai==0.1.0rc1
-transformers==4.41.1
-torch==2.3.0
 numpy==1.26.4
+groq
+langchain==0.1.16
+langchain-core
+langchain-groq
