@@ -23,6 +23,7 @@ const Chatbot = () => {
   const [showSearchBar, setShowSearchBar] = useState(false); // Controls the visibility of the search bar
   const [showAnimatedText, setShowAnimatedText] = useState(true); // Controls the visibility of the animated text
   const [showBubbles, setShowBubbles] = useState(false); //Ensure `showBubbles` is declared with useState
+  const [currentId, setCurrentId] = useState("");
 
   const messagesEndRef = useRef(null);
 
@@ -39,7 +40,7 @@ const Chatbot = () => {
       const interval = setInterval(() => {
         if (index < fullText.length - 1) {
           setDisplayedText((prev) => prev + fullText[index]);
-          console.log(fullText[index]);
+          //console.log(fullText[index]);
           index++;
         } else {
           clearInterval(interval);
@@ -80,6 +81,8 @@ const Chatbot = () => {
         ${resources.Resource_body}
             `;
       });
+
+      console.log(resourceString);
 
       return resourceString;
 
@@ -127,13 +130,53 @@ const Chatbot = () => {
     }
   };
 
+  //getting chatbot to do general conversation
+  const getConversation = async (message) => {
+    console.log("message: ", message);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/chatbot/generic_chat`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_question: message }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      const data = await response.json();
+      
+      return data.response;
+    } catch (error) {
+      console.error("Error uploading post:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
+    let botReply = "";
+
     const userMessage = { text: input, sender: 'user' };
 
+    if(currentId == "cb1") {
+      botReply = await getResources(input);
+    }
+    else if (currentId == "cb2") {
+      botReply = await getChatBot(input);
+    }
+    else if(currentId == "cb3") {
+      botReply = await getConversation(input);
+    }
 
-    const botReply = await getResources(input);
+    //const botReply = await getResources(input);
 
     setMessages([...messages, userMessage]);
     setInput("");
@@ -178,18 +221,21 @@ const Chatbot = () => {
     setShowSearchBar(true); // Show the search bar when a suggestion is clicked
     setShowAnimatedText(false); // Hide the animated text when a suggestion is clicked
 
-    if (suggestion.text === "General conversation.😊") {
-      const specialMessage = {
-        text: "Hello! How is your day?",
-        sender: "bot",
-        special: "general-conversation",
-      };
-      setMessages([...messages, specialMessage]);
-    } else {
-      getChatBot(suggestion).then((botResponse) => {
-        simulateTyping(botResponse); // Display the chatbot response in the chat
-      });
-    }
+    setCurrentId(suggestion.id);
+    console.log("current id", currentId);
+
+    // if (suggestion.text === "General conversation.😊") {
+    //   const specialMessage = {
+    //     text: "Hello! How is your day?",
+    //     sender: "bot",
+    //     special: "general-conversation",
+    //   };
+    //   setMessages([...messages, specialMessage]);
+    // } else {
+    //   getChatBot(suggestion).then((botResponse) => {
+    //     simulateTyping(botResponse); // Display the chatbot response in the chat
+    //   });
+    // }
   };
 
   const handleKeyDown = (e) => {
