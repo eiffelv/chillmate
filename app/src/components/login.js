@@ -44,7 +44,7 @@ function Login() {
       setMessage("Please Wait, Trying to Login...");
 
       // Send POST request to login endpoint
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/login`, {
+      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/login`, {
         method: "POST",
         credentials: "include",
         headers: {

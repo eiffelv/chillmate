@@ -996,7 +996,7 @@ textarea {
   /* Adjust for dynamic sizing */
   overflow-y: auto;
   margin-bottom: 15px;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .bubble {

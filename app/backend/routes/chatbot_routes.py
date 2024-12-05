@@ -90,6 +90,7 @@ def chat():
     """
     data = request.get_json()
     user_question = data.get("user_question", "")
+    logger.debug(user_question)
 
     if not user_question:
         return jsonify({"error": "Please provide a valid question."}), 400
@@ -102,7 +103,7 @@ def chat():
         return jsonify({"error": str(e)}), 500
     
 
-@chatbot_bp.route('/find_sim_docs', methods=['POST'])
+@chatbot_bp.route('/find_sim_docs', methods=['GET', 'POST'])
 def find_similar_docs():
     """
     Find similar documents based on input text embeddings.
