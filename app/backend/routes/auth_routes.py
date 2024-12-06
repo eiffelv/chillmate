@@ -121,7 +121,11 @@ def getProfile():
         "Age": user['Age'],
         "Occupation": user['Occupation'],
         "Username": user['Username'],
-        "EmergencyContactEmail": user['EmergencyContactEmail']
+        "EmergencyContactEmail": user['EmergencyContactEmail'],
+        "EmergencyContactNumber": user['EmergencyNumber'],
+        "EmergencycontactfirstName": user['EmergencyFirstName'],
+        "EmergencycontactlastName": user['EmergencyLastName'],
+        "relationship": user['EmergencyRelation']
     }
 
     if user:
