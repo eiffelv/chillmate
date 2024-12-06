@@ -11,44 +11,39 @@ const Forum = () => {
   const [posts, setPosts] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
-  // //will added this part to get forum posts from api
-  // useEffect(() => {
-  //   //will added this code block
-  //   const getForumPost = async (e) => {
-  //     //event.preventDefault();  // Prevents the default form submission behavior
+  useEffect(() => {
+    const getForumPost = async () => {
+      const token = localStorage.getItem('accessToken');
+      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/forum/getForum`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      console.log("useEffect running")
+      console.log("dapetnya", data);
 
-    //will added this part to get forum posts from api
-    useEffect(() => {
-      const getForumPost = async () => {
-        const token = localStorage.getItem('accessToken');
-        const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/forum/getForum`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-    
-        const data = await response.json();
-        console.log("useEffect running");
-        console.log("dapetnya", data);
-    
-        const formattedPosts = data.map(post => ({
-          topic: post.Topic || "Untitled",
-          content: post.Text || "",
-          liked: false
-        }));
-    
-        setPosts(formattedPosts);
-      };
-    
-      getForumPost(); // Missing closing } was here
-    }, []); // Correctly closes the useEffect dependency array
+      const formattedPosts = data.map(post => ({
+        topic: post.Topic || "Untitled",
+        content: post.Text || "",
+        liked: false
+      }));
+
+      setPosts(formattedPosts); 
+
+      return data;
+    };
+    getForumPost();
+  }, []);
+
+  //
 
     const uploadPost = async (newPost) => {
     const token = localStorage.getItem("accessToken");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_FLASK_URI}/createForum`,
+        `${process.env.REACT_APP_FLASK_URI}/forum/createForum`,
         {
           method: "POST",
           credentials: "include",
