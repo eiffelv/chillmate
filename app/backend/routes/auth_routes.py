@@ -31,6 +31,11 @@ def register():
     Occupation = data.get("Occupation")
     Username = data.get("username")
     EmergencyContactEmail = data.get("EmergencyContactEmail")
+    EmergencyNumber = data.get("EmergencyNumber")
+    EmergencyFirstName = data.get("EmergencyFirstName")
+    EmergencyLastName = data.get("EmergencyLastName")
+    EmergencyRelation = data.get("EmergencyRelation")
+
 
     # Use MongoUtils to interact with the database
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name="user")
@@ -47,7 +52,11 @@ def register():
         "Age": Age,
         "Occupation": Occupation,
         "Username": Username,
-        "EmergencyContactEmail": EmergencyContactEmail
+        "EmergencyContactEmail": EmergencyContactEmail,
+        "EmergencyNumber": EmergencyNumber,
+        "EmergencyFirstName": EmergencyFirstName,
+        "EmergencyLastName": EmergencyLastName,
+        "EmergencyRelation": EmergencyRelation
     }
 
     mongo_utils.collection.insert_one(new_user)
