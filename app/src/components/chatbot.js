@@ -31,6 +31,13 @@ const Chatbot = () => {
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(""); // State to track the selected ID
 
+  // State to store conversation history for each suggestion
+  const [conversationHistory, setConversationHistory] = useState({
+    cb1: [],
+    cb2: [],
+    cb3: [],
+  });
+
   const renderMessageWithLinks = (text) => {
     const linkRegex = /(https?:\/\/[^\s]+)/g; // Regex to detect URLs
     const parts = text.split(linkRegex); // Split the text by links
@@ -245,18 +252,18 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
-    // if (suggestion.text === "General conversation.😊") {
-    //   const specialMessage = {
-    //     text: "Hello! How is your day?",
-    //     sender: "bot",
-    //     special: "general-conversation",
-    //   };
-    //   setMessages([...messages, specialMessage]);
-    // } else {
-    //   getChatBot(suggestion).then((botResponse) => {
-    //     simulateTyping(botResponse); // Display the chatbot response in the chat
-    //   });
-    // }
+    if (suggestion.text === "General conversation.😊") {
+       const specialMessage = {
+         text: "Hello! How is your day?",
+         sender: "bot",
+         special: "general-conversation",
+       };
+       setMessages([...messages, specialMessage]);
+       } else {
+        getChatBot(suggestion).then((botResponse) => {
+        simulateTyping(botResponse); // Display the chatbot response in the chat
+      });
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -290,13 +297,7 @@ const Chatbot = () => {
         <h1>Chatbot</h1>
         {showAnimatedText && <AnimatedText />}{" "}
         {/* Only show AnimatedText if showAnimatedText is true */}
-        <div className="chatbot-messages">
-          {/* Add bubbles as the background */}
-          {showBubbles &&
-            Array.from({ length: 80 }).map((_, index) => (
-              <div key={index} className="bubble"></div>
-            ))}
-          <div className="suggestions">
+        <div className="suggestions">
             {suggestions.map((suggestion) => (
               <button
                 key={suggestion.id} // Use the unique ID as the key
@@ -313,7 +314,14 @@ const Chatbot = () => {
             {suggestion.text}
               </button>
             ))}
-          </div>
+        </div>
+        <div className="chatbot-messages">
+          {/* Add bubbles as the background */}
+          {showBubbles &&
+            Array.from({ length: 80 }).map((_, index) => (
+              <div key={index} className="bubble"></div>
+            ))}
+          
 
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
