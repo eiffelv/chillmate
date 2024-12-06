@@ -4,7 +4,6 @@ import React from "react";
 const JournalEntry = ({ entry }) => (
   <div className="journal-entry">
     <h2>{entry.title}</h2>
-    <p>{entry.date}</p>
     <p>{entry.content}</p>
   </div>
 );

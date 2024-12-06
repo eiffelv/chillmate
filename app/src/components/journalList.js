@@ -11,7 +11,6 @@ const JournalList = ({ entries }) => (
         style={{ backgroundColor: entry.color }}
       >
         <h3>{entry.title}</h3>
-        <p>{entry.date}</p>
         <p>{entry.content}</p>
       </div>
     ))}
