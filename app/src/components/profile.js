@@ -50,7 +50,6 @@ export default function Profile() {
     loading: "Loading",
   };
 
-  const [mood, setMood] = useState("neutral");
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
 
@@ -226,7 +225,7 @@ export default function Profile() {
   useEffect(() => {
     console.log("getting profile");
     getProfileData();
-  }, []);
+  });
 
   return (
     <div className="profile">

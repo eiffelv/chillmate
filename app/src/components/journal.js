@@ -21,6 +21,7 @@ const JournalPage = () => {
       formRef.current.scrollIntoView({ behavior: "smooth" });
     }
     getJournal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showAddForm]);
 
   //get journal entries from database

@@ -5,7 +5,6 @@ import { LoginContext } from "./LoginContext";
 import FormEnabler from "./FormEnabler";
 import "./style.css";
 import "./ChillMateLogo.png";
-import LoginPic from "./Chill.pic.jpg";
 import FlowerPic from "./lavender.jpg";
 
 function Login() {
@@ -44,14 +43,17 @@ function Login() {
       setMessage("Please Wait, Trying to Login...");
 
       // Send POST request to login endpoint
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      );
 
       const data = await response.json();
 

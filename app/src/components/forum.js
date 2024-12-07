@@ -52,7 +52,7 @@ const Forum = () => {
       }
     };
     getForumPost();
-  }, []);
+  }, [isLoggedIn, logout, navigate]);
 
   //
 
