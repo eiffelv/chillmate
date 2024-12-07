@@ -1361,6 +1361,7 @@ textarea {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust column size */
   gap: 20px; /* Add spacing between grid items */
   padding: 20px;
+
 }
 
 .journal-entry {
@@ -1444,6 +1445,26 @@ textarea {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.journal {
+  display:block;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.journal-flip-container {
+  perspective: 1000px;
+  position: relative;
+}
+
+.journal-entries {
+  transform-origin: center; /* Set the rotation pivot point */
+  transform-style: preserve-3d; /* Enable 3D rendering for child elements */
+  transition: transform 1s ease; /* Smooth transition for the flip */
+  backface-visibility: hidden;
+}
+
 
 .suggestions {
   display: flex;

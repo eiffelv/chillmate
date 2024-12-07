@@ -4,12 +4,14 @@ import "./ChillMateLogo.png";
 import { LoginContext } from "./LoginContext";
 import JournalList from "./journalList";
 import AddJournalForm from "./addjournalForm";
+import HTMLFlipBook from "react-pageflip";
 
 const JournalPage = () => {
   const [entries, setEntries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [flipDirection, setFlipDirection] = useState(null);
   const journalsPerPage = 2;
   const latestEntryRef = useRef(null);
   const formRef = useRef(null);
@@ -59,6 +61,7 @@ const JournalPage = () => {
     };
     getJournal();
   }, [showAddForm]);
+  
 
   //upload new journal entry to database
   const uploadJournal = async (newEntry) => {
@@ -113,63 +116,72 @@ const JournalPage = () => {
 
   const handleNext = () => {
     if (currentPage < totalPages) {
-      setCurrentPage((prev) => {
-        console.log("Next Page:", prev + 1);
-        return prev + 1;
-      });
+      setFlipDirection("forward"); // Set the direction to forward
+      setCurrentPage((prev) => prev + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (currentPage > 1) {
-      setCurrentPage((prev) => {
-        console.log("Previous Page:", prev - 1);
-        return prev - 1;
-      });
+      setFlipDirection("backward"); // Set the direction to backward
+      setCurrentPage((prev) => prev - 1);
     }
   };
   
 
   return (
     <div className="journal">
-      <div className="journal-page">
-        <h1>Journal</h1>
-        <input
-          type="text"
-          placeholder="Search journal..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button
-          className="add-journal-button"
-          onClick={() => setShowAddForm(true)}
+      <h1>Journal</h1>
+      <input
+        type="text"
+        placeholder="Search journal..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <button
+        className="add-journal-button"
+        onClick={() => setShowAddForm(true)}
+      >
+        +
+      </button>
+
+      <div className="journal-flip-container">
+        <div
+          className="journal-entries"
+          style={{
+            transform:
+              flipDirection === "forward"
+                ? "rotateY(-360deg)"
+                : flipDirection === "backward"
+                ? "rotateY(360deg)"
+                : "rotateY(0deg)",
+            transition: "transform 1s ease",
+
+          }}
         >
-          +
-        </button>
-
-        <JournalList entries={currentJournals} 
-                      latestEntryRef={latestEntryRef} 
-        />
-        {showAddForm && (
-          <div ref={formRef}>
-            <AddJournalForm
-              onAddEntry={addJournalEntry}
-              onClose={() => setShowAddForm(false)}
-            />
-          </div>
-        )}
-
-        <div className="pagination">
-          <button onClick={handlePrev} disabled={currentPage === 1}>
-            ← Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button onClick={handleNext} disabled={currentPage === totalPages}>
-            Next →
-          </button>
+          <JournalList entries={currentJournals} />
         </div>
+      </div>
+
+      {showAddForm && (
+        <div ref={formRef}>
+          <AddJournalForm
+            onAddEntry={addJournalEntry}
+            onClose={() => setShowAddForm(false)}
+          />
+        </div>
+      )}
+
+      <div className="pagination">
+        <button onClick={handlePrev} disabled={currentPage === 1}>
+          ← Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button onClick={handleNext} disabled={currentPage === totalPages}>
+          Next →
+        </button>
       </div>
     </div>
   );
