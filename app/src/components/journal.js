@@ -9,6 +9,8 @@ const JournalPage = () => {
   const [entries, setEntries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const journalsPerPage = 2;
   const latestEntryRef = useRef(null);
   const formRef = useRef(null);
 
@@ -97,12 +99,35 @@ const JournalPage = () => {
   const addJournalEntry = (title, content, color) => {
     //i got rid of id = dateID from newEntry so we'll have to discuss this later
     const newEntry = { title, content, color };
-    console.log(newEntry);
     uploadJournal(newEntry);
-    setEntries((prevEntries) => [...prevEntries, newEntry]);
-    console.log("keupload ga ?");
+    setEntries((prevEntries) => [newEntry, ...prevEntries]);
     setShowAddForm(false); // Hide form after submission
   };
+
+  // Pagination Logic
+  const indexOfLastJournal = currentPage * journalsPerPage;
+  const indexOfFirstJournal = indexOfLastJournal - journalsPerPage;
+  const currentJournals = filteredEntries.slice(indexOfFirstJournal, indexOfLastJournal);
+  const totalPages = Math.ceil(filteredEntries.length / journalsPerPage);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => {
+        console.log("Next Page:", prev + 1);
+        return prev + 1;
+      });
+    }
+  };
+  
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => {
+        console.log("Previous Page:", prev - 1);
+        return prev - 1;
+      });
+    }
+  };
+  
 
   return (
     <div className="journal">
@@ -121,9 +146,8 @@ const JournalPage = () => {
           +
         </button>
 
-        <JournalList
-          entries={filteredEntries}
-          latestEntryRef={latestEntryRef}
+        <JournalList entries={currentJournals} 
+                      latestEntryRef={latestEntryRef} 
         />
         {showAddForm && (
           <div ref={formRef}>
@@ -133,6 +157,18 @@ const JournalPage = () => {
             />
           </div>
         )}
+
+        <div className="pagination">
+          <button onClick={handlePrev} disabled={currentPage === 1}>
+            ← Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button onClick={handleNext} disabled={currentPage === totalPages}>
+            Next →
+          </button>
+        </div>
       </div>
     </div>
   );
