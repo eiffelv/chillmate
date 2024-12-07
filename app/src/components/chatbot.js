@@ -11,6 +11,7 @@ const suggestions = [
   "General conversation.😊",
 ];
 */
+
 const suggestions = [
   { text: "Find the resources in campus for you.📚", id: "cb1" },
   { text: "Organizing your tasks for you.📋", id: "cb2" },
@@ -30,6 +31,35 @@ const Chatbot = () => {
 
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(""); // State to track the selected ID
+
+  // State to store conversation history for each suggestion
+  const [conversationHistory, setConversationHistory] = useState({
+    cb1: [],
+    cb2: [],
+    cb3: [],
+  });
+
+  const renderMessageWithLinks = (text) => {
+    const linkRegex = /(https?:\/\/[^\s]+)/g; // Regex to detect URLs
+    const parts = text.split(linkRegex); // Split the text by links
+
+    return parts.map((part, index) => {
+      if (linkRegex.test(part)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            {part}
+          </a>
+        );
+      }
+      return part; // Render non-link text as-is
+    });
+  };
 
   // AnimatedText Component
   const AnimatedText = () => {
@@ -87,8 +117,9 @@ const Chatbot = () => {
       });
 
       console.log(resourceString);
-
+      
       return resourceString;
+
     } catch (error) {
       console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
@@ -223,6 +254,7 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
+
     // if (suggestion.text === "General conversation.😊") {
     //   const specialMessage = {
     //     text: "Hello! How is your day?",
@@ -235,6 +267,20 @@ const Chatbot = () => {
     //     simulateTyping(botResponse); // Display the chatbot response in the chat
     //   });
     // }
+
+    if (suggestion.text === "General conversation.😊") {
+       const specialMessage = {
+         text: "Hello! How is your day?",
+         sender: "bot",
+         special: "general-conversation",
+       };
+       setMessages([...messages, specialMessage]);
+       } else {
+        getChatBot(suggestion).then((botResponse) => {
+        simulateTyping(botResponse); // Display the chatbot response in the chat
+      });
+    }
+
   };
 
   const handleKeyDown = (e) => {
@@ -268,28 +314,38 @@ const Chatbot = () => {
         <h1>Chatbot</h1>
         {showAnimatedText && <AnimatedText />}{" "}
         {/* Only show AnimatedText if showAnimatedText is true */}
+        <div className="suggestions">
+            {suggestions.map((suggestion) => (
+              <button
+                key={suggestion.id} // Use the unique ID as the key
+                className="suggestion-button"
+                style={{
+                  backgroundColor: selectedId === suggestion.id ? "#2d00b3" : "",
+                  color: selectedId === suggestion.id ? "#fff" : "", // Optional: Change text color for better contrast
+                }}
+                onClick={() => {
+                  setSelectedId(suggestion.id); // Update the selectedId state
+                  handleSuggestionClick(suggestion); // Call the existing click handler
+                }}
+              >
+            {suggestion.text}
+              </button>
+            ))}
+        </div>
         <div className="chatbot-messages">
           {/* Add bubbles as the background */}
           {showBubbles &&
             Array.from({ length: 80 }).map((_, index) => (
               <div key={index} className="bubble"></div>
             ))}
-          <div className="suggestions">
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion.id} // Use the unique ID as the key
-                className="suggestion-button"
-                onClick={() => handleSuggestionClick(suggestion)}
-              >
-                {suggestion.text}
-              </button>
-            ))}
-          </div>
+          
+
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
-              {msg.text}
+              {msg.sender === "bot" ? renderMessageWithLinks(msg.text) : msg.text}
             </div>
           ))}
+
           {typingMessage && <div className="message bot">{typingMessage}</div>}
           <div ref={messagesEndRef} />
         </div>

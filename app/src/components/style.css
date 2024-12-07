@@ -478,6 +478,7 @@ input {
   cursor: pointer;
   border-radius: 5px;
   font-size: 18px;
+  background-color: #966fd6;
 }
 
 .logout-button:hover {
@@ -983,7 +984,7 @@ textarea {
   /* Use Flexbox for layout */
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 90vh;
   /* Adjust height as needed */
 }
 
@@ -1126,15 +1127,35 @@ textarea {
 }
 
 .message.user {
-  background-color: #e0f7fa;
+  background-color:#f7ccff; 
+  border-radius: 15px; /* Rounded corners for consistency */
+  padding: 15px 20px; /* Adequate padding for readability */
   text-align: right;
+  white-space: pre-wrap; /* Preserve line breaks */
+  font-family: 'Arial', sans-serif;
+  font-size: 18px; /* Same size as bot messages */
+  line-height: 1.6; /* Improve readability */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 10px 0; /* Add spacing between messages */
+  max-width: 80%; /* Constrain message width */
+  word-wrap: break-word; /* Ensure long words or links wrap */
+  align-self: flex-end; /* Align messages to the right */
+  margin-left: auto; /* Push the message to the right */
 }
 
 .message.bot {
-  background-color: #f1f8e9;
+  background-color: #afaaff; 
+  border-radius: 15px; /* Rounded corners */
+  padding: 15px 20px; /* Adequate padding for text readability */
   text-align: left;
-  white-space: pre-wrap;
-  /* or pre-line */
+  white-space: pre-wrap; /* Preserve line breaks */
+  font-family: 'Arial', sans-serif;
+  font-size: 18px; /* Slightly smaller for better balance */
+  line-height: 1.6; /* Improve readability */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 10px 0; /* Add spacing between messages */
+  max-width: 80%; /* Constrain message width */
+  word-wrap: break-word; /* Ensure long words or links wrap */
 }
 
 .chatbot-input {
@@ -1157,7 +1178,7 @@ textarea {
 
 .chatbot-input button {
   padding: 5px 8px; /* Reduced padding for smaller size */
-  background-color: #007bff; /* Blue background color */
+  background-color: #966fd6; /* Blue background color */
   color: white; /* White text color */
   border: none; /* Remove any border */
   border-radius: 20px; /* Add curved edges to the button */
@@ -1172,6 +1193,17 @@ textarea {
 
 .chatbot-input button:hover {
   background-color: #2d00b3;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: #0056b3;
 }
 
 /* Add responsiveness */
@@ -1396,7 +1428,7 @@ textarea {
 .suggestion-button {
   padding: 10px 20px;
   /* Ensure buttons have consistent size */
-  background-color: #007bff;
+  background-color: #966fd6;
   border: 1px solid #ddd;
   color: #fff;
   border-radius: 5px;
