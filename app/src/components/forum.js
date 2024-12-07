@@ -38,7 +38,7 @@ const Forum = () => {
 
   //
 
-  const uploadPost = async (newPost) => {
+    const uploadPost = async (newPost) => {
     const token = localStorage.getItem("accessToken");
 
     try {

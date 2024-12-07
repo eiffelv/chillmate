@@ -116,8 +116,9 @@ const Chatbot = () => {
       });
 
       console.log(resourceString);
-
+      
       return resourceString;
+
     } catch (error) {
       console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
@@ -252,6 +253,20 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
+
+    // if (suggestion.text === "General conversation.😊") {
+    //   const specialMessage = {
+    //     text: "Hello! How is your day?",
+    //     sender: "bot",
+    //     special: "general-conversation",
+    //   };
+    //   setMessages([...messages, specialMessage]);
+    // } else {
+    //   getChatBot(suggestion).then((botResponse) => {
+    //     simulateTyping(botResponse); // Display the chatbot response in the chat
+    //   });
+    // }
+
     if (suggestion.text === "General conversation.😊") {
        const specialMessage = {
          text: "Hello! How is your day?",
@@ -264,6 +279,7 @@ const Chatbot = () => {
         simulateTyping(botResponse); // Display the chatbot response in the chat
       });
     }
+
   };
 
   const handleKeyDown = (e) => {
