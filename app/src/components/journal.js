@@ -124,9 +124,9 @@ const JournalPage = () => {
   );
 
   // Function to add a new journal entry
-  const addJournalEntry = (title, content, color) => {
+  const addJournalEntry = (title, date, content, color) => {
     //i got rid of id = dateID from newEntry so we'll have to discuss this later
-    const newEntry = { title, content, color };
+    const newEntry = { title, date, content, color };
     console.log(newEntry);
     uploadJournal(newEntry);
     setEntries((prevEntries) => [...prevEntries, newEntry]);
