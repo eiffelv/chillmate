@@ -39,6 +39,7 @@ def create_journal():
 
     title = data.get("title")
     content = data.get("content")
+    color = data.get("color")
 
     if not title or not content:
         return jsonify({"error": "Title and content are required"}), 400
@@ -48,6 +49,7 @@ def create_journal():
         "SFStateID": current_user,
         "Title": title,
         "Content": content,
+        "color": color
     }
 
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
