@@ -28,12 +28,20 @@ def register():
     LastName = data.get("last_name")
     Email = data.get("email")
     Password = data.get("password")
-    Address = data.get("Address")
+    Address = data.get("address_line_1")
+    Address2 = data.get("address_line_2")
     PhoneNum = data.get("phone_number")
     Age = data.get("Age")
     Occupation = data.get("Occupation")
     Username = data.get("username")
     EmergencyContactEmail = data.get("EmergencyContactEmail")
+    EmergencyContactNum = data.get("emergency_phone_number")
+    EmergencyContactFirstName = data.get("emergency_first_name")
+    EmergencyContactLastName = data.get("emergency_last_name")
+    EmergencyContactRelationship = data.get("relationship")
+    City = data.get("city")
+    State = data.get("state")
+    ZipCode = data.get("zip_code")
 
     # Use MongoUtils to interact with the database
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name="user")
@@ -46,11 +54,20 @@ def register():
         "Email": Email,
         "Password": Password,
         "Address": Address,
+        "Address2": Address2,
+        "City": City,
+        "State": State,
+        "ZipCode": ZipCode,
         "PhoneNum": PhoneNum,
         "Age": Age,
         "Occupation": Occupation,
         "Username": Username,
-        "EmergencyContactEmail": EmergencyContactEmail
+        "EmergencyContactEmail": EmergencyContactEmail,
+        "EmergencyContactNum": EmergencyContactNum,
+        "EmergencyContactFirstName": EmergencyContactFirstName,
+        "EmergencyContactLastName": EmergencyContactLastName,
+        "EmergencyContactRelationship": EmergencyContactRelationship,
+        "Mood": "neutral"
     }
 
     mongo_utils.collection.insert_one(new_user)
@@ -107,12 +124,20 @@ def getProfile():
         "FirstName": user['FirstName'],
         "LastName": user['LastName'],
         "Address": user['Address'],
+        "Address2": user['Address2'],
+        "City": user['City'],
+        "State": user['State'],
         "Email": user['Email'],
         "PhoneNum": user['PhoneNum'],
         "Age": user['Age'],
         "Occupation": user['Occupation'],
         "Username": user['Username'],
-        "EmergencyContactEmail": user['EmergencyContactEmail']
+        "EmergencyContactEmail": user['EmergencyContactEmail'],
+        "EmergencyContactNum": user['EmergencyContactNum'],
+        "EmergencyContactFirstName": user['EmergencyContactFirstName'],
+        "EmergencyContactLastName": user['EmergencyContactLastName'],
+        "EmergencyContactRelationship": user['EmergencyContactRelationship'],
+        "Mood": user['Mood']
     }
 
     if user:
@@ -121,3 +146,78 @@ def getProfile():
         return jsonify({'error': 'user not found'})
 
 #-------------------------------
+
+# Update profile API
+@auth_bp.route('/updateProfile', methods=['POST'])
+@jwt_required()
+def updateProfile():
+    current_user = get_jwt_identity()
+    data = request.json
+
+    FirstName = data.get("firstName")
+    LastName = data.get("lastName")
+    Email = data.get("sfsuEmail")
+    Address = data.get("address1")
+    Address2 = data.get("address2")
+    PhoneNum = data.get("phoneNumber")
+    Age = data.get("age")
+    Occupation = data.get("occupation")
+    EmergencyContactEmail = data.get("emergencyemail")
+    EmergencyContactNum = data.get("emergencyContactNumber")
+    EmergencyContactFirstName = data.get("EmergencycontactfirstName")
+    EmergencyContactLastName = data.get("EmergencycontactlastName")
+    EmergencyContactRelationship = data.get("relationship")
+    City = data.get("city")
+    State = data.get("state")
+
+    # Use MongoUtils to interact with the database
+    mongo_utils = MongoUtils(client, db_name="chillmate", collection_name="user")
+
+    # Update user profile
+    mongo_utils.collection.update_one(
+        {"SFStateID": current_user},
+        {
+            "$set": {
+                "FirstName": FirstName,
+                "LastName": LastName,
+                "Email": Email,
+                "Address": Address,
+                "Address2": Address2,
+                "City": City,
+                "State": State,
+                "PhoneNum": PhoneNum,
+                "Age": Age,
+                "Occupation": Occupation,
+                "EmergencyContactEmail": EmergencyContactEmail,
+                "EmergencyContactNum": EmergencyContactNum,
+                "EmergencyContactFirstName": EmergencyContactFirstName,
+                "EmergencyContactLastName": EmergencyContactLastName,
+                "EmergencyContactRelationship": EmergencyContactRelationship,
+            }
+        }
+    )
+
+    return jsonify({"message": "Profile updated successfully"}), 200
+
+# Update mood API
+@auth_bp.route('/updateMood', methods=['POST'])
+@jwt_required()
+def updateMood():
+    current_user = get_jwt_identity()
+    data = request.json
+    mood = data.get("mood")
+
+    # Use MongoUtils to interact with the database
+    mongo_utils = MongoUtils(client, db_name="chillmate", collection_name="user")
+
+    # Update user mood
+    mongo_utils.collection.update_one(
+        {"SFStateID": current_user},
+        {
+            "$set": {
+                "Mood": mood
+            }
+        }
+    )
+
+    return jsonify({"message": "Mood updated successfully"}), 200

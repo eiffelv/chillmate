@@ -14,13 +14,16 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
       // Reset fields after successful submission
       setTitle("");
       setDate("");
+      console.log(date);
       setContent("");
+      setColor("#FFFFFF");
     } else {
       alert("Please fill out all fields.");
     }
   };
 
   const colors = [
+    "#FFFFFF",
     "#FFCDD2",
     "#C8E6C9",
     "#BBDEFB",

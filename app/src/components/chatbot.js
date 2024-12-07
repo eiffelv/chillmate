@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 import "./ChillMateLogo.png";
 import { LoginContext } from "./LoginContext";
@@ -29,7 +30,7 @@ const Chatbot = () => {
 
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(""); // State to track the selected ID
-  
+
   // AnimatedText Component
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
@@ -57,22 +58,25 @@ const Chatbot = () => {
   const getResources = async (message) => {
     console.log("message: ", message);
     try {
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/chatbot/find_sim_docs`, {
-        method: "POST",
-        // credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ input_text: message }),
-      });
-  
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/chatbot/find_sim_docs`,
+        {
+          method: "POST",
+          // credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ input_text: message }),
+        }
+      );
+
       if (!response.ok) {
-        throw new Error('Failed to upload post');
+        throw new Error("Failed to upload post");
       }
-  
+
       const data = await response.json();
 
-      let resourceString ='';
+      let resourceString = "";
 
       data.forEach((resources, index) => {
         resourceString += `
@@ -85,18 +89,13 @@ const Chatbot = () => {
       console.log(resourceString);
 
       return resourceString;
-
-
     } catch (error) {
-      console.error('Error uploading post:', error);
+      console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
-    }
-    finally {
+    } finally {
       setLoading(false); // Once the promise settles, update loading state
     }
-  }
-
-
+  };
 
   //getting chatbot to do list response
   const getChatBot = async (message) => {
@@ -120,7 +119,9 @@ const Chatbot = () => {
       const data = await response.json();
       let resultString = `Goal: ${data.goal}\n\nSubtasks:\n`;
       data.subtasks.forEach((subtask, index) => {
-        resultString += `Subtask ${index + 1}: ${subtask.subtask}\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
+        resultString += `Subtask ${index + 1}: ${
+          subtask.subtask
+        }\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
       });
       return resultString;
     } catch (error) {
@@ -150,7 +151,7 @@ const Chatbot = () => {
       }
 
       const data = await response.json();
-      
+
       return data.response;
     } catch (error) {
       console.error("Error uploading post:", error);
@@ -164,15 +165,13 @@ const Chatbot = () => {
 
     let botReply = "";
 
-    const userMessage = { text: input, sender: 'user' };
+    const userMessage = { text: input, sender: "user" };
 
-    if(currentId == "cb1") {
+    if (currentId == "cb1") {
       botReply = await getResources(input);
-    }
-    else if (currentId == "cb2") {
+    } else if (currentId == "cb2") {
       botReply = await getChatBot(input);
-    }
-    else if(currentId == "cb3") {
+    } else if (currentId == "cb3") {
       botReply = await getConversation(input);
     }
 

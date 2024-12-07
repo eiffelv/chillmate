@@ -150,21 +150,22 @@ def mood_tracker():
     # Fetch the latest document for the user
     latest_journal = mongo_utils.collection.find_one(
         {'SFStateID': current_user},
-        sort=[("_id", -1)]  # Sort by _id in descending order
+        sort=[("Timestamp", -1)]  # Sort by Latest Timestamp
     )
+    logger.debug(latest_journal)
 
     # Extract and return only the content field
-    content = latest_journal.get('content') if latest_journal else ""
+    content = latest_journal.get('Content') if latest_journal else ""
     logger.debug(content)
     # content = "I'm very nervous for my presentation"
-    logger.debug(content)
+    # logger.debug(content)
     if not content:
         return jsonify({"mood": "neutral"}), 200
     
     try:
         # Infer mood using the MoodTracker class
         ext_json = {"mood": "<mood_name>"}
-        moods_list = {"Happy", "Sad", "Angry", "Excited", "Calm", "Anxious"}
+        moods_list = {"happy", "sad", "angry", "excited", "calm", "anxious"}
         context = {"user_input": content, "ext_json": ext_json, "moods_list": moods_list}
 
         model_name = "llama3-8b-8192"
