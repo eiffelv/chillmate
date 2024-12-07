@@ -68,3 +68,25 @@ def create_forum():
     except Exception as e:
         logger.error(f"Error in /createForum: {e}")
         return jsonify({"error": str(e)}), 500
+    
+
+@forum_bp.route('createRelation', methods=['POST', 'GET'])
+@jwt_required()
+def create_relation():
+    try:
+        postId = request.json
+        studentId = get_jwt_identity()
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='relation')
+
+        new_relation = {
+            "postId": postId,
+            "student": studentId
+        }
+
+        mongo_utils.collection.insert_one(new_relation)
+
+        return jsonify({"message": "Relation succesfully created"}), 201
+
+    except Exception as e:
+        logger.error(f"Error in /createRelation: {e}")
+        return jsonify({"error": str(e)}), 500

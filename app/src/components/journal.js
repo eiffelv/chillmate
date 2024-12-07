@@ -5,6 +5,7 @@ import { LoginContext } from "./LoginContext";
 import JournalList from "./journalList";
 import AddJournalForm from "./addjournalForm";
 import HTMLFlipBook from "react-pageflip";
+import { ReactPageFlip } from 'react-pageflip';
 
 const JournalPage = () => {
   const [entries, setEntries] = useState([]);

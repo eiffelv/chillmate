@@ -24,6 +24,7 @@ const Forum = () => {
       console.log("dapetnya", data);
 
       const formattedPosts = data.map(post => ({
+        id: post._id || "",
         topic: post.Topic || "Untitled",
         content: post.Text || "",
         liked: false
@@ -91,11 +92,58 @@ const Forum = () => {
     setShowForm(false);
   };
 
+
+  //create a relation to the database, that sends the userID and postID
+  const createLike = async(id) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/createRelation`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      // Handle success or error based on the response data
+      } catch (error) {
+        console.error("Error creating relation:", error);
+        // Handle error, e.g., display an error message to the user
+      }
+  };
+
+
   // Toggle like status for a post
   const toggleLike = (index) => {
     const updatedPosts = posts.map((post, i) => {
+      
       if (i === index) {
+        console.log(post.id);
+
+        //if the post is false, then it will turn to true
+        //this means create a relation
+        if(post.liked == false) {
+          createLike(post.id);
+        }
+        else {
+          //else if the post is true, it will turn to false
+          //remove the relation from the new collection
+
+        }
+
         return { ...post, liked: !post.liked };
+        
       }
       return post;
     });
