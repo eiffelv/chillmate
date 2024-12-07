@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const AddJournalForm = ({ onAddEntry, onClose }) => {
   const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
   const [content, setContent] = useState("");
   const [color, setColor] = useState("#FFFFFF");
 
@@ -9,7 +10,7 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
     e.preventDefault();
 
     if (title && content) {
-      onAddEntry(title, content, color);
+      onAddEntry(title, date, content, color);
       // Reset fields after successful submission
       setTitle("");
       setDate("");
@@ -41,6 +42,12 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
           required
         />
         <textarea
