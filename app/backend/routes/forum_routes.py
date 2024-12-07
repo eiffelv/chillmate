@@ -90,3 +90,28 @@ def create_relation():
     except Exception as e:
         logger.error(f"Error in /createRelation: {e}")
         return jsonify({"error": str(e)}), 500
+    
+@forum_bp.route('checkLike', methods=['POST', 'GET'])
+@jwt_required()
+def check_like():
+    try:
+        postId = request.json
+        studentId = get_jwt_identity()
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='relation')
+        logger.debug("postId", postId)
+        logger.debug("studen", studentId)
+        relation = mongo_utils.collection.count_documents({"postId": postId, "student": studentId})
+        logger.debug(relation)
+    
+
+        if relation <= 0:
+            status = 0
+        else:
+            status = 1
+        #return jsonify({"message": "Relation succesfully created"}), 201
+
+        return jsonify({"relation": status}), 201
+
+    except Exception as e:
+        logger.error(f"Error in /checkLike: {e}")
+        return jsonify({"error": str(e)}), 500
