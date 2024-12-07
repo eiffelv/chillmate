@@ -24,6 +24,10 @@ const Register = () => {
     city: "",
     state: "",
     zip_code: "",
+    EmergencyNumber: "",
+    EmergencyFirstName: "",
+    EmergencyLastName: "",
+    EmergencyRelation: ""
   });
 
   const [message, setMessage] = useState("");
@@ -85,6 +89,8 @@ const Register = () => {
     setUser({ ...user, [name]: value }); // Dynamically set the value based on field name
     // setAddress({ ...user, [name]: value });
     // setUser({Address: fullAddress});
+
+    console.log(user);
 
     //combine address into one variable which is Address
     setUser((prevUser) => ({
@@ -334,9 +340,9 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="first_name"
+              name="EmergencyFirstName"
               placeholder="Olivia"
-              value={user.FirstName}
+              value={user.EmergencyFirstName}
               onChange={handleChange}
               required
             />
@@ -345,9 +351,9 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="last_name"
+              name="EmergencyLastName"
               placeholder="Smith"
-              value={user.LastName}
+              value={user.EmergencyLastName}
               onChange={handleChange}
               required
             />
@@ -357,8 +363,8 @@ const Register = () => {
             <input
               placeholder="1234567890"
               type="tel"
-              name="phone_number"
-              value={user.PhoneNum}
+              name="EmergencyNumber"
+              value={user.EmergencyNumber}
               onChange={handleChange}
               required
               pattern="[0-9]{10}" // Optional: restrict to 10-digit phone numbers
@@ -367,9 +373,9 @@ const Register = () => {
             <label>Relationship</label>
             <input
               type="text"
-              name="relationship"
+              name="EmergencyRelation"
               placeholder="Mother"
-              value={user.FirstName}
+              value={user.EmergencyRelation}
               onChange={handleChange}
               required
             />
