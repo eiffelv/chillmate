@@ -10,10 +10,11 @@ from dotenv import load_dotenv
 import re
 import json
 from pathlib import Path
+from groq import Groq
 
 load_dotenv()
 
-fireworks_key = os.getenv("fireworks_key")
+groq_api_key = os.getenv("GROQ_API_KEY")
 
 
 class PromptLoader:
@@ -65,28 +66,27 @@ class GenerateGoal:
         self.provider_name = provider_name
 
     def call_llm(self, prompt: str, system_msg: str, get_json: bool= True):
-        if self.provider_name == "open_ai":
-            url = "https://api.openai.com/v1"
-            key = os.getenv("OPENAI_API_KEY", "")
-        elif self.provider_name == "open_router":
-            url = "https://openrouter.ai/api/v1"
-            key = os.getenv("OPENROUTER_API_KEY", "")
+        # if self.provider_name == "open_ai":
+        #     url = "https://api.openai.com/v1"
+        #     key = os.getenv("OPENAI_API_KEY", "")
+        # elif self.provider_name == "open_router":
+        #     url = "https://openrouter.ai/api/v1"
+        #     key = os.getenv("OPENROUTER_API_KEY", "")
 
-        elif self.provider_name == "groq":
-            url = "https://api.groq.com/openai/v1"
-            key = ""
+        # elif self.provider_name == "groq":
+        #     url = "https://api.groq.com/openai/v1"
+        #     key = ""
 
-        elif self.provider_name == "fireworks":
-            url = "https://api.fireworks.ai/inference/v1"
-            key = fireworks_key
+        # elif self.provider_name == "fireworks":
+        #     url = "https://api.fireworks.ai/inference/v1"
+        #     key = fireworks_key
 
-        elif self.provider_name == "deepinfra":
-            url = "https://api.deepinfra.com/v1/openai"
-            key = ""
+        # elif self.provider_name == "deepinfra":
+        #     url = "https://api.deepinfra.com/v1/openai"
+        #     key = ""
 
-        client = OpenAI(
-            base_url=url,
-            api_key=key,
+        client = Groq(
+            api_key=groq_api_key
         )
         # client = Groq(api_key=key)
         logger.debug(f"Model being used: {self.model_name}")
