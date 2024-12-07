@@ -50,6 +50,7 @@ const JournalPage = () => {
           //id: post._id,
           title: post.Title || "",
           content: post.Content || "",
+          color: post.color || "#FFFFFF"
         }));
         //put journal entry to website
         setEntries(formattedJournal);

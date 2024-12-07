@@ -428,7 +428,8 @@ input {
 
 .login {
   display: flex;
-  height: 100vh;
+  height: 80vh;
+  width: 80vh;
   /* Full viewport height */
   background-color: #deddff;
   /* Optional: background color */
@@ -436,7 +437,7 @@ input {
 
 .login-container {
   background-color: #ffffff;
-  padding: 50px;
+  padding: 20% 26.35% 90% 26.35%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 50%;
   text-align: center;

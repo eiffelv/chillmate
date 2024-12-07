@@ -78,7 +78,7 @@ function Login() {
 
   return (
     <div className="login">
-      <img src={FlowerPic} width="900" height="593" alt="LoginPic" />
+      <img src={FlowerPic} width="400%" height="110%" alt="LoginPic" />
       <div className="login-container">
         <h2>Login</h2>
 
