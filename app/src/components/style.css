@@ -144,9 +144,7 @@ body {
   /* Initially hidden */
   transform: translateX(-100%);
   /* Start off-screen to the left */
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .feature.animate {
@@ -1593,9 +1591,7 @@ select {
   padding: 10px 20px; /* Add some padding */
   font-size: 24px; /* Larger font size for emojis */
   cursor: pointer; /* Show pointer cursor on hover */
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease; /* Smooth hover effects */
+  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth hover effects */
 }
 
 .emoji-tracker .mood-selector button:hover {
@@ -1618,6 +1614,10 @@ select {
   font-size: 5em;
   margin-top: 1px;
   padding: 2px;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 /* Emergency Contact Details */

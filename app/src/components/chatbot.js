@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 import "./ChillMateLogo.png";
 import { LoginContext } from "./LoginContext";
@@ -149,7 +150,9 @@ const Chatbot = () => {
       const data = await response.json();
       let resultString = `Goal: ${data.goal}\n\nSubtasks:\n`;
       data.subtasks.forEach((subtask, index) => {
-        resultString += `Subtask ${index + 1}: ${subtask.subtask}\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
+        resultString += `Subtask ${index + 1}: ${
+          subtask.subtask
+        }\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
       });
       return resultString;
     } catch (error) {
@@ -179,7 +182,7 @@ const Chatbot = () => {
       }
 
       const data = await response.json();
-      
+
       return data.response;
     } catch (error) {
       console.error("Error uploading post:", error);
@@ -193,15 +196,13 @@ const Chatbot = () => {
 
     let botReply = "";
 
-    const userMessage = { text: input, sender: 'user' };
+    const userMessage = { text: input, sender: "user" };
 
-    if(currentId == "cb1") {
+    if (currentId == "cb1") {
       botReply = await getResources(input);
-    }
-    else if (currentId == "cb2") {
+    } else if (currentId == "cb2") {
       botReply = await getChatBot(input);
-    }
-    else if(currentId == "cb3") {
+    } else if (currentId == "cb3") {
       botReply = await getConversation(input);
     }
 
