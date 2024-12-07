@@ -1,4 +1,4 @@
-{/*import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 
 export default function Profile() {
@@ -137,7 +137,7 @@ export default function Profile() {
           )}
         </div>
 
-        /* Mood Tracker 
+        {/* Mood Tracker */}
         <div className="mood-tracker-container">
           <div className="emoji-tracker">
             {isEditing ? (
@@ -152,7 +152,7 @@ export default function Profile() {
           </div>
         </div>
 
-        /* Profile Information 
+        {/* Profile Information */}
         <div className="profile-header">
           <h3>
             {isEditing ? (
@@ -372,92 +372,4 @@ export default function Profile() {
       </div>
     </div>
   );
-} */}
-import React, { useEffect, useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
-import "./style.css";
-
-
-const Navbar = ({ setShowBubbles }) => {  // Accept setShowBubbles as a prop
-  const { isLoggedIn, logout } = useContext(LoginContext);  // Get login state and logout function
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await fetch(`${process.env.REACT_APP_FLASK_URI}/logout`, {
-      method: "POST",
-      credentials: "include"
-    });
-    logout();  // Update login state
-    navigate("/");  // Redirect to home after logout
-  };
-
-  // Function to toggle chatbot visibility
-  const handleChatbotClick = () => {
-    setShowBubbles(prevState => !prevState);
-  };
-
-  return (
-    <div>
-      <nav className="navbar">
-        <ul>
-          <li>
-            <Link to="/">
-              <Logo width="50" height="50" />
-            </Link>
-          </li>
-          <li>
-            {isLoggedIn ? (
-              <Link to="/forum">Forum</Link>
-            ) : (
-              <Link to="/login">Forum</Link>
-            )}
-          </li>
-          <li>
-            {isLoggedIn ? (
-              <Link to="/chatbot">Chatbot</Link>
-            ) : (
-              <Link to="/login">Chatbot</Link>
-            )}
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/resources">Resources</Link>
-          </li>
-          <li>
-            {isLoggedIn ? (
-              <Link to="/journal">Journal</Link>
-            ) : (
-              <Link to="/login">Journal</Link>
-            )}
-          </li>
-          <li>
-            {isLoggedIn ? (
-              <Link to="/profile">Profile</Link>
-            ) : (
-              <Link to="/login">Profile</Link>
-            )}
-          </li>
-          <li>
-            {isLoggedIn ? (
-              <button onClick={handleLogout} className="logout-button">Logout</button>
-            ) : (
-              <Link to="/login" className="login-button">Login</Link>
-            )}
-          </li>
-          {/* Added button to toggle chatbot */}
-          <li>
-            <button onClick={handleChatbotClick} className="chatbot-toggle-button">
-              Toggle Chatbot
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  );
-};
-
-export default Navbar;
-
+} 
