@@ -400,6 +400,7 @@ nav ul li a {
 .navbar li:last-child {
   /* Move the last item (Logout button) to the far right */
   margin-left: auto;
+  
 }
 
 /*Using flexbox to try to make alignment easier*/
@@ -482,6 +483,7 @@ input {
   border-radius: 5px;
   font-size: 18px;
   background-color: #966fd6;
+  margin: 10px;
 }
 
 .logout-button:hover {
@@ -500,6 +502,7 @@ input {
   border-radius: 5px;
   font-size: 18px;
   background-color: #966fd6;
+  margin-left: 10px;
 }
 
 .login-button:hover {
