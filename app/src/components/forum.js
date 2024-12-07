@@ -165,6 +165,35 @@ const Forum = () => {
       }
   };
 
+  const unlike = async(id) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/deleteRelation`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      // Handle success or error based on the response data
+      } catch (error) {
+        console.error("Error creating relation:", error);
+        // Handle error, e.g., display an error message to the user
+      }
+  };
+
 
   // Toggle like status for a post
   const toggleLike = (index) => {
@@ -181,6 +210,8 @@ const Forum = () => {
         else {
           //else if the post is true, it will turn to false
           //remove the relation from the new collection
+          console.log("delete relation");
+          unlike(post.id);
 
         }
 
