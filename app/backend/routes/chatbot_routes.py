@@ -140,7 +140,7 @@ def find_similar_docs():
         return jsonify({"error": str(e)}), 500
 
 @chatbot_bp.route('/mood_tracker', methods=['GET', 'POST'])
-# @jwt_required
+@jwt_required()
 def mood_tracker():
     
     current_user = get_jwt_identity()
@@ -155,7 +155,9 @@ def mood_tracker():
 
     # Extract and return only the content field
     content = latest_journal.get('content') if latest_journal else ""
-    content = "I'm very nervous for my presentation"
+    logger.debug(content)
+    # content = "I'm very nervous for my presentation"
+    logger.debug(content)
     if not content:
         return jsonify({"mood": "neutral"}), 200
     
