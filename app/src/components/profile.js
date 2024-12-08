@@ -59,7 +59,7 @@ export default function Profile() {
       console.error("Access token is missing! User might be logged out.");
       return;
     }
-  
+
     try {
       const response = await fetch(
         `${process.env.REACT_APP_FLASK_URI}/auth/getProfile`,
@@ -81,7 +81,6 @@ export default function Profile() {
       }
       const user = await response.json();
       console.log("Fetched profile:", user);
-  
 
       setProfile({
         username: user.Username || "(empty)",
@@ -101,7 +100,7 @@ export default function Profile() {
         emergencyContactNumber: user.EmergencyContactNum || "(empty)",
         emergencyemail: user.EmergencyContactEmail || "(empty)",
         relationship: user.EmergencyContactRelationship || "(empty)",
-        mood: user.Mood || "(empty)"
+        mood: user.Mood || "(empty)",
       });
     } catch (error) {
       console.error("Error getting profile:", error);
@@ -230,7 +229,7 @@ export default function Profile() {
   useEffect(() => {
     console.log("getting profile");
     getProfileData();
-  });
+  }, []);
 
   return (
     <div className="profile">
@@ -472,4 +471,4 @@ export default function Profile() {
       </div>
     </div>
   );
-} 
+}

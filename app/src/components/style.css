@@ -399,7 +399,63 @@ nav ul li a {
 .navbar li:last-child {
   /* Move the last item (Logout button) to the far right */
   margin-left: auto;
+}
 
+.hamburger {
+  display: none;
+  /* Hide the hamburger menu by default */
+}
+
+/* Hamburger menu styles */
+.hamburger {
+  display: none; /* Hidden by default on desktop */
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show hamburger on mobile */
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 100;
+  }
+
+  .nav-menu {
+    display: none; /* Hide menu by default on mobile */
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #d9d9d9;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .nav-menu.active {
+    display: flex; /* Show menu when active */
+  }
+
+  .nav-menu li {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-menu li:last-child {
+    margin-left: 0;
+  }
+
+  .login-button,
+  .logout-button {
+    margin: 10px auto;
+    display: block;
+  }
 }
 
 /*Using flexbox to try to make alignment easier*/
@@ -416,7 +472,7 @@ nav ul li a {
 }
 
 /*For the Chillmate header*/
-.container> :first-child {
+.container > :first-child {
   margin: 0 auto;
   /* Center the first item */
 }
@@ -645,9 +701,7 @@ nav ul li:last-child {
 
 /* Profile container styling */
 .profile-container {
-  background: linear-gradient(to bottom,
-      #7c32eb 90px,
-      rgb(244, 240, 244) 50px);
+  background: linear-gradient(to bottom, #7c32eb 90px, rgb(244, 240, 244) 50px);
   /* Strip color and container color */
   padding-left: 10px;
   padding-left: 10px;
@@ -1068,10 +1122,7 @@ textarea {
 .bubble {
   position: absolute;
   /* Positioning relative to .chatbot-messages */
-  background-color: rgba(235,
-      151,
-      217,
-      0.6);
+  background-color: rgba(235, 151, 217, 0.6);
   /* Semi-transparent white for bubbles */
   border-radius: 50%;
   animation: bubble-animation 10s infinite ease-in-out;
@@ -1210,7 +1261,7 @@ textarea {
   text-align: right;
   white-space: pre-wrap;
   /* Preserve line breaks */
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 18px;
   /* Same size as bot messages */
   line-height: 1.6;
@@ -1238,7 +1289,7 @@ textarea {
   text-align: left;
   white-space: pre-wrap;
   /* Preserve line breaks */
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 18px;
   /* Slightly smaller for better balance */
   line-height: 1.6;
@@ -1468,7 +1519,6 @@ textarea {
   gap: 20px;
   /* Add spacing between grid items */
   padding: 20px;
-
 }
 
 .journal-entry {
@@ -1582,7 +1632,6 @@ textarea {
   /* Smooth transition for the flip */
   backface-visibility: hidden;
 }
-
 
 .suggestions {
   display: flex;
@@ -1772,9 +1821,7 @@ select {
   /* Larger font size for emojis */
   cursor: pointer;
   /* Show pointer cursor on hover */
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   /* Smooth hover effects */
 }
 
