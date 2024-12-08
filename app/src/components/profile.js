@@ -83,11 +83,11 @@ export default function Profile() {
         city: user.City || "Unknown",
         sfsuId: user.SFStateID || "No ID",
         sfsuEmail: user.Email || "No Email",
-        EmergencycontactfirstName: user.emerEmergencyContactFirstName || "Default First Name",
-        EmergencycontactlastName: user.EmergencyContactLastName || "Default Last Name",
+        EmergencycontactfirstName: user.EmergencycontactfirstName || "Default First Name",
+        EmergencycontactlastName: user.EmergencycontactlastName || "Default Last Name",
         emergencyContactNumber: user.EmergencyContactNumber || "Unknown",
         emergencyemail: user.EmergencyContactEmail || "No Email",
-        relationship: user.EmergencyContactRelationship || "Unknown", 
+        relationship: user.relationship || "Unknown", 
         mood: "neutral", 
       });
     } catch (error) {}
