@@ -1,7 +1,6 @@
 // JournalList.js
 import React from "react";
 
-
 const JournalList = ({ entries }) => (
   <div className="journal-list">
     {entries.map((entry) => (

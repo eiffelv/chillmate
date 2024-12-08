@@ -1,41 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { LoginContext } from "./LoginContext"; // Import the LoginContext
+import { logoutUser } from "./Logout";
 import "./style.css";
 
 export default function Profile() {
+  const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
-    username: "Sneha Katturu",
-    firstName: "Sneha",
-    lastName: "Katturu",
-    occupation: "Student",
-    age: "24",
-    phoneNumber: "123-456-7890",
-    address1: "123 Market St, San Francisco",
-    address2: "Market St",
+    username: "⌛",
+    firstName: "⌛",
+    lastName: "⌛",
+    occupation: "⌛",
+    age: "⌛",
+    phoneNumber: "⌛",
+    address1: "1600 Holloway Ave",
+    address2: "⌛",
     state: "California",
     city: "San Francisco",
-    sfsuId: "12345678",
-    sfsuEmail: "skatturu@sfsu.edu",
-    EmergencycontactfirstName: "Anjali",
-    EmergencycontactlastName: "Chiruvandhulu",
-    emergencyContactNumber: "987-654-3210",
-    emergencyemail: "parent@gmail.com",
-    relationship: "Mother",
-    mood: "neutral",
+    sfsuId: "⌛",
+    sfsuEmail: "⌛",
+    EmergencycontactfirstName: "⌛",
+    EmergencycontactlastName: "⌛",
+    emergencyContactNumber: "⌛",
+    emergencyemail: "⌛",
+    relationship: "⌛",
+    mood: "loading",
   });
 
   const moodEmoji = {
     happy: "😊",
     neutral: "😐",
     sad: "😢",
+    angry: "😡",
+    excited: "😆",
+    calm: "😌",
+    anxious: "😢",
+    loading: "⌛",
   };
 
   const moodText = {
     happy: "Happy",
     neutral: "Neutral",
     sad: "Sad",
+    angry: "Angry",
+    excited: "Excited",
+    calm: "Calm",
+    anxious: "Anxious",
+    loading: "Loading",
   };
 
-  const [mood, setMood] = useState("neutral");
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
 
@@ -61,70 +75,167 @@ export default function Profile() {
       );
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error fetching profile:", errorData);
-        return;
+        // const data = await response.json();
+        // console.log(data);
+        throw new Error("Failed to get profile");
       }
-  
       const user = await response.json();
       console.log("Fetched profile:", user);
   
 
       setProfile({
-        username: user.Username || "Default Username",
-        firstName: user.FirstName || "Default First Name",
-        lastName: user.LastName || "Default Last Name",
-        occupation: user.Occupation || "Unknown",
-        age: user.Age || "Unknown",
-        phoneNumber: user.PhoneNum || "Unknown",
-        address1: user.Address || "No Address",
-        address2: user.Address || "No Address",
-        state: user.State || "Unknown",
-        city: user.City || "Unknown",
-        sfsuId: user.SFStateID || "No ID",
-        sfsuEmail: user.Email || "No Email",
-        EmergencycontactfirstName: user.EmergencycontactfirstName || "Default First Name",
-        EmergencycontactlastName: user.EmergencycontactlastName || "Default Last Name",
-        emergencyContactNumber: user.EmergencyContactNumber || "Unknown",
-        emergencyemail: user.EmergencyContactEmail || "No Email",
-        relationship: user.relationship || "Unknown", 
-        mood: "neutral", 
+        username: user.Username || "(empty)",
+        firstName: user.FirstName || "(empty)",
+        lastName: user.LastName || "(empty)",
+        occupation: user.Occupation || "(empty)",
+        age: user.Age || "(empty)",
+        phoneNumber: user.PhoneNum || "(empty)",
+        address1: user.Address || "(empty)",
+        address2: user.Address2 || "(empty)",
+        state: user.State || "(empty)",
+        city: user.City || "(empty)",
+        sfsuId: user.SFStateID || "(empty)",
+        sfsuEmail: user.Email || "(empty)",
+        EmergencycontactfirstName: user.EmergencyContactFirstName || "(empty)",
+        EmergencycontactlastName: user.EmergencyContactLastName || "(empty)",
+        emergencyContactNumber: user.EmergencyContactNum || "(empty)",
+        emergencyemail: user.EmergencyContactEmail || "(empty)",
+        relationship: user.EmergencyContactRelationship || "(empty)",
+        mood: user.Mood || "(empty)"
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error getting profile:", error);
+      // Handle error, e.g., display an error message to the user
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
   };
   const handleEditClick = () => {
+    setEditedProfile({ ...profile });
     setIsEditing(true);
   };
 
   const handleSaveClick = () => {
     setProfile(editedProfile);
+    updateProfile(editedProfile);
     setIsEditing(false);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setEditedProfile({ ...editedProfile, [name]: value });
   };
 
-  const handleMoodChange = (newMood) => {
-    setEditedProfile({ ...editedProfile, mood: newMood });
+  const updateMood = async () => {
+    const token = localStorage.getItem("accessToken");
+    setProfile({ ...profile, mood: "loading" });
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/chatbot/mood_tracker`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update mood");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setProfile({ ...profile, mood: data.mood });
+      sendMood(data.mood);
+    } catch (error) {
+      console.error("Error updating mood:", error);
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
   };
 
-  const changeMood = (newMood) => {
-    setMood(newMood);
+  const sendMood = async (newMood) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/updateMood`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ mood: newMood }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update mood");
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error updating mood:", error);
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
+  };
+
+  const updateProfile = async (editedProfile) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/updateProfile`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(editedProfile),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update profile");
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
+  };
+
+  const textMood = () => {
+    const output =
+      "Current Mood: " + moodText[profile.mood] + " -- Click to Update Mood";
+    return output;
   };
 
   //function that call api to get profile data
   useEffect(() => {
     console.log("getting profile");
     getProfileData();
-  }, []);
+  });
 
   return (
     <div className="profile">
       <div className="profile-container">
         <div className="strip"></div>
-        /* Edit/Save Button 
         <div className="button-container">
           {!isEditing ? (
             <button className="edit-button" onClick={handleEditClick}>
@@ -140,32 +251,21 @@ export default function Profile() {
         {/* Mood Tracker */}
         <div className="mood-tracker-container">
           <div className="emoji-tracker">
-            {isEditing ? (
-              <div className="mood-selector">
-                <button onClick={() => handleMoodChange("happy")}>😊</button>
-                <button onClick={() => handleMoodChange("neutral")}>😐</button>
-                <button onClick={() => handleMoodChange("sad")}>😢</button>
-              </div>
-            ) : (
-              <span>{moodEmoji[profile.mood]}</span>
-            )}
+            {/* Make emoji clickable link to update mood */}
+
+            <span
+              className="clickable"
+              title={textMood()}
+              onClick={() => updateMood()}
+            >
+              {moodEmoji[profile.mood]}
+            </span>
           </div>
         </div>
 
         {/* Profile Information */}
         <div className="profile-header">
-          <h3>
-            {isEditing ? (
-              <input
-                type="text"
-                name="username"
-                value={editedProfile.username}
-                onChange={handleInputChange}
-              />
-            ) : (
-              profile.username
-            )}{" "}
-          </h3>
+          <h3>{profile.username} </h3>
         </div>
 
         <div className="profile-details-heading">
@@ -281,7 +381,7 @@ export default function Profile() {
                   type="text"
                   name="city"
                   value={editedProfile.sfsuId}
-                  onChange={handleInputChange}
+                  disabled
                 />
               ) : (
                 profile.sfsuId

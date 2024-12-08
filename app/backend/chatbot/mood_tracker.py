@@ -1,5 +1,4 @@
-import yaml
-from jinja2 import Template
+from .generate_goals import PromptLoader
 
 from typing import Dict
 import os
@@ -12,60 +11,22 @@ import json
 from pathlib import Path
 from groq import Groq
 
+
 load_dotenv()
 
 groq_api_key = os.getenv("GROQ_API_KEY")
 
-
-class PromptLoader:
-    def __init__(self, yaml_file_path, context=None):
-        """
-        Initializes the PromptLoader class.
-        :param yaml_file_path: Path to the YAML file.
-        :param context: Dictionary of context values to format the prompts.
-        """
-        self.yaml_file_path = yaml_file_path
-        self.context = context if context else {}
-        self.user_prompt = ""
-        self.system_prompt = ""
-        self.load_prompts()
-
-    def load_prompts(self):
-        try:
-            with open(self.yaml_file_path, 'r') as file:
-                data = yaml.safe_load(file)
-                
-                # Use Jinja2 Template for rendering
-                user_prompt_template = Template(data.get('user_prompt', ''))
-                system_prompt_template = Template(data.get('system_prompt', ''))
-                
-                # Render templates with the provided context
-                self.user_prompt = user_prompt_template.render(**self.context)
-                self.system_prompt = system_prompt_template.render(**self.context)
-        except FileNotFoundError:
-            print(f"Error: The file {self.yaml_file_path} was not found.")
-        except yaml.YAMLError as exc:
-            print(f"Error parsing YAML file: {exc}")
-        except Exception as exc:
-            print(f"Error rendering templates: {exc}")
-
-    def get_user_prompt(self):
-        return self.user_prompt
-
-    def get_system_prompt(self):
-        return self.system_prompt
-
-
-class GenerateGoal:
+class MoodTracker:
     def __init__(self, model_name: str, provider_name: str):
 
         # Define the base path (can be absolute or relative)
         base_dir = Path(__file__).parent
-        self.yaml_path = base_dir / "goal_prompt.yaml"
+        self.yaml_path = base_dir / "mood_tracker_prompt.yaml"
         self.model_name = model_name
         self.provider_name = provider_name
 
     def call_llm(self, prompt: str, system_msg: str, get_json: bool= True):
+        logger.debug(f"Groq API key: {groq_api_key}")
         # if self.provider_name == "open_ai":
         #     url = "https://api.openai.com/v1"
         #     key = os.getenv("OPENAI_API_KEY", "")
@@ -75,18 +36,19 @@ class GenerateGoal:
 
         # elif self.provider_name == "groq":
         #     url = "https://api.groq.com/openai/v1"
-        #     key = ""
+        #     key = groq_api_key
 
         # elif self.provider_name == "fireworks":
         #     url = "https://api.fireworks.ai/inference/v1"
-        #     key = fireworks_key
+        #     key = ""
 
         # elif self.provider_name == "deepinfra":
         #     url = "https://api.deepinfra.com/v1/openai"
         #     key = ""
-
+        # logger.debug(f"Provider: {self.provider_name}")
+        # logger.debug(f"API key: {groq_api_key}")
         client = Groq(
-            api_key=groq_api_key
+            api_key=groq_api_key,
         )
         # client = Groq(api_key=key)
         logger.debug(f"Model being used: {self.model_name}")
@@ -148,19 +110,20 @@ class GenerateGoal:
     @staticmethod
     def _postprocess_response(response, **kwargs):
         """Post-processing to extract valid json schema from the response"""
-        input_string = GenerateGoal.replace_quotes(response)
+        input_string = MoodTracker.replace_quotes(response)
         # logger.debug(f"Input string for json extraction -> {input_string}")
-        json_string = GenerateGoal.extract_json_string(input_string)
+        json_string = MoodTracker.extract_json_string(input_string)
         # logger.debug(f"Extracted json string -> {json_string}")
         return json_string
 
     def generate(self, context: Dict):
         
         prompt = PromptLoader(self.yaml_path, context)
-        
+        # logger.debug(f"System prompt: {prompt.system_prompt}")
+        # logger.debug(f"User prompt: {prompt.user_prompt}")
         try:
             raw_res, time_taken = self.call_llm(prompt.get_user_prompt(), prompt.get_system_prompt(), get_json=True)
-            parsed_output = json.loads(GenerateGoal._postprocess_response(raw_res))
+            parsed_output = json.loads(MoodTracker._postprocess_response(raw_res))
 
         except Exception as e:
             logger.error(f"Issue processing user query| error message: {e}")

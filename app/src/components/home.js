@@ -1,8 +1,6 @@
 //import React from "react";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./LoginContext";
-import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png";
 import Chatbot from "./Chatbot.png";
@@ -48,16 +46,19 @@ function Home() {
   return (
     <div className="containerHome" id="home">
       <h1>ChillMate</h1>
-      <div classname="Title">
+      <div className="Title">
         <h5 className="fade-in">
           <em>Empowering You on Your Mental Health Journey</em>
         </h5>
         <p>Discover a Path to Better Mental Health with ChillMate</p>
+        <br />
+        <br />
         <button className="pulse-button" onClick={goToAbout}>
           Learn more ➜
         </button>
       </div>
-      <p></p>
+      <br />
+      <br />
       <div className="missionStatement">
         <h2>Our Mission</h2>
         <h3>
@@ -95,7 +96,10 @@ function Home() {
           <img src={Tasklist} width="100" height="100" alt="TaskList" />
         </div>
       </div>
+      <br />
+      <br />
       <p>Join us in fostering a healthier academic environment!</p>
+      <br />
       <button className="pulse-button" onClick={goToRegister}>
         Register Now!
       </button>

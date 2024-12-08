@@ -183,3 +183,9 @@ flask_session/
 # Vercel #
 ##########
 .vercel
+
+# MongoDB #
+###########
+*.log
+*.mdmp
+*.mongodb.js

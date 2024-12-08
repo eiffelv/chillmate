@@ -24,10 +24,10 @@ const Register = () => {
     city: "",
     state: "",
     zip_code: "",
-    EmergencyNumber: "",
-    EmergencyFirstName: "",
-    EmergencyLastName: "",
-    EmergencyRelation: ""
+    emergency_first_name: "",
+    emergency_last_name: "",
+    emergency_phone_number: "",
+    relationship: "",
   });
 
   const [message, setMessage] = useState("");
@@ -38,7 +38,6 @@ const Register = () => {
 
     setUser((prevUser) => ({
       ...prevUser,
-      Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`,
     }));
 
     event.preventDefault();
@@ -89,14 +88,6 @@ const Register = () => {
     setUser({ ...user, [name]: value }); // Dynamically set the value based on field name
     // setAddress({ ...user, [name]: value });
     // setUser({Address: fullAddress});
-
-    console.log(user);
-
-    //combine address into one variable which is Address
-    setUser((prevUser) => ({
-      ...prevUser,
-      Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`,
-    }));
   };
 
   const navigate = useNavigate();
@@ -340,7 +331,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="EmergencyFirstName"
+              name="emergency_first_name"
               placeholder="Olivia"
               value={user.EmergencyFirstName}
               onChange={handleChange}
@@ -351,7 +342,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="EmergencyLastName"
+              name="emergency_last_name"
               placeholder="Smith"
               value={user.EmergencyLastName}
               onChange={handleChange}
@@ -363,8 +354,8 @@ const Register = () => {
             <input
               placeholder="1234567890"
               type="tel"
-              name="EmergencyNumber"
-              value={user.EmergencyNumber}
+              name="emergency_phone_number"
+              value={user.PhoneNum}
               onChange={handleChange}
               required
               pattern="[0-9]{10}" // Optional: restrict to 10-digit phone numbers

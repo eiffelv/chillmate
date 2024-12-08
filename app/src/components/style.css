@@ -145,9 +145,7 @@ body {
   /* Initially hidden */
   transform: translateX(-100%);
   /* Start off-screen to the left */
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .feature.animate {
@@ -1804,6 +1802,10 @@ select {
   font-size: 5em;
   margin-top: 1px;
   padding: 2px;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 /* Emergency Contact Details */
