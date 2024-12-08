@@ -50,6 +50,8 @@ function Home() {
       if (!response.ok) {
         throw new Error("Failed to get profile");
       }
+
+      console.log("User seems still logged in.");
     } catch (error) {
       console.error("Logging Out, Invalid Token");
       // Handle error, e.g., display an error message to the user
