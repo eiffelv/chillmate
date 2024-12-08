@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import "./ChillMateLogo.png";
-import { LoginContext } from "./LoginContext";
 
 /*
 const suggestions = [
@@ -32,11 +31,11 @@ const Chatbot = () => {
   const [selectedId, setSelectedId] = useState(""); // State to track the selected ID
 
   // State to store conversation history for each suggestion
-  const [conversationHistory, setConversationHistory] = useState({
+  /* const [conversationHistory, setConversationHistory] = useState({
     cb1: [],
     cb2: [],
     cb3: [],
-  });
+  }); */
 
   const renderMessageWithLinks = (text) => {
     const linkRegex = /(https?:\/\/[^\s]+)/g; // Regex to detect URLs
@@ -116,9 +115,8 @@ const Chatbot = () => {
       });
 
       console.log(resourceString);
-      
-      return resourceString;
 
+      return resourceString;
     } catch (error) {
       console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
@@ -149,7 +147,9 @@ const Chatbot = () => {
       const data = await response.json();
       let resultString = `Goal: ${data.goal}\n\nSubtasks:\n`;
       data.subtasks.forEach((subtask, index) => {
-        resultString += `Subtask ${index + 1}: ${subtask.subtask}\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
+        resultString += `Subtask ${index + 1}: ${
+          subtask.subtask
+        }\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
       });
       return resultString;
     } catch (error) {
@@ -179,7 +179,7 @@ const Chatbot = () => {
       }
 
       const data = await response.json();
-      
+
       return data.response;
     } catch (error) {
       console.error("Error uploading post:", error);
@@ -193,15 +193,13 @@ const Chatbot = () => {
 
     let botReply = "";
 
-    const userMessage = { text: input, sender: 'user' };
+    const userMessage = { text: input, sender: "user" };
 
-    if(currentId == "cb1") {
+    if (currentId === "cb1") {
       botReply = await getResources(input);
-    }
-    else if (currentId == "cb2") {
+    } else if (currentId === "cb2") {
       botReply = await getChatBot(input);
-    }
-    else if(currentId == "cb3") {
+    } else if (currentId === "cb3") {
       botReply = await getConversation(input);
     }
 
@@ -253,7 +251,6 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
-
     // if (suggestion.text === "General conversation.😊") {
     //   const specialMessage = {
     //     text: "Hello! How is your day?",
@@ -268,18 +265,17 @@ const Chatbot = () => {
     // }
 
     if (suggestion.text === "General conversation.😊") {
-       const specialMessage = {
-         text: "Hello! How is your day?",
-         sender: "bot",
-         special: "general-conversation",
-       };
-       setMessages([...messages, specialMessage]);
-       } else {
-        getChatBot(suggestion).then((botResponse) => {
+      const specialMessage = {
+        text: "Hello! How is your day?",
+        sender: "bot",
+        special: "general-conversation",
+      };
+      setMessages([...messages, specialMessage]);
+    } else {
+      getChatBot(suggestion).then((botResponse) => {
         simulateTyping(botResponse); // Display the chatbot response in the chat
       });
     }
-
   };
 
   const handleKeyDown = (e) => {
@@ -314,22 +310,22 @@ const Chatbot = () => {
         {showAnimatedText && <AnimatedText />}{" "}
         {/* Only show AnimatedText if showAnimatedText is true */}
         <div className="suggestions">
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion.id} // Use the unique ID as the key
-                className="suggestion-button"
-                style={{
-                  backgroundColor: selectedId === suggestion.id ? "#2d00b3" : "",
-                  color: selectedId === suggestion.id ? "#fff" : "", // Optional: Change text color for better contrast
-                }}
-                onClick={() => {
-                  setSelectedId(suggestion.id); // Update the selectedId state
-                  handleSuggestionClick(suggestion); // Call the existing click handler
-                }}
-              >
-            {suggestion.text}
-              </button>
-            ))}
+          {suggestions.map((suggestion) => (
+            <button
+              key={suggestion.id} // Use the unique ID as the key
+              className="suggestion-button"
+              style={{
+                backgroundColor: selectedId === suggestion.id ? "#2d00b3" : "",
+                color: selectedId === suggestion.id ? "#fff" : "", // Optional: Change text color for better contrast
+              }}
+              onClick={() => {
+                setSelectedId(suggestion.id); // Update the selectedId state
+                handleSuggestionClick(suggestion); // Call the existing click handler
+              }}
+            >
+              {suggestion.text}
+            </button>
+          ))}
         </div>
         <div className="chatbot-messages">
           {/* Add bubbles as the background */}
@@ -337,11 +333,12 @@ const Chatbot = () => {
             Array.from({ length: 80 }).map((_, index) => (
               <div key={index} className="bubble"></div>
             ))}
-          
 
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
-              {msg.sender === "bot" ? renderMessageWithLinks(msg.text) : msg.text}
+              {msg.sender === "bot"
+                ? renderMessageWithLinks(msg.text)
+                : msg.text}
             </div>
           ))}
 

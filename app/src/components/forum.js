@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./LoginContext";
+import { logoutUser } from "./Logout";
 import "./style.css";
 import "./ChillMateLogo.png";
 
@@ -10,18 +11,29 @@ const Forum = () => {
   const [postContent, setPostContent] = useState("");
   const [posts, setPosts] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getForumPost = async () => {
-      const token = localStorage.getItem('accessToken');
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/forum/getForum`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+      const token = localStorage.getItem("accessToken");
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_FLASK_URI}/forum/getForum`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch forum posts");
         }
-      });
-      const data = await response.json();
-      console.log("useEffect running")
-      console.log("dapetnya", data);
+
+        const data = await response.json();
+        console.log("useEffect running");
+        console.log("dapetnya", data);
 
       const formattedPosts = await Promise.all(
         data.map(async post => ({
@@ -33,14 +45,18 @@ const Forum = () => {
       );
       console.log("formattedPosts: ", formattedPosts);
 
-      setPosts(formattedPosts); 
+        setPosts(formattedPosts);
 
-      return data;
+        return data;
+      } catch (error) {
+        console.error("Error fetching forum posts:", error);
+        if (isLoggedIn) {
+          logoutUser(logout, navigate);
+        }
+      }
     };
     getForumPost();
-  }, []);
-
-  //
+  }, [isLoggedIn, logout, navigate]);
 
   //function to create forum posts
   const uploadPost = async (newPost) => {
@@ -69,6 +85,9 @@ const Forum = () => {
     } catch (error) {
       console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
     }
   };
 

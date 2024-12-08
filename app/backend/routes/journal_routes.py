@@ -22,7 +22,7 @@ def get_journal():
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
     result = [
         {**doc, "_id": str(doc["_id"])}
-        for doc in mongo_utils.collection.find({'SFStateID': current_user}).sort("_id", -1)
+        for doc in mongo_utils.collection.find({'SFStateID': current_user}).sort("Timestamp", -1)
     ]
 
     logger.debug(result)
@@ -39,6 +39,7 @@ def create_journal():
 
     title = data.get("title")
     content = data.get("content")
+    date = data.get("date")
     color = data.get("color")
 
     if not title or not content:
@@ -49,7 +50,8 @@ def create_journal():
         "SFStateID": current_user,
         "Title": title,
         "Content": content,
-        "color": color
+        "Timestamp": date,
+        "Color": color,
     }
 
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
