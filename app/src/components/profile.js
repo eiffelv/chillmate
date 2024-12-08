@@ -53,19 +53,24 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
 
-  const getProfileData = async (e) => {
+  const getProfileData = async () => {
     const token = localStorage.getItem("accessToken");
+    if (!token) {
+      console.error("Access token is missing! User might be logged out.");
+      return;
+    }
+  
     try {
       const response = await fetch(
         `${process.env.REACT_APP_FLASK_URI}/auth/getProfile`,
         {
-          method: "POST",
+          method: "GET", // Use GET method
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
           },
-          //body: JSON.stringify(newJournal),
+          mode: "cors",
         }
       );
 
@@ -74,29 +79,29 @@ export default function Profile() {
         // console.log(data);
         throw new Error("Failed to get profile");
       }
-
       const user = await response.json();
-      console.log(user);
+      console.log("Fetched profile:", user);
+  
 
       setProfile({
-        username: user.Username,
-        firstName: user.FirstName,
-        lastName: user.LastName,
-        occupation: user.Occupation,
-        age: user.Age,
-        phoneNumber: user.PhoneNum,
-        address1: user.Address,
-        address2: user.Address2,
-        state: user.State,
-        city: user.City,
-        sfsuId: user.SFStateID,
-        sfsuEmail: user.Email,
-        EmergencycontactfirstName: user.EmergencyContactFirstName,
-        EmergencycontactlastName: user.EmergencyContactLastName,
-        emergencyContactNumber: user.EmergencyContactNum,
-        emergencyemail: user.EmergencyContactEmail,
-        relationship: user.EmergencyContactRelationship,
-        mood: user.Mood,
+        username: user.Username || "(empty)",
+        firstName: user.FirstName || "(empty)",
+        lastName: user.LastName || "(empty)",
+        occupation: user.Occupation || "(empty)",
+        age: user.Age || "(empty)",
+        phoneNumber: user.PhoneNum || "(empty)",
+        address1: user.Address || "(empty)",
+        address2: user.Address2 || "(empty)",
+        state: user.State || "(empty)",
+        city: user.City || "(empty)",
+        sfsuId: user.SFStateID || "(empty)",
+        sfsuEmail: user.Email || "(empty)",
+        EmergencycontactfirstName: user.EmergencyContactFirstName || "(empty)",
+        EmergencycontactlastName: user.EmergencyContactLastName || "(empty)",
+        emergencyContactNumber: user.EmergencyContactNum || "(empty)",
+        emergencyemail: user.EmergencyContactEmail || "(empty)",
+        relationship: user.EmergencyContactRelationship || "(empty)",
+        mood: user.Mood || "(empty)"
       });
     } catch (error) {
       console.error("Error getting profile:", error);
@@ -231,7 +236,6 @@ export default function Profile() {
     <div className="profile">
       <div className="profile-container">
         <div className="strip"></div>
-        {/* Edit/Save Button */}
         <div className="button-container">
           {!isEditing ? (
             <button className="edit-button" onClick={handleEditClick}>
@@ -468,4 +472,4 @@ export default function Profile() {
       </div>
     </div>
   );
-}
+} 

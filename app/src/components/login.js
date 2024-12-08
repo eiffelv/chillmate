@@ -79,8 +79,8 @@ function Login() {
   };
 
   return (
-    <div className="login">
-      <img src={FlowerPic} width="900" height="593" alt="LoginPic" />
+    <login className="login">
+      <img src={FlowerPic} alt="LoginPic" className="login-image" />
       <div className="login-container">
         <h2>Login</h2>
 
@@ -108,7 +108,7 @@ function Login() {
           Don't have an account? <Link to="/register">Register here</Link>
         </p>
       </div>
-    </div>
+    </login>
   );
 }
 

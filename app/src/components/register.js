@@ -333,7 +333,7 @@ const Register = () => {
               type="text"
               name="emergency_first_name"
               placeholder="Olivia"
-              value={user.FirstName}
+              value={user.EmergencyFirstName}
               onChange={handleChange}
               required
             />
@@ -344,7 +344,7 @@ const Register = () => {
               type="text"
               name="emergency_last_name"
               placeholder="Smith"
-              value={user.LastName}
+              value={user.EmergencyLastName}
               onChange={handleChange}
               required
             />
@@ -364,9 +364,9 @@ const Register = () => {
             <label>Relationship</label>
             <input
               type="text"
-              name="relationship"
+              name="EmergencyRelation"
               placeholder="Mother"
-              value={user.FirstName}
+              value={user.EmergencyRelation}
               onChange={handleChange}
               required
             />

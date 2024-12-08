@@ -17,3 +17,5 @@ const JournalList = ({ entries }) => (
 );
 
 export default JournalList;
+
+

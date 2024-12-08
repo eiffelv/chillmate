@@ -53,6 +53,7 @@ body {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -371,7 +372,7 @@ nav {
   align-items: center;
   top: 0;
   /* Position at the top of the viewport */
-  width: 99%;
+  width: 98.8%;
   /* Make it span the entire width of the page */
 }
 
@@ -398,6 +399,7 @@ nav ul li a {
 .navbar li:last-child {
   /* Move the last item (Logout button) to the far right */
   margin-left: auto;
+
 }
 
 /*Using flexbox to try to make alignment easier*/
@@ -414,7 +416,7 @@ nav ul li a {
 }
 
 /*For the Chillmate header*/
-.container > :first-child {
+.container> :first-child {
   margin: 0 auto;
   /* Center the first item */
 }
@@ -424,19 +426,39 @@ input {
   margin-bottom: 10px;
 }
 
+/* login ul {
+  display: flex;
+  align-items: center;
+  width: 100%;
+} */
+
 .login {
   display: flex;
+  margin-right: auto;
   height: 100vh;
+  width: 100%;
+  max-width: 3000px;
+  /* align-items: center; */
   /* Full viewport height */
   background-color: #deddff;
   /* Optional: background color */
 }
 
+.login-image {
+  flex: 1;
+  /* Take up half of the available space */
+  height: 100%;
+  /* Match parent container height */
+  width: 60%;
+  /* Ensure it takes only half the width */
+  object-fit: cover;
+  /* Cover the container without distortion */
+}
+
 .login-container {
   background-color: #ffffff;
-  padding: 50px;
+  padding: 10%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 50%;
   text-align: center;
 }
 
@@ -479,6 +501,7 @@ input {
   border-radius: 5px;
   font-size: 18px;
   background-color: #966fd6;
+  margin: 10px;
 }
 
 .logout-button:hover {
@@ -497,6 +520,7 @@ input {
   border-radius: 5px;
   font-size: 18px;
   background-color: #966fd6;
+  margin-left: 10px;
 }
 
 .login-button:hover {
@@ -606,10 +630,13 @@ nav ul li:last-child {
 .profile {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align content to the top */
-  min-height: 100vh; /* Take full viewport height */
+  align-items: flex-start;
+  /* Align content to the top */
+  min-height: 100vh;
+  /* Take full viewport height */
   box-sizing: border-box;
-  padding-top: 20px; /* Add some top padding */
+  padding-top: 20px;
+  /* Add some top padding */
   padding-left: 20px;
   background: linear-gradient(to right, rgb(194, 182, 240), rgb(232, 179, 232));
   position: relative;
@@ -618,18 +645,19 @@ nav ul li:last-child {
 
 /* Profile container styling */
 .profile-container {
-  background: linear-gradient(
-    to bottom,
-    #7c32eb 90px,
-    rgb(244, 240, 244) 50px
-  ); /* Strip color and container color */
+  background: linear-gradient(to bottom,
+      #7c32eb 90px,
+      rgb(244, 240, 244) 50px);
+  /* Strip color and container color */
   padding-left: 10px;
   padding-left: 10px;
   border-radius: 8px;
   padding: 20px;
-  width: 650px; /* Fixed width */
+  width: 650px;
+  /* Fixed width */
   margin-top: 50px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for elevation */
   text-align: left;
   position: relative;
 }
@@ -663,12 +691,14 @@ nav ul li:last-child {
 /* Mood tracker styling */
 .mood-tracker-container {
   display: flex;
-  justify-content: center; /* Center the mood emoji */
+  justify-content: center;
+  /* Center the mood emoji */
   margin-bottom: 20px;
 }
 
 .emoji {
-  font-size: 80px; /* Big emoji */
+  font-size: 80px;
+  /* Big emoji */
   margin: 0;
 }
 
@@ -681,22 +711,26 @@ nav ul li:last-child {
 
 /* Profile name and description */
 .profile-header {
-  margin-bottom: 20px; /* Add space below header */
+  margin-bottom: 20px;
+  /* Add space below header */
   text-align: left;
 }
 
 .profile-header h3 {
   margin: 5px 0;
   font-family: "Times New Roman", Times, serif;
-  font-size: 24px; /* Slightly larger name text */
+  font-size: 24px;
+  /* Slightly larger name text */
   font-weight: bold;
-  color: #6200ee; /* Purple accent color */
+  color: #6200ee;
+  /* Purple accent color */
 }
 
 .profile-details-heading {
   font-size: 18px;
   font-weight: bold;
-  margin-top: 30px; /* Space between profile and details */
+  margin-top: 30px;
+  /* Space between profile and details */
   padding-left: 10px;
   font-family: "Times New Roman", Times, serif;
   text-align: left;
@@ -706,9 +740,12 @@ nav ul li:last-child {
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Space between columns */
-  align-items: left; /* Align items vertically */
-  margin-bottom: 15px; /* Add spacing between rows */
+  justify-content: space-between;
+  /* Space between columns */
+  align-items: left;
+  /* Align items vertically */
+  margin-bottom: 15px;
+  /* Add spacing between rows */
   padding-left: 15px;
   padding-top: 15px;
   padding-bottom: 6px;
@@ -718,11 +755,15 @@ nav ul li:last-child {
 }
 
 .row p {
-  margin: 0; /* Remove default paragraph margins */
-  font-size: 13px; /* Adjust font size */
+  margin: 0;
+  /* Remove default paragraph margins */
+  font-size: 13px;
+  /* Adjust font size */
   font-family: Arial, Helvetica, sans-serif;
-  color: #333; /* Text color */
-  line-height: 1.4; /* Improve readability */
+  color: #333;
+  /* Text color */
+  line-height: 1.4;
+  /* Improve readability */
   /* Allow items to take full width and avoid crossing */
   flex: 1 1 48%;
 }
@@ -730,35 +771,44 @@ nav ul li:last-child {
 /* Styling for strong elements (labels) */
 .row strong {
   font-weight: bold;
-  color: #555; /* Slightly muted label color */
+  color: #555;
+  /* Slightly muted label color */
 }
 
 /* Profile details box */
 .profile-details {
   padding-top: 5px;
-  background-color: #f9f9f9; /* Light gray background for contrast */
-  border-radius: 6px; /* Rounded corners */
-  margin-top: 10px; /* Space between profile and details */
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); /* Light shadow for separation */
+  background-color: #f9f9f9;
+  /* Light gray background for contrast */
+  border-radius: 6px;
+  /* Rounded corners */
+  margin-top: 10px;
+  /* Space between profile and details */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  /* Light shadow for separation */
   padding-left: 10px;
   padding: 2px;
   padding-right: 0px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
 /* Responsive adjustments */
 @media (max-width: 400px) {
   .profile-container {
-    width: 90%; /* Adjust width for smaller screens */
+    width: 90%;
+    /* Adjust width for smaller screens */
     padding: 15px;
   }
 
   .row {
-    flex-wrap: wrap; /* Allow rows to wrap on smaller screens */
+    flex-wrap: wrap;
+    /* Allow rows to wrap on smaller screens */
   }
 
   .row p {
-    flex: 1 1 100%; /* Make each item take full width */
+    flex: 1 1 100%;
+    /* Make each item take full width */
     text-align: left;
     margin-bottom: 10px;
   }
@@ -767,7 +817,8 @@ nav ul li:last-child {
 .emergency-details-heading {
   font-size: 18px;
   font-weight: bold;
-  margin-top: 30px; /* Space between profile and details */
+  margin-top: 30px;
+  /* Space between profile and details */
   padding-left: 10px;
   font-family: "Times New Roman", Times, serif;
   text-align: left;
@@ -776,7 +827,8 @@ nav ul li:last-child {
 .emergency-details {
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add shadow */
   padding: 15px;
   margin: 15px 0;
 }
@@ -784,27 +836,39 @@ nav ul li:last-child {
 /* Editable Fields */
 input[type="text"],
 textarea {
-  border: 1px solid #ccc; /* Border for input fields */
-  padding: 8px; /* Padding inside input fields */
-  font-size: 14px; /* Keep the font size same as regular text */
-  font-family: Arial, Helvetica, sans-serif; /* Same font family as regular text */
-  background-color: #f9f9f9; /* Light background for input fields */
-  border-radius: 4px; /* Slightly rounded borders */
-  width: calc(100% - 16px); /* Ensures input takes full width minus padding */
+  border: 1px solid #ccc;
+  /* Border for input fields */
+  padding: 8px;
+  /* Padding inside input fields */
+  font-size: 14px;
+  /* Keep the font size same as regular text */
+  font-family: Arial, Helvetica, sans-serif;
+  /* Same font family as regular text */
+  background-color: #f9f9f9;
+  /* Light background for input fields */
+  border-radius: 4px;
+  /* Slightly rounded borders */
+  width: calc(100% - 16px);
+  /* Ensures input takes full width minus padding */
   margin-top: 5px;
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
+  /* Include padding in width calculation */
 }
 
 input[type="text"]:focus,
 textarea:focus {
   outline: none;
-  border-color: #6200ee; /* Purple border color on focus */
-  background-color: #fff; /* White background on focus */
+  border-color: #6200ee;
+  /* Purple border color on focus */
+  background-color: #fff;
+  /* White background on focus */
 }
 
 textarea {
-  resize: vertical; /* Allow vertical resizing of text area */
-  min-height: 80px; /* Set minimum height for textareas */
+  resize: vertical;
+  /* Allow vertical resizing of text area */
+  min-height: 80px;
+  /* Set minimum height for textareas */
 }
 
 /* Forum CSS*/
@@ -965,11 +1029,14 @@ textarea {
 /*chatbot stlyling*/
 
 .message.bot.general-conversation {
-  background-color: #f1f8e9; /* Same as other bot messages */
-  color: #007bff; /* Text color for the general conversation message */
+  background-color: #f1f8e9;
+  /* Same as other bot messages */
+  color: #007bff;
+  /* Text color for the general conversation message */
   text-align: left;
   white-space: pre-wrap;
-  font-weight: bold; /* Optional: make the text bold for emphasis */
+  font-weight: bold;
+  /* Optional: make the text bold for emphasis */
 }
 
 .chatbot-container {
@@ -999,16 +1066,17 @@ textarea {
 }
 
 .bubble {
-  position: absolute; /* Positioning relative to .chatbot-messages */
-  background-color: rgba(
-    235,
-    151,
-    217,
-    0.6
-  ); /* Semi-transparent white for bubbles */
+  position: absolute;
+  /* Positioning relative to .chatbot-messages */
+  background-color: rgba(235,
+      151,
+      217,
+      0.6);
+  /* Semi-transparent white for bubbles */
   border-radius: 50%;
   animation: bubble-animation 10s infinite ease-in-out;
-  pointer-events: none; /* Prevents bubbles from blocking user interactions */
+  pointer-events: none;
+  /* Prevents bubbles from blocking user interactions */
 }
 
 /* Bubble animation */
@@ -1017,10 +1085,12 @@ textarea {
     transform: translateY(100%) scale(0.5);
     opacity: 0;
   }
+
   50% {
     transform: translateY(-20vh) scale(1);
     opacity: 1;
   }
+
   100% {
     transform: translateY(-100%) scale(0.5);
     opacity: 0;
@@ -1031,8 +1101,10 @@ textarea {
 .bubble:nth-child(1) {
   width: 50px;
   height: 50px;
-  top: 20%; /* Adjust the vertical position */
-  left: 10%; /* Adjust horizontal position */
+  top: 20%;
+  /* Adjust the vertical position */
+  left: 10%;
+  /* Adjust horizontal position */
   animation-duration: 8s;
 }
 
@@ -1074,6 +1146,7 @@ textarea {
   left: 5%;
   animation-duration: 3s;
 }
+
 .bubble:nth-child(7) {
   width: 50px;
   height: 50px;
@@ -1101,6 +1174,7 @@ textarea {
   left: 5%;
   animation-duration: 3s;
 }
+
 /* Animated text styling */
 .animated-text {
   font-size: 1.5rem;
@@ -1115,6 +1189,7 @@ textarea {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -1127,35 +1202,55 @@ textarea {
 }
 
 .message.user {
-  background-color:#f7ccff; 
-  border-radius: 15px; /* Rounded corners for consistency */
-  padding: 15px 20px; /* Adequate padding for readability */
+  background-color: #f7ccff;
+  border-radius: 15px;
+  /* Rounded corners for consistency */
+  padding: 15px 20px;
+  /* Adequate padding for readability */
   text-align: right;
-  white-space: pre-wrap; /* Preserve line breaks */
+  white-space: pre-wrap;
+  /* Preserve line breaks */
   font-family: 'Arial', sans-serif;
-  font-size: 18px; /* Same size as bot messages */
-  line-height: 1.6; /* Improve readability */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  margin: 10px 0; /* Add spacing between messages */
-  max-width: 80%; /* Constrain message width */
-  word-wrap: break-word; /* Ensure long words or links wrap */
-  align-self: flex-end; /* Align messages to the right */
-  margin-left: auto; /* Push the message to the right */
+  font-size: 18px;
+  /* Same size as bot messages */
+  line-height: 1.6;
+  /* Improve readability */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
+  margin: 10px 0;
+  /* Add spacing between messages */
+  max-width: 80%;
+  /* Constrain message width */
+  word-wrap: break-word;
+  /* Ensure long words or links wrap */
+  align-self: flex-end;
+  /* Align messages to the right */
+  margin-left: auto;
+  /* Push the message to the right */
 }
 
 .message.bot {
-  background-color: #afaaff; 
-  border-radius: 15px; /* Rounded corners */
-  padding: 15px 20px; /* Adequate padding for text readability */
+  background-color: #afaaff;
+  border-radius: 15px;
+  /* Rounded corners */
+  padding: 15px 20px;
+  /* Adequate padding for text readability */
   text-align: left;
-  white-space: pre-wrap; /* Preserve line breaks */
+  white-space: pre-wrap;
+  /* Preserve line breaks */
   font-family: 'Arial', sans-serif;
-  font-size: 18px; /* Slightly smaller for better balance */
-  line-height: 1.6; /* Improve readability */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  margin: 10px 0; /* Add spacing between messages */
-  max-width: 80%; /* Constrain message width */
-  word-wrap: break-word; /* Ensure long words or links wrap */
+  font-size: 18px;
+  /* Slightly smaller for better balance */
+  line-height: 1.6;
+  /* Improve readability */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
+  margin: 10px 0;
+  /* Add spacing between messages */
+  max-width: 80%;
+  /* Constrain message width */
+  word-wrap: break-word;
+  /* Ensure long words or links wrap */
 }
 
 .chatbot-input {
@@ -1171,24 +1266,36 @@ textarea {
   padding: 10px;
   border: 1px solid #ddd;
   /*border-radius: 4px;*/
-  border-radius: 20px; /* Add curved edges to the input box */
+  border-radius: 20px;
+  /* Add curved edges to the input box */
   font-size: 16px;
   outline: none;
 }
 
 .chatbot-input button {
-  padding: 5px 8px; /* Reduced padding for smaller size */
-  background-color: #966fd6; /* Blue background color */
-  color: white; /* White text color */
-  border: none; /* Remove any border */
-  border-radius: 20px; /* Add curved edges to the button */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 14px; /* Adjust font size */
+  padding: 5px 8px;
+  /* Reduced padding for smaller size */
+  background-color: #966fd6;
+  /* Blue background color */
+  color: white;
+  /* White text color */
+  border: none;
+  /* Remove any border */
+  border-radius: 20px;
+  /* Add curved edges to the button */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  font-size: 14px;
+  /* Adjust font size */
   padding-top: 8px;
-  transition: background-color 0.3s ease; /* Smooth color transition */
-  width: 50px; /* Ensure the width adjusts automatically */
-  height: 40px; /* Ensure the height adjusts automatically */
-  outline: none; /* Remove outline on focus */
+  transition: background-color 0.3s ease;
+  /* Smooth color transition */
+  width: 50px;
+  /* Ensure the width adjusts automatically */
+  height: 40px;
+  /* Ensure the height adjusts automatically */
+  outline: none;
+  /* Remove outline on focus */
 }
 
 .chatbot-input button:hover {
@@ -1354,19 +1461,41 @@ textarea {
 }
 
 .journal-list {
-  margin-top: 20px;
+  display: grid;
+  /* Use CSS Grid for layout */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* Adjust column size */
+  gap: 20px;
+  /* Add spacing between grid items */
+  padding: 20px;
+
 }
 
 .journal-entry {
-  border: 2px solid #cccccc;
-  /* Adds an outline */
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
-  /* Optional: rounds corners */
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* Optional: adds shadow */
+  display: flex;
+  flex-direction: column;
+  /* Ensure content is stacked vertically */
+  align-items: flex-start;
+  /* Center content horizontally */
+  padding: 20px;
+  border-radius: 10px;
+  /* Make container corners rounded */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add subtle shadow */
+  min-height: 250px;
+  /* Set minimum height for square shape */
+}
+
+.journal-entry h3 {
+  margin-bottom: 10px;
+  /* Add space between title and content */
+}
+
+.journal-entry p {
+  margin: 0;
+  /* Reset margins for paragraphs */
+  line-height: 1.5;
+  /* Add spacing between lines for readability */
 }
 
 .add-journal-form input,
@@ -1409,6 +1538,51 @@ textarea {
   display: flex;
   gap: 5px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.journal {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.journal-flip-container {
+  perspective: 1000px;
+  position: relative;
+}
+
+.journal-entries {
+  transform-origin: center;
+  /* Set the rotation pivot point */
+  transform-style: preserve-3d;
+  /* Enable 3D rendering for child elements */
+  transition: transform 1s ease;
+  /* Smooth transition for the flip */
+  backface-visibility: hidden;
+}
+
 
 .suggestions {
   display: flex;
@@ -1581,27 +1755,41 @@ select {
 
 .emoji-tracker .mood-selector {
   display: inline-flex;
-  gap: 10px; /* Add spacing between buttons */
+  gap: 10px;
+  /* Add spacing between buttons */
 }
 
 .emoji-tracker .mood-selector button {
-  background-color: #e791d3; /* Light background color */
-  border: none; /* Remove default border */
-  border-radius: 10px; /* Rounded corners */
-  padding: 10px 20px; /* Add some padding */
-  font-size: 24px; /* Larger font size for emojis */
-  cursor: pointer; /* Show pointer cursor on hover */
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth hover effects */
+  background-color: #e791d3;
+  /* Light background color */
+  border: none;
+  /* Remove default border */
+  border-radius: 10px;
+  /* Rounded corners */
+  padding: 10px 20px;
+  /* Add some padding */
+  font-size: 24px;
+  /* Larger font size for emojis */
+  cursor: pointer;
+  /* Show pointer cursor on hover */
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  /* Smooth hover effects */
 }
 
 .emoji-tracker .mood-selector button:hover {
-  background-color: #94399c; /* Slightly darker background on hover */
-  transform: scale(1.1); /* Slight zoom effect */
+  background-color: #94399c;
+  /* Slightly darker background on hover */
+  transform: scale(1.1);
+  /* Slight zoom effect */
 }
 
 .emoji-tracker .mood-selector button:active {
-  transform: scale(1.05); /* Reduce scale slightly on click */
-  background-color: #94399c; /* Even darker background when active */
+  transform: scale(1.05);
+  /* Reduce scale slightly on click */
+  background-color: #94399c;
+  /* Even darker background when active */
 }
 
 .Current.Mood {
@@ -1752,14 +1940,17 @@ select {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
+
 .resources_container {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+
 /* General container styles */
 .columns {
   display: grid;
@@ -1768,11 +1959,13 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   /* Dynamic column size */
 }
+
 /* Ensures a maximum of 2 columns */
 .columns {
   grid-template-columns: repeat(2, 1fr);
   /* Forces a max of 2 columns */
 }
+
 /* Responsive fallback: Stack in 1 column on smaller screens */
 @media (max-width: 600px) {
   .columns {
@@ -1780,31 +1973,38 @@ h1 {
     /* Stacks all items into 1 column for smaller screens */
   }
 }
+
 .column {
   flex: 1;
   /* Makes columns take equal space */
   min-width: 300px;
   /* Prevents columns from getting too narrow */
 }
+
 /* Styles for titles and links */
 h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
 }
+
 ul {
   list-style: none;
   padding: 0;
 }
+
 li {
   margin-bottom: 20px;
 }
+
 a {
   color: #007bff;
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
+
 p {
   margin: 5px 0;
   font-size: 0.9em;
