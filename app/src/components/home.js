@@ -1,5 +1,5 @@
 //import React from "react";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import "./ChillMateLogo.png";
@@ -8,8 +8,11 @@ import Forum from "./Forum.png";
 import Journal from "./Journal.png";
 import Resources from "./Resources.png";
 import Tasklist from "./TaskList.png";
+import { logoutUser } from "./Logout";
+import { LoginContext } from "./LoginContext";
 
 function Home() {
+  const { isLoggedIn, logout } = useContext(LoginContext);
   const navigate = useNavigate();
 
   // Define the function to handle navigation
@@ -21,6 +24,39 @@ function Home() {
   const goToAbout = () => {
     console.log("Navigating to about");
     navigate("/about");
+  };
+
+  const checkLogin = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      console.error("Access token is missing! User might be logged out.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/getProfile`,
+        {
+          method: "GET", // Use GET method
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
+          },
+          mode: "cors",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to get profile");
+      }
+    } catch (error) {
+      console.error("Logging Out, Invalid Token");
+      // Handle error, e.g., display an error message to the user
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
   };
 
   // Add the scroll animation logic
@@ -39,6 +75,8 @@ function Home() {
     );
 
     features.forEach((feature) => observer.observe(feature));
+
+    checkLogin();
 
     return () => observer.disconnect(); // Cleanup observer
   }, []);
