@@ -23,11 +23,15 @@ const Forum = () => {
       console.log("useEffect running")
       console.log("dapetnya", data);
 
-      const formattedPosts = data.map(post => ({
-        topic: post.Topic || "Untitled",
-        content: post.Text || "",
-        liked: false
-      }));
+      const formattedPosts = await Promise.all(
+        data.map(async post => ({
+          id: post._id || "",
+          topic: post.Topic || "Untitled",
+          content: post.Text || "",
+          liked: await checkLike(post._id)
+        }))
+      );
+      console.log("formattedPosts: ", formattedPosts);
 
       setPosts(formattedPosts); 
 
@@ -38,9 +42,9 @@ const Forum = () => {
 
   //
 
-    const uploadPost = async (newPost) => {
+  //function to create forum posts
+  const uploadPost = async (newPost) => {
     const token = localStorage.getItem("accessToken");
-
     try {
       const response = await fetch(
         `${process.env.REACT_APP_FLASK_URI}/forum/createForum`,
@@ -68,6 +72,45 @@ const Forum = () => {
     }
   };
 
+  //check if forum posts is liked by particular user or not
+  async function checkLike(id) {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/checkLike`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to check like status");
+      }
+
+      const data = await response.json();
+      console.log("datanya dpt ini:", data);
+      if(data.relation == 0) {
+        console.log("kasih false");
+        return false;
+      }
+      else {
+        console.log("kasih true");
+        return true
+      }
+      return data
+      // Handle success or error based on the response data
+    } catch (error) {
+      console.error("Error checking status:", error);
+      // Handle error, e.g., display an error message to the user
+    }
+  }
+
   // Handle form submission to add new posts
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,11 +134,89 @@ const Forum = () => {
     setShowForm(false);
   };
 
+
+  //create a relation to the database, that sends the userID and postID
+  const createLike = async(id) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/createRelation`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      // Handle success or error based on the response data
+      } catch (error) {
+        console.error("Error creating relation:", error);
+        // Handle error, e.g., display an error message to the user
+      }
+  };
+
+  const unlike = async(id) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/deleteRelation`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      // Handle success or error based on the response data
+      } catch (error) {
+        console.error("Error creating relation:", error);
+        // Handle error, e.g., display an error message to the user
+      }
+  };
+
+
   // Toggle like status for a post
   const toggleLike = (index) => {
     const updatedPosts = posts.map((post, i) => {
+      
       if (i === index) {
+        console.log(post.id);
+
+        //if the post is false, then it will turn to true
+        //this means create a relation
+        if(post.liked == false) {
+          createLike(post.id);
+        }
+        else {
+          //else if the post is true, it will turn to false
+          //remove the relation from the new collection
+          console.log("delete relation");
+          unlike(post.id);
+
+        }
+
         return { ...post, liked: !post.liked };
+        
       }
       return post;
     });

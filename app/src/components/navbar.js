@@ -41,13 +41,6 @@ export default function Navbar() {
             )}
           </li>
           <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/resources">Resources</Link>
-          </li>
-
-          <li>
             {isLoggedIn ? (
               <Link to="/journal">Journal</Link>
             ) : (
@@ -55,13 +48,17 @@ export default function Navbar() {
             )}
           </li>
           <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/resources">Resources</Link>
+          </li>
+          <li>
             {isLoggedIn ? (
               <Link to="/profile">Profile</Link>
             ) : (
               <Link to="/login">Profile</Link>
             )}
-          </li>
-          <li>
             {isLoggedIn ? (
               <button onClick={handleLogout} className="logout-button">
                 Logout

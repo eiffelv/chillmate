@@ -2,18 +2,16 @@ import React, { useState } from "react";
 
 const AddJournalForm = ({ onAddEntry, onClose }) => {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
   const [content, setContent] = useState("");
   const [color, setColor] = useState("#FFFFFF");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (title && date && content) {
-      onAddEntry(title, date, content, color);
+    if (title && content) {
+      onAddEntry(title, content, color);
       // Reset fields after successful submission
       setTitle("");
-      setDate("");
       setContent("");
     } else {
       alert("Please fill out all fields.");
@@ -39,12 +37,6 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
           required
         />
         <textarea

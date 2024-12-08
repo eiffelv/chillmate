@@ -39,44 +39,56 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({ ...profile });
 
-  const getProfileData = async (e) => {
+  const getProfileData = async () => {
     const token = localStorage.getItem("accessToken");
+    if (!token) {
+      console.error("Access token is missing! User might be logged out.");
+      return;
+    }
+  
     try {
       const response = await fetch(
         `${process.env.REACT_APP_FLASK_URI}/auth/getProfile`,
         {
-          method: "POST",
+          method: "GET", // Use GET method
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
           },
-          //body: JSON.stringify(newJournal),
+          mode: "cors",
         }
       );
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error fetching profile:", errorData);
+        return;
+      }
+  
       const user = await response.json();
-      console.log(user);
+      console.log("Fetched profile:", user);
+  
 
       setProfile({
-        username: user.Username,
-        firstName: user.FirstName,
-        lastName: user.LastName,
-        occupation: user.Occupation,
-        age: user.Age,
-        phoneNumber: user.PhoneNum,
-        address1: user.Address,
-        address2: user.Address,
-        state: "California",
-        city: "San Francisco",
-        sfsuId: user.SFStateID,
-        sfsuEmail: user.Email,
-        EmergencycontactfirstName: "John",
-        EmergencycontactlastName: "Doe",
-        emergencyContactNumber: "9110000000",
-        emergencyemail: user.EmergencyContactEmail,
-        relationship: "Father",
-        mood: "neutral",
+        username: user.Username || "Default Username",
+        firstName: user.FirstName || "Default First Name",
+        lastName: user.LastName || "Default Last Name",
+        occupation: user.Occupation || "Unknown",
+        age: user.Age || "Unknown",
+        phoneNumber: user.PhoneNum || "Unknown",
+        address1: user.Address || "No Address",
+        address2: user.Address || "No Address",
+        state: user.State || "Unknown",
+        city: user.City || "Unknown",
+        sfsuId: user.SFStateID || "No ID",
+        sfsuEmail: user.Email || "No Email",
+        EmergencycontactfirstName: user.EmergencycontactfirstName || "Default First Name",
+        EmergencycontactlastName: user.EmergencycontactlastName || "Default Last Name",
+        emergencyContactNumber: user.EmergencyContactNumber || "Unknown",
+        emergencyemail: user.EmergencyContactEmail || "No Email",
+        relationship: user.relationship || "Unknown", 
+        mood: "neutral", 
       });
     } catch (error) {}
   };
@@ -112,7 +124,7 @@ export default function Profile() {
     <div className="profile">
       <div className="profile-container">
         <div className="strip"></div>
-        {/* Edit/Save Button */}
+        /* Edit/Save Button 
         <div className="button-container">
           {!isEditing ? (
             <button className="edit-button" onClick={handleEditClick}>
@@ -360,4 +372,4 @@ export default function Profile() {
       </div>
     </div>
   );
-}
+} 
