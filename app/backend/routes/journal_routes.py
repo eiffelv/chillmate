@@ -58,3 +58,24 @@ def create_journal():
     mongo_utils.collection.insert_one(new_journal)
 
     return jsonify({"message": "Post successfully added"}), 201
+
+#function to delete journal
+@journal_bp.route('/deleteJournal', methods=['POST', 'GET'])
+@jwt_required()
+def delete_journal():
+    try:
+        current_user = get_jwt_identity()
+        data = request.json
+
+        title = data.get("title")
+        content = data.get("content")
+        date = data.get("date")
+        color = data.get("color")
+
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
+        mongo_utils.collection.delete_many({"SFStateID": current_user, "Title":title, "Content": content, "Timestamp": date, "Color": color})
+
+        return jsonify({"message": "journal successfully deleted"}), 201
+    except Exception as e:
+        logger.error(f"Error in /deleteJournal: {e}")
+        return jsonify({"error": str(e)}), 500
