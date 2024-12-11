@@ -234,6 +234,35 @@ const Forum = () => {
     setPosts(updatedPosts);
   };
 
+  // Add delete handler function
+  const handleDelete = async (postId) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/deleteForum`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(postId),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete post");
+      }
+
+      // Remove post from state
+      setPosts(posts.filter((post) => post._id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
   return (
     <div className="forum">
       {/* Forum Page */}
@@ -278,16 +307,26 @@ const Forum = () => {
                   <div className="post-author">{post.topic}</div>
                   <div className="post-content">{post.content}</div>
 
-                  {/* Like Button */}
-                  <div className="like-container">
+                  <div className="post-actions">
+                    {/* Like Button */}
+                    <div className="like-container">
+                      <button
+                        className={`like-btn ${post.liked ? "liked" : ""}`}
+                        onClick={() => toggleLike(index)}
+                      >
+                        <span className="like-icon">👍</span>
+                        <span className="like-text">
+                          {post.liked ? "Liked" : "Like"}
+                        </span>
+                      </button>
+                    </div>
+
+                    {/* Delete Button */}
                     <button
-                      className={`like-btn ${post.liked ? "liked" : ""}`}
-                      onClick={() => toggleLike(index)}
+                      className="delete-btn"
+                      onClick={() => handleDelete(post._id)}
                     >
-                      <span className="like-icon">👍</span>
-                      <span className="like-text">
-                        {post.liked ? "Liked" : "Like"}
-                      </span>
+                      🗑️ Delete
                     </button>
                   </div>
                 </li>

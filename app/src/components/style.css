@@ -1118,6 +1118,30 @@ textarea {
   text-align: left;
 }
 
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+  color: #fff;
+}
+
 /*chatbot stlyling*/
 
 .message.bot.general-conversation {
