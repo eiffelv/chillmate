@@ -1126,7 +1126,7 @@ textarea {
 }
 
 .delete-btn {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   background-color: #f1f1f1;
