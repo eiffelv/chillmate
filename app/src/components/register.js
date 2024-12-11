@@ -364,7 +364,7 @@ const Register = () => {
             <label>Relationship</label>
             <input
               type="text"
-              name="EmergencyRelation"
+              name="relationship"
               placeholder="Mother"
               value={user.EmergencyRelation}
               onChange={handleChange}
