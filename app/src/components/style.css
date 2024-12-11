@@ -523,7 +523,25 @@ input {
 }
 
 .login-container input {
-  width: 87%;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #5868fe;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.login-container .login-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #5868fe;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.login-container .login-password {
+  width: 94%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #5868fe;
@@ -736,8 +754,28 @@ nav ul li:last-child {
   transition: background-color 0.3s ease;
 }
 
+.update-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  color: rgb(11, 11, 11);
+  background-color: white;
+  border-radius: 5px;
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+  transition: background-color 0.3s ease;
+  margin: 0 10px;
+}
+
+.update-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
 .edit-button:hover,
-.save-button:hover {
+.save-button:hover,
+.update-button:hover {
   background-color: #e2a8ee;
 }
 
@@ -1073,6 +1111,30 @@ textarea {
 
 .left-align {
   text-align: left;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.delete-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+  color: #fff;
 }
 
 /*chatbot stlyling*/

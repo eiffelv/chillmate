@@ -66,7 +66,7 @@ const Register = () => {
       }
     } catch (error) {
       enableFields();
-      console.error("Backend error:", error);
+      // console.error("Backend error:", error);
       setMessage(
         "Something went wrong while registering. Please try again later."
       );

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
@@ -6,7 +7,6 @@ import { LoginContext } from "./LoginContext";
 import { logoutUser } from "./Logout";
 import JournalList from "./journalList";
 import AddJournalForm from "./addjournalForm";
-
 
 const JournalPage = () => {
   const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
@@ -49,7 +49,7 @@ const JournalPage = () => {
         throw new Error("Failed to upload post");
       }
       const data = await response.json();
-      console.log("response: ", data);
+      // console.log("response: ", data);
 
       //format the journal entry from database array
       const formattedJournal = data.map((post) => ({
@@ -59,12 +59,13 @@ const JournalPage = () => {
         content: post.Content || "<No Content>",
         // Convert timestamp to date string
         date: convertTimestampToDate(post.Timestamp) || "<No Date>",
+        timestamp: post.Timestamp,
         color: post.Color || "#FFFFFF",
       }));
       //put journal entry to website
       setEntries(formattedJournal);
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -115,7 +116,7 @@ const JournalPage = () => {
       // Handle success or error based on the response data
       getJournal();
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -136,10 +137,51 @@ const JournalPage = () => {
     setShowAddForm(false); // Hide form after submission
   };
 
+  const handleDelete = async (title, timestamp, content) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/journal/deleteJournal`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ title, timestamp, content }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete journal");
+      }
+
+      // Remove entry from state
+      setEntries(
+        entries.filter(
+          (entry) =>
+            entry.title !== title &&
+            entry.timestamp !== timestamp &&
+            entry.content !== content
+        )
+      );
+    } catch (error) {
+      console.error("Error deleting journal:", error);
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
+  };
+
   // Pagination Logic
   const indexOfLastJournal = currentPage * journalsPerPage;
   const indexOfFirstJournal = indexOfLastJournal - journalsPerPage;
-  const currentJournals = filteredEntries.slice(indexOfFirstJournal, indexOfLastJournal);
+  const currentJournals = filteredEntries.slice(
+    indexOfFirstJournal,
+    indexOfLastJournal
+  );
   const totalPages = Math.ceil(filteredEntries.length / journalsPerPage);
 
   const handleNext = () => {
@@ -155,7 +197,6 @@ const JournalPage = () => {
       setCurrentPage((prev) => prev - 1);
     }
   };
-  
 
   return (
     <div className="journal">
@@ -169,11 +210,8 @@ const JournalPage = () => {
       </button>
 
       <div className="journal-flip-container">
-        <div
-          className="journal-entries"
-          
-        >
-          <JournalList entries={currentJournals} />
+        <div className="journal-entries">
+          <JournalList entries={currentJournals} onDelete={handleDelete} />
         </div>
       </div>
 

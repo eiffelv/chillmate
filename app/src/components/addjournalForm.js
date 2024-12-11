@@ -15,7 +15,7 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
       // Reset fields after successful submission
       setTitle("");
       setDate("");
-      console.log(date);
+      // console.log(date);
       setContent("");
       setColor("#FFFFFF");
     } else {

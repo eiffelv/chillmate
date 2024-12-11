@@ -112,6 +112,20 @@ def delete_relation():
     except Exception as e:
         logger.error(f"Error in /deleteRelation: {e}")
         return jsonify({"error": str(e)}), 500
+
+#function to delete forum
+@forum_bp.route('deleteForum', methods=['POST','GET'])
+@jwt_required()
+def delete_forum():
+    try:
+        postId = request.json
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Forum')
+        mongo_utils.collection.delete_many({"postId": postId})
+        return jsonify({"message": "Forum succesfully deleted"}), 201
+
+    except Exception as e:
+        logger.error(f"Error in /deleteForum: {e}")
+        return jsonify({"error": str(e)}), 500
     
 @forum_bp.route('checkLike', methods=['POST', 'GET'])
 @jwt_required()

@@ -56,7 +56,7 @@ export default function Profile() {
   const getProfileData = async () => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      console.error("Access token is missing! User might be logged out.");
+      // console.error("Access token is missing! User might be logged out.");
       return;
     }
 
@@ -80,7 +80,7 @@ export default function Profile() {
         throw new Error("Failed to get profile");
       }
       const user = await response.json();
-      console.log("Fetched profile:", user);
+      // console.log("Fetched profile:", user);
 
       setProfile({
         username: user.Username || "(empty)",
@@ -103,7 +103,7 @@ export default function Profile() {
         mood: user.Mood || "(empty)",
       });
     } catch (error) {
-      console.error("Error getting profile:", error);
+      // console.error("Error getting profile:", error);
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -123,14 +123,17 @@ export default function Profile() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    // console.log(name, value);
     setEditedProfile({ ...editedProfile, [name]: value });
   };
 
   const updateMood = async () => {
     const token = localStorage.getItem("accessToken");
     setProfile({ ...profile, mood: "loading" });
+    document.querySelector(".update-button").disabled = true;
     try {
+      // disable button className "update-button" while waiting for response
+
       const response = await fetch(
         `${process.env.REACT_APP_FLASK_URI}/chatbot/mood_tracker`,
         {
@@ -148,15 +151,16 @@ export default function Profile() {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setProfile({ ...profile, mood: data.mood });
       sendMood(data.mood);
     } catch (error) {
-      console.error("Error updating mood:", error);
+      // console.error("Error updating mood:", error);
       if (isLoggedIn) {
         logoutUser(logout, navigate);
       }
     }
+    document.querySelector(".update-button").disabled = false;
   };
 
   const sendMood = async (newMood) => {
@@ -179,10 +183,10 @@ export default function Profile() {
         throw new Error("Failed to update mood");
       }
 
-      const data = await response.json();
-      console.log(data);
+      // const data = await response.json();
+      // console.log(data);
     } catch (error) {
-      console.error("Error updating mood:", error);
+      // console.error("Error updating mood:", error);
       if (isLoggedIn) {
         logoutUser(logout, navigate);
       }
@@ -209,10 +213,10 @@ export default function Profile() {
         throw new Error("Failed to update profile");
       }
 
-      const data = await response.json();
-      console.log(data);
+      //const data = await response.json();
+      //console.log(data);
     } catch (error) {
-      console.error("Error updating profile:", error);
+      // console.error("Error updating profile:", error);
       if (isLoggedIn) {
         logoutUser(logout, navigate);
       }
@@ -225,10 +229,10 @@ export default function Profile() {
     return output;
   };
 
-  //function that call api to get profile data
+  //function that call api to get profile data on page load
   useEffect(() => {
-    console.log("getting profile");
     getProfileData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -236,6 +240,9 @@ export default function Profile() {
       <div className="profile-container">
         <div className="strip"></div>
         <div className="button-container">
+          <button className="update-button" onClick={() => updateMood()}>
+            Update Mood
+          </button>
           {!isEditing ? (
             <button className="edit-button" onClick={handleEditClick}>
               Edit
