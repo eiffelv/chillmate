@@ -7,8 +7,6 @@ import { LoginContext } from "./LoginContext";
 import { logoutUser } from "./Logout";
 import JournalList from "./journalList";
 import AddJournalForm from "./addjournalForm";
-import HTMLFlipBook from "react-pageflip";
-import { ReactPageFlip } from "react-pageflip";
 
 const JournalPage = () => {
   const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
@@ -203,12 +201,7 @@ const JournalPage = () => {
   return (
     <div className="journal">
       <h1>Journal</h1>
-      <input
-        type="text"
-        placeholder="Search journal..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+      
       <button
         className="add-journal-button"
         onClick={() => setShowAddForm(true)}
@@ -217,18 +210,7 @@ const JournalPage = () => {
       </button>
 
       <div className="journal-flip-container">
-        <div
-          className="journal-entries"
-          style={{
-            transform:
-              flipDirection === "forward"
-                ? "rotateY(-360deg)"
-                : flipDirection === "backward"
-                ? "rotateY(360deg)"
-                : "rotateY(0deg)",
-            transition: "transform 1s ease",
-          }}
-        >
+        <div className="journal-entries">
           <JournalList entries={currentJournals} onDelete={handleDelete} />
         </div>
       </div>

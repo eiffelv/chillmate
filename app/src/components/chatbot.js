@@ -22,7 +22,6 @@ const Chatbot = () => {
   const [typingMessage, setTypingMessage] = useState("");
   const [showSearchBar, setShowSearchBar] = useState(false); // Controls the visibility of the search bar
   const [showAnimatedText, setShowAnimatedText] = useState(true); // Controls the visibility of the animated text
-  const [showBubbles, setShowBubbles] = useState(false); //Ensure `showBubbles` is declared with useState
   const [currentId, setCurrentId] = useState("");
 
   const messagesEndRef = useRef(null);
@@ -58,7 +57,7 @@ const Chatbot = () => {
       return part; // Render non-link text as-is
     });
   };
-
+   
   // AnimatedText Component
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
@@ -251,19 +250,6 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
-    // if (suggestion.text === "General conversation.😊") {
-    //   const specialMessage = {
-    //     text: "Hello! How is your day?",
-    //     sender: "bot",
-    //     special: "general-conversation",
-    //   };
-    //   setMessages([...messages, specialMessage]);
-    // } else {
-    //   getChatBot(suggestion).then((botResponse) => {
-    //     simulateTyping(botResponse); // Display the chatbot response in the chat
-    //   });
-    // }
-
     if (suggestion.text === "General conversation.😊") {
       const specialMessage = {
         text: "Hello! How is your day?",
@@ -286,29 +272,24 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typingMessage]);
 
-  useEffect(() => {
-    // Trigger bubbles only when the component mounts
-    setShowBubbles(true);
-
-    // Set a timer to hide the bubbles after 2 minutes
-    const timer = setTimeout(() => {
-      setShowBubbles(false); // Hide bubbles after the specified time
-    }, 5000); // 2 minutes in milliseconds
-
-    // Cleanup the timer on component unmount
-    return () => clearTimeout(timer);
-  }, []); // Empty dependency array ensures this runs only once on mount
-
-  //const bubbles = Array.from({ length: 80 }).map((_, index) => (
-  //<div key={index} className="bubble"></div>
-  //));
-
+  
+      
   return (
-    <div>
-      <div className="chatbot-container">
-        <h1>Chatbot</h1>
+    
+     <div
+      className="chatbot-container"
+      style={{
+        backgroundImage: "url('/screenshot.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        opacity: 0.9,
+      }}
+    > 
+
+        <h1>Chillbot </h1>
         {showAnimatedText && <AnimatedText />}{" "}
-        {/* Only show AnimatedText if showAnimatedText is true */}
+        
         <div className="suggestions">
           {suggestions.map((suggestion) => (
             <button
@@ -327,14 +308,10 @@ const Chatbot = () => {
             </button>
           ))}
         </div>
+         
+       
         <div className="chatbot-messages">
-          {/* Add bubbles as the background */}
-          {showBubbles &&
-            Array.from({ length: 80 }).map((_, index) => (
-              <div key={index} className="bubble"></div>
-            ))}
-
-          {messages.map((msg, index) => (
+            {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
               {msg.sender === "bot"
                 ? renderMessageWithLinks(msg.text)
@@ -359,7 +336,7 @@ const Chatbot = () => {
           </div>
         )}
       </div>
-    </div>
+    
   );
 };
 
