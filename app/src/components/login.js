@@ -87,6 +87,7 @@ function Login() {
         {message && <p className="error-message">{message}</p>}
         <form onSubmit={handleSubmit}>
           <input
+            className="login-input"
             type="text"
             placeholder="Username"
             name="username"
@@ -95,6 +96,7 @@ function Login() {
             required
           />
           <input
+            className="login-password"
             type="password"
             placeholder="Password"
             name="password"
