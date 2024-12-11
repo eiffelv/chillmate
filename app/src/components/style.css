@@ -933,11 +933,6 @@ textarea {
   font-family: Arial, sans-serif;
 }
 
-.container1 {
-  background-color: #fff;
-  border-radius: 10px;
-}
-
 /* Heading */
 .forum h1,
 .forum h2 {
@@ -1524,16 +1519,20 @@ textarea {
 .journal-entry {
   display: flex;
   flex-direction: column;
-  /* Ensure content is stacked vertically */
   align-items: flex-start;
-  /* Center content horizontally */
   padding: 20px;
-  border-radius: 10px;
-  /* Make container corners rounded */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Add subtle shadow */
-  min-height: 250px;
-  /* Set minimum height for square shape */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  min-height: 250px; /* Minimum height for square shape */
+  width: 300px; /* Fixed width */
+  background-color: #f0f8ff; /* Optional: background color */
+  margin-bottom: 20px; /* Add vertical spacing between rows */
+  text-align: start;
+
+  word-wrap: break-word; /* Break words that are too long */
+  overflow-wrap: break-word; /* Ensure long words break properly */
+  white-space:normal; /* Allow text to wrap to the next line */
+  overflow:auto; /* Prevent scrolling or overflow if content is too long */
 }
 
 .journal-entry h3 {
@@ -1598,7 +1597,7 @@ textarea {
 }
 
 .pagination button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -1619,18 +1618,18 @@ textarea {
 }
 
 .journal-flip-container {
-  perspective: 1000px;
-  position: relative;
+  display: block;
+  justify-content: center; /* Center entries horizontally */
+  gap: 20px; /* Space between the entries */
+ 
+  width: 100%; /* Full width of the page */
+  max-width: 800px; /* Limit maximum width for alignment */
+  margin: 0 auto; /* Center the container on the page */
 }
 
+
 .journal-entries {
-  transform-origin: center;
-  /* Set the rotation pivot point */
-  transform-style: preserve-3d;
-  /* Enable 3D rendering for child elements */
-  transition: transform 1s ease;
-  /* Smooth transition for the flip */
-  backface-visibility: hidden;
+  text-align: start;
 }
 
 .suggestions {
