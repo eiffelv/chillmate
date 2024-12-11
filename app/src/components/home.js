@@ -17,19 +17,24 @@ function Home() {
 
   // Define the function to handle navigation
   const goToRegister = () => {
-    console.log("Navigating to register");
+    // console.log("Navigating to register");
     navigate("/register");
   };
 
   const goToAbout = () => {
-    console.log("Navigating to about");
+    // console.log("Navigating to about");
     navigate("/about");
   };
 
   const checkLogin = async () => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      console.error("Access token is missing! User might be logged out.");
+      // console.error("Access token is missing! User might be logged out.");
+      return;
+    }
+
+    if (!isLoggedIn) {
+      // console.error("User is not logged in.");
       return;
     }
 
@@ -51,9 +56,9 @@ function Home() {
         throw new Error("Failed to get profile");
       }
 
-      console.log("User seems still logged in.");
+      // console.log("User seems still logged in.");
     } catch (error) {
-      console.error("Logging Out, Invalid Token");
+      // console.error("Logging Out, Invalid Token");
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -81,6 +86,7 @@ function Home() {
     checkLogin();
 
     return () => observer.disconnect(); // Cleanup observer
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

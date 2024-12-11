@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
@@ -7,7 +8,7 @@ import { logoutUser } from "./Logout";
 import JournalList from "./journalList";
 import AddJournalForm from "./addjournalForm";
 import HTMLFlipBook from "react-pageflip";
-import { ReactPageFlip } from 'react-pageflip';
+import { ReactPageFlip } from "react-pageflip";
 
 const JournalPage = () => {
   const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
@@ -50,7 +51,7 @@ const JournalPage = () => {
         throw new Error("Failed to upload post");
       }
       const data = await response.json();
-      console.log("response: ", data);
+      // console.log("response: ", data);
 
       //format the journal entry from database array
       const formattedJournal = data.map((post) => ({
@@ -65,7 +66,7 @@ const JournalPage = () => {
       //put journal entry to website
       setEntries(formattedJournal);
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -116,7 +117,7 @@ const JournalPage = () => {
       // Handle success or error based on the response data
       getJournal();
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -140,7 +141,10 @@ const JournalPage = () => {
   // Pagination Logic
   const indexOfLastJournal = currentPage * journalsPerPage;
   const indexOfFirstJournal = indexOfLastJournal - journalsPerPage;
-  const currentJournals = filteredEntries.slice(indexOfFirstJournal, indexOfLastJournal);
+  const currentJournals = filteredEntries.slice(
+    indexOfFirstJournal,
+    indexOfLastJournal
+  );
   const totalPages = Math.ceil(filteredEntries.length / journalsPerPage);
 
   const handleNext = () => {
@@ -156,7 +160,6 @@ const JournalPage = () => {
       setCurrentPage((prev) => prev - 1);
     }
   };
-  
 
   return (
     <div className="journal">
@@ -185,7 +188,6 @@ const JournalPage = () => {
                 ? "rotateY(360deg)"
                 : "rotateY(0deg)",
             transition: "transform 1s ease",
-
           }}
         >
           <JournalList entries={currentJournals} />

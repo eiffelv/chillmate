@@ -10,6 +10,7 @@ const JournalList = ({ entries }) => (
         style={{ backgroundColor: entry.color }}
       >
         <h3>{entry.title}</h3>
+        <h6>{entry.date}</h6>
         <p>{entry.content}</p>
       </div>
     ))}
@@ -17,5 +18,3 @@ const JournalList = ({ entries }) => (
 );
 
 export default JournalList;
-
-

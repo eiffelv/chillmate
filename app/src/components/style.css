@@ -736,8 +736,28 @@ nav ul li:last-child {
   transition: background-color 0.3s ease;
 }
 
+.update-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  color: rgb(11, 11, 11);
+  background-color: white;
+  border-radius: 5px;
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+  transition: background-color 0.3s ease;
+  margin: 0 10px;
+}
+
+.update-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
 .edit-button:hover,
-.save-button:hover {
+.save-button:hover,
+.update-button:hover {
   background-color: #e2a8ee;
 }
 

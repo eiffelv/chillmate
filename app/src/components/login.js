@@ -13,7 +13,7 @@ function Login() {
     username: "",
     password: "",
   });
-  console.log(user);
+  // console.log(user);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 

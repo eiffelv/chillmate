@@ -32,24 +32,24 @@ const Forum = () => {
         }
 
         const data = await response.json();
-        console.log("useEffect running");
-        console.log("dapetnya", data);
+        // console.log("useEffect running");
+        // console.log("dapetnya", data);
 
-      const formattedPosts = await Promise.all(
-        data.map(async post => ({
-          id: post._id || "",
-          topic: post.Topic || "Untitled",
-          content: post.Text || "",
-          liked: await checkLike(post._id)
-        }))
-      );
-      console.log("formattedPosts: ", formattedPosts);
+        const formattedPosts = await Promise.all(
+          data.map(async (post) => ({
+            id: post._id || "",
+            topic: post.Topic || "Untitled",
+            content: post.Text || "",
+            liked: await checkLike(post._id),
+          }))
+        );
+        // console.log("formattedPosts: ", formattedPosts);
 
         setPosts(formattedPosts);
 
         return data;
       } catch (error) {
-        console.error("Error fetching forum posts:", error);
+        // error("Error fetching forum posts:", error);
         if (isLoggedIn) {
           logoutUser(logout, navigate);
         }
@@ -79,11 +79,11 @@ const Forum = () => {
         throw new Error("Failed to upload post");
       }
 
-      const data = await response.json();
-      console.log(data);
+      //const data = await response.json();
+      //console.log(data);
       // Handle success or error based on the response data
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
       if (isLoggedIn) {
         logoutUser(logout, navigate);
@@ -113,19 +113,17 @@ const Forum = () => {
       }
 
       const data = await response.json();
-      console.log("datanya dpt ini:", data);
-      if(data.relation == 0) {
-        console.log("kasih false");
+      // console.log("datanya dpt ini:", data);
+      if (data.relation === 0) {
+        // console.log("kasih false");
         return false;
+      } else {
+        // console.log("kasih true");
+        return true;
       }
-      else {
-        console.log("kasih true");
-        return true
-      }
-      return data
       // Handle success or error based on the response data
     } catch (error) {
-      console.error("Error checking status:", error);
+      // console.error("Error checking status:", error);
       // Handle error, e.g., display an error message to the user
     }
   }
@@ -146,16 +144,15 @@ const Forum = () => {
     };
 
     uploadPost(newPost);
-    console.log(newPost);
+    //console.log(newPost);
     setPosts([newPost, ...posts]); // Add new post to the beginning of the posts array
     setTopic(""); // Clear form fields
     setPostContent("");
     setShowForm(false);
   };
 
-
   //create a relation to the database, that sends the userID and postID
-  const createLike = async(id) => {
+  const createLike = async (id) => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await fetch(
@@ -175,16 +172,16 @@ const Forum = () => {
         throw new Error("Failed to upload post");
       }
 
-      const data = await response.json();
-      console.log(data);
+      //const data = await response.json();
+      //console.log(data);
       // Handle success or error based on the response data
-      } catch (error) {
-        console.error("Error creating relation:", error);
-        // Handle error, e.g., display an error message to the user
-      }
+    } catch (error) {
+      // console.error("Error creating relation:", error);
+      // Handle error, e.g., display an error message to the user
+    }
   };
 
-  const unlike = async(id) => {
+  const unlike = async (id) => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await fetch(
@@ -204,38 +201,33 @@ const Forum = () => {
         throw new Error("Failed to upload post");
       }
 
-      const data = await response.json();
-      console.log(data);
+      //const data = await response.json();
+      //console.log(data);
       // Handle success or error based on the response data
-      } catch (error) {
-        console.error("Error creating relation:", error);
-        // Handle error, e.g., display an error message to the user
-      }
+    } catch (error) {
+      // console.error("Error creating relation:", error);
+      // Handle error, e.g., display an error message to the user
+    }
   };
-
 
   // Toggle like status for a post
   const toggleLike = (index) => {
     const updatedPosts = posts.map((post, i) => {
-      
       if (i === index) {
-        console.log(post.id);
+        // console.log(post.id);
 
         //if the post is false, then it will turn to true
         //this means create a relation
-        if(post.liked == false) {
+        if (post.liked === false) {
           createLike(post.id);
-        }
-        else {
+        } else {
           //else if the post is true, it will turn to false
           //remove the relation from the new collection
-          console.log("delete relation");
+          // console.log("delete relation");
           unlike(post.id);
-
         }
 
         return { ...post, liked: !post.liked };
-        
       }
       return post;
     });
