@@ -1,7 +1,8 @@
 // JournalList.js
 import React from "react";
+import "./style.css";
 
-const JournalList = ({ entries }) => (
+const JournalList = ({ entries, onDelete }) => (
   <div className="journal-list">
     {entries.map((entry) => (
       <div
@@ -12,6 +13,12 @@ const JournalList = ({ entries }) => (
         <h3>{entry.title}</h3>
         <h6>{entry.date}</h6>
         <p>{entry.content}</p>
+        <button
+          className="delete-journal-button"
+          onClick={() => onDelete(entry.title, entry.timestamp, entry.content)}
+        >
+          Delete
+        </button>
       </div>
     ))}
   </div>

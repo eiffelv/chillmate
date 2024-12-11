@@ -61,6 +61,7 @@ const JournalPage = () => {
         content: post.Content || "<No Content>",
         // Convert timestamp to date string
         date: convertTimestampToDate(post.Timestamp) || "<No Date>",
+        timestamp: post.Timestamp,
         color: post.Color || "#FFFFFF",
       }));
       //put journal entry to website
@@ -138,6 +139,44 @@ const JournalPage = () => {
     setShowAddForm(false); // Hide form after submission
   };
 
+  const handleDelete = async (title, timestamp, content) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/journal/deleteJournal`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ title, timestamp, content }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete journal");
+      }
+
+      // Remove entry from state
+      setEntries(
+        entries.filter(
+          (entry) =>
+            entry.title !== title &&
+            entry.timestamp !== timestamp &&
+            entry.content !== content
+        )
+      );
+    } catch (error) {
+      console.error("Error deleting journal:", error);
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
+  };
+
   // Pagination Logic
   const indexOfLastJournal = currentPage * journalsPerPage;
   const indexOfFirstJournal = indexOfLastJournal - journalsPerPage;
@@ -190,7 +229,7 @@ const JournalPage = () => {
             transition: "transform 1s ease",
           }}
         >
-          <JournalList entries={currentJournals} />
+          <JournalList entries={currentJournals} onDelete={handleDelete} />
         </div>
       </div>
 

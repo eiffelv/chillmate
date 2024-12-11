@@ -69,11 +69,11 @@ def delete_journal():
 
         title = data.get("title")
         content = data.get("content")
-        date = data.get("date")
-        color = data.get("color")
+
+        logger.debug(f"Deleting journal entry id: {current_user}, title: {title}, and content: {content}")
 
         mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
-        mongo_utils.collection.delete_many({"SFStateID": current_user, "Title":title, "Content": content, "Timestamp": date, "Color": color})
+        mongo_utils.collection.delete_many({"SFStateID": current_user, "Title":title, "Content": content})
 
         return jsonify({"message": "journal successfully deleted"}), 201
     except Exception as e:
