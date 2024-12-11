@@ -81,13 +81,15 @@ const JournalPage = () => {
   const convertDateToLosAngeles = (date) => {
     // Add 12 hours to the date to convert to Los Angeles time
     const losAngelesDate = new Date(date);
-    losAngelesDate.setHours(losAngelesDate.getHours() + 12);
+    losAngelesDate.setHours(losAngelesDate.getHours() - 8);
     return losAngelesDate;
   };
 
   //upload new journal entry to database
   const uploadJournal = async (newEntry) => {
     const token = localStorage.getItem("accessToken");
+
+    newEntry.date = Date.now();
 
     newEntry.date = Math.floor(
       Date.parse(convertDateToLosAngeles(newEntry.date)) / 1000
@@ -201,7 +203,7 @@ const JournalPage = () => {
   return (
     <div className="journal">
       <h1>Journal</h1>
-      
+
       <button
         className="add-journal-button"
         onClick={() => setShowAddForm(true)}

@@ -250,18 +250,18 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
-    if (suggestion.text === "General conversation.😊") {
-      const specialMessage = {
-        text: "Hello! How is your day?",
-        sender: "bot",
-        special: "general-conversation",
-      };
-      setMessages([...messages, specialMessage]);
-    } else {
-      getChatBot(suggestion).then((botResponse) => {
-        simulateTyping(botResponse); // Display the chatbot response in the chat
-      });
-    }
+    // if (suggestion.text === "General conversation.😊") {
+    //   const specialMessage = {
+    //     text: "Hello! How is your day?",
+    //     sender: "bot",
+    //     special: "general-conversation",
+    //   };
+    //   setMessages([...messages, specialMessage]);
+    // } else {
+    //   getChatBot(suggestion).then((botResponse) => {
+    //     simulateTyping(botResponse); // Display the chatbot response in the chat
+    //   });
+    // }
   };
 
   const handleKeyDown = (e) => {
