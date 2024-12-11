@@ -14,6 +14,10 @@ from langchain_core.prompts import (
 from langchain_groq import ChatGroq
 from loguru import logger
 from pymongo import MongoClient
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from chatbot.mood_tracker import MoodTracker
+from dotenv import load_dotenv
+load_dotenv()
 
 # Initialize the conversation chain
 groq_api_key = os.getenv('GROQ_API_KEY')
@@ -58,8 +62,8 @@ def generate_subtasks():
     if not input_text:
         return jsonify({}), 400
 
-    model_name = "accounts/fireworks/models/llama-v3p1-70b-instruct"
-    provider_name = "fireworks"
+    model_name = "llama3-8b-8192"
+    provider_name = "groq"
 
     ext_json = {
         'goal': '[Original goal/problem]',
@@ -134,3 +138,45 @@ def find_similar_docs():
     except Exception as e:
         logger.error(f"Error occurred: {e}")
         return jsonify({"error": str(e)}), 500
+
+@chatbot_bp.route('/mood_tracker', methods=['GET', 'POST'])
+@jwt_required()
+def mood_tracker():
+    
+    current_user = get_jwt_identity()
+
+    mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
+    
+    # Fetch the latest document for the user
+    latest_journal = mongo_utils.collection.find_one(
+        {'SFStateID': current_user},
+        sort=[("Timestamp", -1)]  # Sort by Latest Timestamp
+    )
+    logger.debug(latest_journal)
+
+    # Extract and return only the content field
+    content = latest_journal.get('Content') if latest_journal else ""
+    logger.debug(content)
+    # content = "I'm very nervous for my presentation"
+    # logger.debug(content)
+    if not content:
+        return jsonify({"mood": "neutral"}), 200
+    
+    try:
+        # Infer mood using the MoodTracker class
+        ext_json = {"mood": "<mood_name>"}
+        moods_list = {"happy", "sad", "angry", "excited", "calm", "anxious"}
+        context = {"user_input": content, "ext_json": ext_json, "moods_list": moods_list}
+
+        model_name = "llama3-8b-8192"
+        provider_name = "groq"
+
+        mood_data = MoodTracker(model_name, provider_name).generate(context)
+
+        # If MoodTracker fails, return neutral as a fallback
+        inferred_mood = mood_data.get("mood", "neutral")
+        return jsonify({"mood": inferred_mood}), 200
+    
+    except Exception as e:
+        logger.error(f"Error inferring mood: {e}")
+        return jsonify({"error": "An error occurred while extracting the mood"}), 500

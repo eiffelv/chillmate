@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const AddJournalForm = ({ onAddEntry, onClose }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -9,18 +10,21 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (title && date && content) {
+    if (title && content) {
       onAddEntry(title, date, content, color);
       // Reset fields after successful submission
       setTitle("");
       setDate("");
+      // console.log(date);
       setContent("");
+      setColor("#FFFFFF");
     } else {
       alert("Please fill out all fields.");
     }
   };
 
   const colors = [
+    "#FFFFFF",
     "#FFCDD2",
     "#C8E6C9",
     "#BBDEFB",
@@ -39,12 +43,6 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
           required
         />
         <textarea
@@ -72,8 +70,44 @@ const AddJournalForm = ({ onAddEntry, onClose }) => {
             ))}
           </div>
         </div>
-        <button type="submit">Save</button>
-        <button type="button" onClick={onClose}>
+        <p>
+          </p>
+        <button
+          type="submit"
+          style={{
+            backgroundColor: "#e069f8", // Green background
+            color: "white",             // White text
+            border: "black",             // No border
+            padding: "10px 20px",       // Padding
+            fontSize: "16px",           // Font size
+            cursor: "pointer",          // Pointer cursor on hover
+            borderRadius: "5px",        // Rounded corners
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Shadow effect
+            transition: "background-color 0.3s ease",  // Transition effect
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = "#c300ff"} // Darker green on hover
+          onMouseLeave={(e) => e.target.style.backgroundColor = "#e069f8"} // Reset color on mouse leave
+        >
+          Save
+        </button>
+
+        <button  
+          type="button" 
+          onClick={onClose}
+          style={{
+            backgroundColor: "#e069f8", // Green background
+            color: "white",             // White text
+            border: "black",             // No border
+            padding: "10px 20px",       // Padding
+            fontSize: "16px",           // Font size
+            cursor: "pointer",          // Pointer cursor on hover
+            borderRadius: "5px",        // Rounded corners
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Shadow effect
+            transition: "background-color 0.3s ease",  // Transition effect
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = "#c300ff"} // Darker green on hover
+          onMouseLeave={(e) => e.target.style.backgroundColor = "#e069f8"} // Reset color on mouse leave
+        >
           Cancel
         </button>
       </form>

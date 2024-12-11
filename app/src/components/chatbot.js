@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import "./ChillMateLogo.png";
-import { LoginContext } from "./LoginContext";
 
 /*
 const suggestions = [
@@ -10,6 +9,7 @@ const suggestions = [
   "General conversation.😊",
 ];
 */
+
 const suggestions = [
   { text: "Find the resources in campus for you.📚", id: "cb1" },
   { text: "Organizing your tasks for you.📋", id: "cb2" },
@@ -22,14 +22,42 @@ const Chatbot = () => {
   const [typingMessage, setTypingMessage] = useState("");
   const [showSearchBar, setShowSearchBar] = useState(false); // Controls the visibility of the search bar
   const [showAnimatedText, setShowAnimatedText] = useState(true); // Controls the visibility of the animated text
-  const [showBubbles, setShowBubbles] = useState(false); //Ensure `showBubbles` is declared with useState
   const [currentId, setCurrentId] = useState("");
 
   const messagesEndRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(""); // State to track the selected ID
-  
+
+  // State to store conversation history for each suggestion
+  /* const [conversationHistory, setConversationHistory] = useState({
+    cb1: [],
+    cb2: [],
+    cb3: [],
+  }); */
+
+  const renderMessageWithLinks = (text) => {
+    const linkRegex = /(https?:\/\/[^\s]+)/g; // Regex to detect URLs
+    const parts = text.split(linkRegex); // Split the text by links
+
+    return parts.map((part, index) => {
+      if (linkRegex.test(part)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            {part}
+          </a>
+        );
+      }
+      return part; // Render non-link text as-is
+    });
+  };
+   
   // AnimatedText Component
   const AnimatedText = () => {
     const [displayedText, setDisplayedText] = useState("");
@@ -57,22 +85,25 @@ const Chatbot = () => {
   const getResources = async (message) => {
     console.log("message: ", message);
     try {
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/chatbot/find_sim_docs`, {
-        method: "POST",
-        // credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ input_text: message }),
-      });
-  
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/chatbot/find_sim_docs`,
+        {
+          method: "POST",
+          // credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ input_text: message }),
+        }
+      );
+
       if (!response.ok) {
-        throw new Error('Failed to upload post');
+        throw new Error("Failed to upload post");
       }
-  
+
       const data = await response.json();
 
-      let resourceString ='';
+      let resourceString = "";
 
       data.forEach((resources, index) => {
         resourceString += `
@@ -85,18 +116,13 @@ const Chatbot = () => {
       console.log(resourceString);
 
       return resourceString;
-
-
     } catch (error) {
-      console.error('Error uploading post:', error);
+      console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
-    }
-    finally {
+    } finally {
       setLoading(false); // Once the promise settles, update loading state
     }
-  }
-
-
+  };
 
   //getting chatbot to do list response
   const getChatBot = async (message) => {
@@ -120,7 +146,9 @@ const Chatbot = () => {
       const data = await response.json();
       let resultString = `Goal: ${data.goal}\n\nSubtasks:\n`;
       data.subtasks.forEach((subtask, index) => {
-        resultString += `Subtask ${index + 1}: ${subtask.subtask}\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
+        resultString += `Subtask ${index + 1}: ${
+          subtask.subtask
+        }\nImportance: ${subtask.importance}\nFocus: ${subtask.focus}\n`;
       });
       return resultString;
     } catch (error) {
@@ -150,7 +178,7 @@ const Chatbot = () => {
       }
 
       const data = await response.json();
-      
+
       return data.response;
     } catch (error) {
       console.error("Error uploading post:", error);
@@ -164,15 +192,13 @@ const Chatbot = () => {
 
     let botReply = "";
 
-    const userMessage = { text: input, sender: 'user' };
+    const userMessage = { text: input, sender: "user" };
 
-    if(currentId == "cb1") {
+    if (currentId === "cb1") {
       botReply = await getResources(input);
-    }
-    else if (currentId == "cb2") {
+    } else if (currentId === "cb2") {
       botReply = await getChatBot(input);
-    }
-    else if(currentId == "cb3") {
+    } else if (currentId === "cb3") {
       botReply = await getConversation(input);
     }
 
@@ -224,18 +250,18 @@ const Chatbot = () => {
     setCurrentId(suggestion.id);
     console.log("current id", currentId);
 
-    // if (suggestion.text === "General conversation.😊") {
-    //   const specialMessage = {
-    //     text: "Hello! How is your day?",
-    //     sender: "bot",
-    //     special: "general-conversation",
-    //   };
-    //   setMessages([...messages, specialMessage]);
-    // } else {
-    //   getChatBot(suggestion).then((botResponse) => {
-    //     simulateTyping(botResponse); // Display the chatbot response in the chat
-    //   });
-    // }
+    if (suggestion.text === "General conversation.😊") {
+      const specialMessage = {
+        text: "Hello! How is your day?",
+        sender: "bot",
+        special: "general-conversation",
+      };
+      setMessages([...messages, specialMessage]);
+    } else {
+      getChatBot(suggestion).then((botResponse) => {
+        simulateTyping(botResponse); // Display the chatbot response in the chat
+      });
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -246,51 +272,53 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typingMessage]);
 
-  useEffect(() => {
-    // Trigger bubbles only when the component mounts
-    setShowBubbles(true);
-
-    // Set a timer to hide the bubbles after 2 minutes
-    const timer = setTimeout(() => {
-      setShowBubbles(false); // Hide bubbles after the specified time
-    }, 5000); // 2 minutes in milliseconds
-
-    // Cleanup the timer on component unmount
-    return () => clearTimeout(timer);
-  }, []); // Empty dependency array ensures this runs only once on mount
-
-  //const bubbles = Array.from({ length: 80 }).map((_, index) => (
-  //<div key={index} className="bubble"></div>
-  //));
-
+  
+      
   return (
-    <div>
-      <div className="chatbot-container">
-        <h1>Chatbot</h1>
+    
+     <div
+      className="chatbot-container"
+      style={{
+        backgroundImage: "url('/screenshot.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        opacity: 0.9,
+      }}
+    > 
+
+        <h1>Chillbot </h1>
         {showAnimatedText && <AnimatedText />}{" "}
-        {/* Only show AnimatedText if showAnimatedText is true */}
+        
+        <div className="suggestions">
+          {suggestions.map((suggestion) => (
+            <button
+              key={suggestion.id} // Use the unique ID as the key
+              className="suggestion-button"
+              style={{
+                backgroundColor: selectedId === suggestion.id ? "#2d00b3" : "",
+                color: selectedId === suggestion.id ? "#fff" : "", // Optional: Change text color for better contrast
+              }}
+              onClick={() => {
+                setSelectedId(suggestion.id); // Update the selectedId state
+                handleSuggestionClick(suggestion); // Call the existing click handler
+              }}
+            >
+              {suggestion.text}
+            </button>
+          ))}
+        </div>
+         
+       
         <div className="chatbot-messages">
-          {/* Add bubbles as the background */}
-          {showBubbles &&
-            Array.from({ length: 80 }).map((_, index) => (
-              <div key={index} className="bubble"></div>
-            ))}
-          <div className="suggestions">
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion.id} // Use the unique ID as the key
-                className="suggestion-button"
-                onClick={() => handleSuggestionClick(suggestion)}
-              >
-                {suggestion.text}
-              </button>
-            ))}
-          </div>
-          {messages.map((msg, index) => (
+            {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
-              {msg.text}
+              {msg.sender === "bot"
+                ? renderMessageWithLinks(msg.text)
+                : msg.text}
             </div>
           ))}
+
           {typingMessage && <div className="message bot">{typingMessage}</div>}
           <div ref={messagesEndRef} />
         </div>
@@ -308,7 +336,7 @@ const Chatbot = () => {
           </div>
         )}
       </div>
-    </div>
+    
   );
 };
 

@@ -1,5 +1,5 @@
-import './App.css';
-import React from 'react';
+import "./App.css";
+import React from "react";
 import Home from "./components/home.js";
 import Login from "./components/login.js";
 import Register from "./components/register.js";
@@ -10,8 +10,8 @@ import Chatbot from "./components/chatbot.js";
 import Journal from "./components/journal.js";
 import Profile from "./components/profile.js";
 import Navbar from "./components/navbar.js";
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { LoginProvider } from "./components/LoginContext";  // Import LoginProvider for global state
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { LoginProvider } from "./components/LoginContext"; // Import LoginProvider for global state
 
 // App Component that uses the Router and conditional Navbar rendering
 function App({ router = true }) {

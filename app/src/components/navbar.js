@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Logo } from "./ChillMate.svg";
 import "./style.css";
@@ -7,6 +7,7 @@ import { LoginContext } from "./LoginContext"; // Import the LoginContext
 export default function Navbar() {
   const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Add this state
 
   const handleLogout = async () => {
     await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/logout`, {
@@ -17,10 +18,17 @@ export default function Navbar() {
     navigate("/"); // Redirect to home after logout
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
       <nav className="navbar">
-        <ul>
+        <button className="hamburger" onClick={toggleMenu}>
+          &#9776;
+        </button>
+        <ul className={isMenuOpen ? "nav-menu active" : "nav-menu"}>
           <li>
             <Link to="/">
               <Logo width="50" height="50" />
@@ -41,13 +49,6 @@ export default function Navbar() {
             )}
           </li>
           <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/resources">Resources</Link>
-          </li>
-
-          <li>
             {isLoggedIn ? (
               <Link to="/journal">Journal</Link>
             ) : (
@@ -55,13 +56,17 @@ export default function Navbar() {
             )}
           </li>
           <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/resources">Resources</Link>
+          </li>
+          <li>
             {isLoggedIn ? (
               <Link to="/profile">Profile</Link>
             ) : (
               <Link to="/login">Profile</Link>
             )}
-          </li>
-          <li>
             {isLoggedIn ? (
               <button onClick={handleLogout} className="logout-button">
                 Logout

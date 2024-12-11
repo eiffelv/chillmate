@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png";
 
@@ -146,7 +145,7 @@ const Resources = ({ numberOfColumns }) => {
     <div className="resources">
       <div className="container" id="resources">
         <h1>Resources</h1>
-        <h1></h1>
+        <br />
         <div className={`columns ${columnClass}`}>
           {resourcesData.map((section, sectionIndex) => (
             <div key={sectionIndex} className="column">
@@ -193,9 +192,6 @@ const Resources = ({ numberOfColumns }) => {
       </div>
     </div>
   );
-};
-Resources.propTypes = {
-  numberOfColumns: PropTypes.number.isRequired,
 };
 
 export default Resources;

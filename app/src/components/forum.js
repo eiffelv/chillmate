@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./LoginContext";
+import { logoutUser } from "./Logout";
 import "./style.css";
 import "./ChillMateLogo.png";
 
@@ -10,37 +11,56 @@ const Forum = () => {
   const [postContent, setPostContent] = useState("");
   const [posts, setPosts] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const { isLoggedIn, logout } = useContext(LoginContext); // Get login state and logout function
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getForumPost = async () => {
-      const token = localStorage.getItem('accessToken');
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/forum/getForum`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+      const token = localStorage.getItem("accessToken");
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_FLASK_URI}/forum/getForum`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch forum posts");
         }
-      });
-      const data = await response.json();
-      console.log("useEffect running")
-      console.log("dapetnya", data);
 
-      const formattedPosts = data.map(post => ({
-        topic: post.Topic || "Untitled",
-        content: post.Text || "",
-        liked: false
-      }));
+        const data = await response.json();
+        // console.log("useEffect running");
+        // console.log("dapetnya", data);
 
-      setPosts(formattedPosts); 
+        const formattedPosts = await Promise.all(
+          data.map(async (post) => ({
+            id: post._id || "",
+            topic: post.Topic || "Untitled",
+            content: post.Text || "",
+            liked: await checkLike(post._id),
+          }))
+        );
+        // console.log("formattedPosts: ", formattedPosts);
 
-      return data;
+        setPosts(formattedPosts);
+
+        return data;
+      } catch (error) {
+        // error("Error fetching forum posts:", error);
+        if (isLoggedIn) {
+          logoutUser(logout, navigate);
+        }
+      }
     };
     getForumPost();
-  }, []);
+  }, [isLoggedIn, logout, navigate]);
 
-  //
-
-    const uploadPost = async (newPost) => {
+  //function to create forum posts
+  const uploadPost = async (newPost) => {
     const token = localStorage.getItem("accessToken");
-
     try {
       const response = await fetch(
         `${process.env.REACT_APP_FLASK_URI}/forum/createForum`,
@@ -59,14 +79,54 @@ const Forum = () => {
         throw new Error("Failed to upload post");
       }
 
-      const data = await response.json();
-      console.log(data);
+      //const data = await response.json();
+      //console.log(data);
       // Handle success or error based on the response data
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
       // Handle error, e.g., display an error message to the user
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
     }
   };
+
+  //check if forum posts is liked by particular user or not
+  async function checkLike(id) {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/checkLike`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to check like status");
+      }
+
+      const data = await response.json();
+      // console.log("datanya dpt ini:", data);
+      if (data.relation === 0) {
+        // console.log("kasih false");
+        return false;
+      } else {
+        // console.log("kasih true");
+        return true;
+      }
+      // Handle success or error based on the response data
+    } catch (error) {
+      // console.error("Error checking status:", error);
+      // Handle error, e.g., display an error message to the user
+    }
+  }
 
   // Handle form submission to add new posts
   const handleSubmit = (e) => {
@@ -84,22 +144,123 @@ const Forum = () => {
     };
 
     uploadPost(newPost);
-    console.log(newPost);
+    //console.log(newPost);
     setPosts([newPost, ...posts]); // Add new post to the beginning of the posts array
     setTopic(""); // Clear form fields
     setPostContent("");
     setShowForm(false);
   };
 
+  //create a relation to the database, that sends the userID and postID
+  const createLike = async (id) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/createRelation`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      //const data = await response.json();
+      //console.log(data);
+      // Handle success or error based on the response data
+    } catch (error) {
+      // console.error("Error creating relation:", error);
+      // Handle error, e.g., display an error message to the user
+    }
+  };
+
+  const unlike = async (id) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/deleteRelation`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(id),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload post");
+      }
+
+      //const data = await response.json();
+      //console.log(data);
+      // Handle success or error based on the response data
+    } catch (error) {
+      // console.error("Error creating relation:", error);
+      // Handle error, e.g., display an error message to the user
+    }
+  };
+
   // Toggle like status for a post
   const toggleLike = (index) => {
     const updatedPosts = posts.map((post, i) => {
       if (i === index) {
+        // console.log(post.id);
+
+        //if the post is false, then it will turn to true
+        //this means create a relation
+        if (post.liked === false) {
+          createLike(post.id);
+        } else {
+          //else if the post is true, it will turn to false
+          //remove the relation from the new collection
+          // console.log("delete relation");
+          unlike(post.id);
+        }
+
         return { ...post, liked: !post.liked };
       }
       return post;
     });
     setPosts(updatedPosts);
+  };
+
+  // Add delete handler function
+  const handleDelete = async (postId) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/forum/deleteForum`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(postId),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete post");
+      }
+
+      // Remove post from state
+      setPosts(posts.filter((post) => post._id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
   };
 
   return (
@@ -146,16 +307,26 @@ const Forum = () => {
                   <div className="post-author">{post.topic}</div>
                   <div className="post-content">{post.content}</div>
 
-                  {/* Like Button */}
-                  <div className="like-container">
+                  <div className="post-actions">
+                    {/* Like Button */}
+                    <div className="like-container">
+                      <button
+                        className={`like-btn ${post.liked ? "liked" : ""}`}
+                        onClick={() => toggleLike(index)}
+                      >
+                        <span className="like-icon">👍</span>
+                        <span className="like-text">
+                          {post.liked ? "Liked" : "Like"}
+                        </span>
+                      </button>
+                    </div>
+
+                    {/* Delete Button */}
                     <button
-                      className={`like-btn ${post.liked ? "liked" : ""}`}
-                      onClick={() => toggleLike(index)}
+                      className="delete-btn"
+                      onClick={() => handleDelete(post._id)}
                     >
-                      <span className="like-icon">👍</span>
-                      <span className="like-text">
-                        {post.liked ? "Liked" : "Like"}
-                      </span>
+                      🗑️ Delete
                     </button>
                   </div>
                 </li>

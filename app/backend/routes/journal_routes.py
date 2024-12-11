@@ -22,7 +22,7 @@ def get_journal():
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
     result = [
         {**doc, "_id": str(doc["_id"])}
-        for doc in mongo_utils.collection.find({'SFStateID': current_user}).sort("_id", -1)
+        for doc in mongo_utils.collection.find({'SFStateID': current_user}).sort("Timestamp", -1)
     ]
 
     logger.debug(result)
@@ -39,6 +39,8 @@ def create_journal():
 
     title = data.get("title")
     content = data.get("content")
+    date = data.get("date")
+    color = data.get("color")
 
     if not title or not content:
         return jsonify({"error": "Title and content are required"}), 400
@@ -48,9 +50,32 @@ def create_journal():
         "SFStateID": current_user,
         "Title": title,
         "Content": content,
+        "Timestamp": date,
+        "Color": color,
     }
 
     mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
     mongo_utils.collection.insert_one(new_journal)
 
     return jsonify({"message": "Post successfully added"}), 201
+
+#function to delete journal
+@journal_bp.route('/deleteJournal', methods=['POST', 'GET'])
+@jwt_required()
+def delete_journal():
+    try:
+        current_user = get_jwt_identity()
+        data = request.json
+
+        title = data.get("title")
+        content = data.get("content")
+
+        logger.debug(f"Deleting journal entry id: {current_user}, title: {title}, and content: {content}")
+
+        mongo_utils = MongoUtils(client, db_name="chillmate", collection_name='Journal')
+        mongo_utils.collection.delete_many({"SFStateID": current_user, "Title":title, "Content": content})
+
+        return jsonify({"message": "journal successfully deleted"}), 201
+    except Exception as e:
+        logger.error(f"Error in /deleteJournal: {e}")
+        return jsonify({"error": str(e)}), 500

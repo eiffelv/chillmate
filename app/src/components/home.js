@@ -1,8 +1,6 @@
 //import React from "react";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./LoginContext";
-import PropTypes from "prop-types";
 import "./style.css";
 import "./ChillMateLogo.png";
 import Chatbot from "./Chatbot.png";
@@ -10,19 +8,62 @@ import Forum from "./Forum.png";
 import Journal from "./Journal.png";
 import Resources from "./Resources.png";
 import Tasklist from "./TaskList.png";
+import { logoutUser } from "./Logout";
+import { LoginContext } from "./LoginContext";
 
 function Home() {
+  const { isLoggedIn, logout } = useContext(LoginContext);
   const navigate = useNavigate();
 
   // Define the function to handle navigation
   const goToRegister = () => {
-    console.log("Navigating to register");
+    // console.log("Navigating to register");
     navigate("/register");
   };
 
   const goToAbout = () => {
-    console.log("Navigating to about");
+    // console.log("Navigating to about");
     navigate("/about");
+  };
+
+  const checkLogin = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      // console.error("Access token is missing! User might be logged out.");
+      return;
+    }
+
+    if (!isLoggedIn) {
+      // console.error("User is not logged in.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/getProfile`,
+        {
+          method: "GET", // Use GET method
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
+          },
+          mode: "cors",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to get profile");
+      }
+
+      // console.log("User seems still logged in.");
+    } catch (error) {
+      // console.error("Logging Out, Invalid Token");
+      // Handle error, e.g., display an error message to the user
+      if (isLoggedIn) {
+        logoutUser(logout, navigate);
+      }
+    }
   };
 
   // Add the scroll animation logic
@@ -42,22 +83,28 @@ function Home() {
 
     features.forEach((feature) => observer.observe(feature));
 
+    checkLogin();
+
     return () => observer.disconnect(); // Cleanup observer
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="containerHome" id="home">
       <h1>ChillMate</h1>
-      <div classname="Title">
+      <div className="Title">
         <h5 className="fade-in">
           <em>Empowering You on Your Mental Health Journey</em>
         </h5>
         <p>Discover a Path to Better Mental Health with ChillMate</p>
+        <br />
+        <br />
         <button className="pulse-button" onClick={goToAbout}>
           Learn more ➜
         </button>
       </div>
-      <p></p>
+      <br />
+      <br />
       <div className="missionStatement">
         <h2>Our Mission</h2>
         <h3>
@@ -95,7 +142,10 @@ function Home() {
           <img src={Tasklist} width="100" height="100" alt="TaskList" />
         </div>
       </div>
+      <br />
+      <br />
       <p>Join us in fostering a healthier academic environment!</p>
+      <br />
       <button className="pulse-button" onClick={goToRegister}>
         Register Now!
       </button>

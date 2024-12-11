@@ -5,7 +5,6 @@ import { LoginContext } from "./LoginContext";
 import FormEnabler from "./FormEnabler";
 import "./style.css";
 import "./ChillMateLogo.png";
-import LoginPic from "./Chill.pic.jpg";
 import FlowerPic from "./lavender.jpg";
 
 function Login() {
@@ -14,7 +13,7 @@ function Login() {
     username: "",
     password: "",
   });
-  console.log(user);
+  // console.log(user);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -44,14 +43,17 @@ function Login() {
       setMessage("Please Wait, Trying to Login...");
 
       // Send POST request to login endpoint
-      const response = await fetch(`${process.env.REACT_APP_FLASK_URI}/auth/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_FLASK_URI}/auth/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      );
 
       const data = await response.json();
 
@@ -77,14 +79,15 @@ function Login() {
   };
 
   return (
-    <div className="login">
-      <img src={FlowerPic} width="900" height="593" alt="LoginPic" />
+    <login className="login">
+      <img src={FlowerPic} alt="LoginPic" className="login-image" />
       <div className="login-container">
         <h2>Login</h2>
 
         {message && <p className="error-message">{message}</p>}
         <form onSubmit={handleSubmit}>
           <input
+            className="login-input"
             type="text"
             placeholder="Username"
             name="username"
@@ -93,6 +96,7 @@ function Login() {
             required
           />
           <input
+            className="login-password"
             type="password"
             placeholder="Password"
             name="password"
@@ -106,7 +110,7 @@ function Login() {
           Don't have an account? <Link to="/register">Register here</Link>
         </p>
       </div>
-    </div>
+    </login>
   );
 }
 

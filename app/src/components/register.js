@@ -24,6 +24,10 @@ const Register = () => {
     city: "",
     state: "",
     zip_code: "",
+    emergency_first_name: "",
+    emergency_last_name: "",
+    emergency_phone_number: "",
+    relationship: "",
   });
 
   const [message, setMessage] = useState("");
@@ -34,7 +38,6 @@ const Register = () => {
 
     setUser((prevUser) => ({
       ...prevUser,
-      Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`,
     }));
 
     event.preventDefault();
@@ -63,7 +66,7 @@ const Register = () => {
       }
     } catch (error) {
       enableFields();
-      console.error("Backend error:", error);
+      // console.error("Backend error:", error);
       setMessage(
         "Something went wrong while registering. Please try again later."
       );
@@ -85,12 +88,6 @@ const Register = () => {
     setUser({ ...user, [name]: value }); // Dynamically set the value based on field name
     // setAddress({ ...user, [name]: value });
     // setUser({Address: fullAddress});
-
-    //combine address into one variable which is Address
-    setUser((prevUser) => ({
-      ...prevUser,
-      Address: `${prevUser.address_line_1} ${prevUser.address_line_2}, ${prevUser.city}, ${prevUser.state}, ${prevUser.zip_code}`,
-    }));
   };
 
   const navigate = useNavigate();
@@ -334,9 +331,9 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="first_name"
+              name="emergency_first_name"
               placeholder="Olivia"
-              value={user.FirstName}
+              value={user.EmergencyFirstName}
               onChange={handleChange}
               required
             />
@@ -345,9 +342,9 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="last_name"
+              name="emergency_last_name"
               placeholder="Smith"
-              value={user.LastName}
+              value={user.EmergencyLastName}
               onChange={handleChange}
               required
             />
@@ -357,7 +354,7 @@ const Register = () => {
             <input
               placeholder="1234567890"
               type="tel"
-              name="phone_number"
+              name="emergency_phone_number"
               value={user.PhoneNum}
               onChange={handleChange}
               required
@@ -367,9 +364,9 @@ const Register = () => {
             <label>Relationship</label>
             <input
               type="text"
-              name="relationship"
+              name="EmergencyRelation"
               placeholder="Mother"
-              value={user.FirstName}
+              value={user.EmergencyRelation}
               onChange={handleChange}
               required
             />
